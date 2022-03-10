@@ -17,3 +17,6 @@ pluralizeListTitles = false
 
 [Params]
   dateformat = "2006-01-02"
+  hideSummary = true
+  disableSpecial1stPost = true
+  ShowToc = true
