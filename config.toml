@@ -1,5 +1,5 @@
 baseURL = 'http://example.org/'
-title = 'My New Hugo Site'
+title = 'd.oppara.tv'
 theme = "PaperMod"
 
 defaultContentLanguage = "ja"
