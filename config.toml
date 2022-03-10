@@ -7,6 +7,9 @@ languageCode = 'ja'
 hasCJKLanguage = true
 pluralizeListTitles = false
 
+[security]
+  [security.exec]
+    allow = ['^vim$']
 
 [permalinks]
     posts = "/:section/:year/:month/:filename"
