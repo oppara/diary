@@ -10,3 +10,7 @@ pluralizeListTitles = false
 
 [permalinks]
     posts = "/:section/:year/:month/:filename"
+
+
+[Params]
+  dateformat = "2006-01-02"
