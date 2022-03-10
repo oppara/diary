@@ -6,3 +6,7 @@ defaultContentLanguage = "ja"
 languageCode = 'ja'
 hasCJKLanguage = true
 pluralizeListTitles = false
+
+
+[permalinks]
+    posts = "/:section/:year/:month/:filename"
