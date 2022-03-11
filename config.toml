@@ -16,6 +16,7 @@ pluralizeListTitles = false
 
 
 [Params]
+  author = "oppara"
   dateformat = "2006-01-02"
   hideSummary = true
   disableSpecial1stPost = true
