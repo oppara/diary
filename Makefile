@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 CWD := $(patsubst %/,%,$(dir $(mkfile_path)))
+SERVER_OPTS := -D -F --forceSyncStatic
 
 all: create ## create new post
 
@@ -13,8 +14,8 @@ edit: ## edit post
 	@${CWD}/bin/hugo-edit.sh
 
 .PHONY: up
-up: ## open browser & start hugo server
-	@open http://localhost:1313 && hugo server -D -F
+up: ## start hugo server
+	@hugo server $(SERVER_OPTS)
 
 .PHONY: down
 down: ## stop hugo server
