@@ -21,3 +21,4 @@ pluralizeListTitles = false
   hideSummary = true
   disableSpecial1stPost = true
   ShowToc = true
+  ShowBreadCrumbs = true
