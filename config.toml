@@ -2,6 +2,7 @@ baseURL = 'https://d.oppara.tv/'
 title = 'd.oppara.tv'
 theme = "PaperMod"
 
+timeZone = "Asia/Tokyo"
 defaultContentLanguage = "ja"
 languageCode = 'ja'
 hasCJKLanguage = true
