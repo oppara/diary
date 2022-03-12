@@ -1,17 +1,29 @@
+#
+# Requirement
+# oppara/blog
+# https://github.com/oppara/blog/tree/specify-timezone
+#
+# build & drop it in $PATH
+#
+
 SHELL := /bin/bash
+
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 CWD := $(patsubst %/,%,$(dir $(mkfile_path)))
+export BLOG_ROOT := $(CWD)
+export BLOG_POST_DIR := $(shell date +"content/posts/%Y/%m")
+
 SERVER_OPTS := -D -F --forceSyncStatic
 
-all: create ## create new post
+all: new ## create new post
 
-.PHONY: create
-create: ## create new post
-	@${CWD}/bin/hugo-new.sh
+.PHONY: new
+new: ## create new post
+	@blog new
 
 .PHONY: edit
 edit: ## edit post
-	@${CWD}/bin/hugo-edit.sh
+	@blog edit
 
 .PHONY: up
 up: ## start hugo server
