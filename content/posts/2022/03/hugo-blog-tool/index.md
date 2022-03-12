@@ -42,7 +42,7 @@ index 4996bfb..85d597e 100644
                 Stdout:  ioutil.Discard,
                 Stderr:  ioutil.Discard,
 ```
-https://github.com/oppara/blog/commit/1b653d83f0352d0bc06e9b1e737ec292c85989e1
+https://github.com/oppara/b4b4r07-blog/commit/1b653d83f0352d0bc06e9b1e737ec292c85989e1
 
 
 ---
