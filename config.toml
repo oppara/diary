@@ -23,3 +23,4 @@ pluralizeListTitles = false
   disableSpecial1stPost = true
   ShowToc = true
   ShowBreadCrumbs = true
+  ShowPostNavLinks = true
