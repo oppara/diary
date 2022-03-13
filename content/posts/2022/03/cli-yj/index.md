@@ -37,4 +37,7 @@ or
 ProductName:    macOS
 ProductVersion: 12.2
 BuildVersion:   21D49
+
+% yj -v
+v5.0.0
 ```
