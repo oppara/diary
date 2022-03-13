@@ -26,3 +26,15 @@ pluralizeListTitles = false
   ShowToc = true
   ShowBreadCrumbs = true
   ShowPostNavLinks = true
+
+[outputs]
+home = ["html", "rss", "json"]
+
+[menu]
+
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 10
+
