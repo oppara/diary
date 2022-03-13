@@ -41,9 +41,7 @@ the current security configuration is:
     allow = ['^vim$']
 ```
 
----
-
-{{<collapse summary="環境">}}
+## 環境
 
 ```console
 % sw_vers
@@ -54,4 +52,3 @@ BuildVersion:   21D49
 % hugo version
 hugo v0.93.3+extended darwin/amd64 BuildDate=unknown
 ```
-{{</collapse>}}

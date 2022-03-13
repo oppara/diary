@@ -6,6 +6,8 @@ toc: false
 tags: ['hugo']
 ---
 
+## はじめに
+
 [Quick Start | Hugo](https://gohugo.io/getting-started/quick-start/)
 
 とりあえずテーマをインストールしてコンテンツを表示するところまで。
@@ -80,10 +82,7 @@ tags: ['hugo']
 % open http://localhost:1313/
 ```
 
-
----
-
-{{<collapse summary="環境">}}
+## 環境
 
 ```console
 % sw_vers
@@ -94,4 +93,3 @@ BuildVersion:   21D49
 % hugo version
 hugo v0.93.3+extended darwin/amd64 BuildDate=unknown
 ```
-{{</collapse>}}
