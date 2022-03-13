@@ -1,44 +1,55 @@
-# d.oppara.tv
+# [d.oppara.tv](https://d.oppara.tv)
 
 
-## create post
+## Usage
+
+### create post
 
 ```console
 % make
 ```
 
-## create post with server
+### create post with server
 
 ```console
 % blog new
 ```
 
-## edit post
+### edit post
 
 ```console
 % make edit
 ```
 
-## edit post with server
+### edit post with server
 
 ```console
 % blog edit
 ```
 
-## start server
+### start server
 
 ```console
 % make up
 ```
 
-## stop server
+### stop server
 
 ```console
 % make down
 ```
 
-## open browser
+### open browser
 
 ```console
 % make open
 ```
+
+## Reference
+
+- [Hugo Documentation | Hugo](https://gohugo.io/documentation/)
+- [adityatelange/hugo-PaperMod: A fast, clean, responsive Hugo theme.](https://github.com/adityatelange/hugo-PaperMod)
+- [GitHub Pagesのドキュメンテーション - GitHub Docs](https://docs.github.com/ja/pages)
+- [GitHub Actions による GitHub Pages への自動デプロイ - Qiita](https://qiita.com/peaceiris/items/d401f2e5724fdcb0759d)
+- [スムーズに Hugo でブログを書くツール | tellme.tokyo](https://tellme.tokyo/post/2018/10/16/write-blog-smoothly/)
+
