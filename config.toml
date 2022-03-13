@@ -38,3 +38,8 @@ home = ["html", "rss", "json"]
     url = "/search/"
     weight = 10
 
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
