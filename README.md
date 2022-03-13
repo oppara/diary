@@ -3,28 +3,27 @@
 
 ## Usage
 
-### create post
-
-```console
-% make
-```
-
 ### create post with server
 
 ```console
 % blog new
 ```
-
-### edit post
+or
 
 ```console
-% make edit
+% make
 ```
 
 ### edit post with server
 
 ```console
 % blog edit
+```
+
+or
+
+```console
+% make edit
 ```
 
 ### start server
