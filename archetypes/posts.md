@@ -2,15 +2,14 @@
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
-toc: false
 tags: []
 ---
 
-## 
+## はじめに
+## 問題
+## 対応方法
 
----
-
-{{<collapse summary="環境">}}
+## 環境
 
 ```console
 % sw_vers
@@ -18,4 +17,3 @@ ProductName:    macOS
 ProductVersion: 12.2
 BuildVersion:   21D49
 ```
-{{</collapse>}}
