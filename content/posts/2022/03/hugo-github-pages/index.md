@@ -29,6 +29,7 @@ oppara.github.io.       3600    IN      A       185.199.110.153
 - `pull_request:`を削除
 - hugo のバージョンを 0.94.0 に変更
 - `publish_dir: ./public`を削除
+- [cname option](https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-add-cname-file-cname) を設定
 
 
 ## GitHub の設定
