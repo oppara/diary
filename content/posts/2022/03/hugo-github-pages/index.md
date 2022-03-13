@@ -29,8 +29,9 @@ oppara.github.io.       3600    IN      A       185.199.110.153
 - `pull_request:`を削除
 - hugo のバージョンを 0.94.0 に変更
 - `publish_dir: ./public`を削除
+  - gh-pages ブランチの直下にデプロイする。
 - [cname option](https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-add-cname-file-cname) を設定
-
+  - **重要** 設定しないとデプロイ時に Custom domain の設定が初期化され、URL にアクセスしても 404 になってしまう。
 
 ## GitHub の設定
 
