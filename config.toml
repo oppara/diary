@@ -2,6 +2,8 @@ baseURL = 'https://d.oppara.tv/'
 title = 'd.oppara.tv'
 theme = "PaperMod"
 
+googleAnalytics = "G-YQXP0JM67J"
+
 timeZone = "Asia/Tokyo"
 defaultContentLanguage = "ja"
 languageCode = 'ja'
