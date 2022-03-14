@@ -1,7 +1,7 @@
 ---
 title: "yaml, toml, json, hclの変換ツール yj"
 date: 2022-03-13T21:46:57+09:00
-tags: ["cli", "yaml", "toml", "json", "hcl"]
+tags: ["cli", "yaml", "toml", "json", "hcl", "converter"]
 ---
 
 ## はじめに
