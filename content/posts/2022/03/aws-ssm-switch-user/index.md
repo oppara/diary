@@ -1,7 +1,6 @@
 ---
 title: "Session Manager で Amazon Linux にログイン後ユーザーを切り替える"
-date: 2022-03-15T22:31:09+09:00
-draft: true
+date: 2022-03-16T22:31:09+09:00
 tags: ["aws", "ssm"]
 ---
 
