@@ -31,14 +31,9 @@ curl -L http://repo.msys2.org/msys/x86_64/libxxhash-0.8.0-1-x86_64.pkg.tar.zst  
 
 - [Git for Windows に rsync を追加する](https://zenn.dev/miwarin/articles/14a10b3278e7a6)
 
-<!--
 
 ## 環境
 
-```console
-% sw_vers
-ProductName:    macOS
-ProductVersion: 12.2
-BuildVersion:   21D49
-```
--->
+* Windows 10 21H2 (OS ビルド 19044, 1586)
+* Git for Windows 2.35.1
+* rsync version 3.2.2 protocol version 31
