@@ -1,7 +1,6 @@
 ---
 title: "GitHub Actions 時でなくてもブランチ名を利用したい"
 date: 2022-04-03T00:04:44+09:00
-draft: true
 tags: ["github", "actions", "git"]
 ---
 
