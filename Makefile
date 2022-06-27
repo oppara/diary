@@ -1,9 +1,10 @@
 #
 # Requirement
-# oppara/blog
-# https://github.com/oppara/blog/tree/specify-timezone
+# https://github.com/oppara/b4b4r07-blog/tree/specify-timezone
 #
-# build & drop it in $PATH
+# % git clone git@github.com:oppara/b4b4r07-blog.git
+# % cd b4b4r07-blog
+# % go install
 #
 
 SHELL := /bin/bash
