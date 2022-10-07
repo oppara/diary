@@ -2,7 +2,7 @@
 title: "APG4b を Mac  上で確認したい"
 date: 2022-09-24T22:12:03+09:00
 draft: false
-tags: ["atcoder", "mac"]
+tags: ["atcoder", "mac", "c++", "vim"]
 ---
 
 ## 目的
