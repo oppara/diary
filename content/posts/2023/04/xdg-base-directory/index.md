@@ -23,21 +23,21 @@ echo "${XDG_CONFIG_HOME:-$HOME/.config}"
 ユーザー個別のデータファイルが書き込まれるディレクトリ。
 
 ```
-echo "${XDG_DATA_HOME:-$HOME/.config}"
+echo "${XDG_DATA_HOME:-$HOME/.share}"
 ```
 ### XDG_STATE_HOME
 
 ユーザー個別の状態ファイルをが書き込まれるディレクトリ。
 
 ```
-echo "${XDG_STATE_HOME:-$HOME/.config}"
+echo "${XDG_STATE_HOME:-$HOME/.state}"
 ```
 ### XDG_CACHE_HOME
 
 ユーザー個別の重要でない (キャッシュ) データが書き込まれるディレクトリ。
 
 ```
-echo "${XDG_CACHE_HOME:-$HOME/.config}"
+echo "${XDG_CACHE_HOME:-$HOME/.cache}"
 ```
 
 ## 参考サイト
