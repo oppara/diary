@@ -25,7 +25,7 @@ add_filter('sanitize_title', function ($title) {
         if (function_exists('mt_strtolower')) {
             $title = mb_strtolower($title, 'UTF-8');
         }
-        $title = utf8_uri_encode($title);
+        $title = utf8_uri_encode($title, 200);
     }
 
     return $title;
