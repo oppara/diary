@@ -22,7 +22,7 @@ remove_filter('sanitize_title', 'sanitize_title_with_dashes');
 // URI エンコードを行う
 add_filter('sanitize_title', function ($title) {
     if (seems_utf8($title)) {
-        if (function_exists('mt_strtolower')) {
+        if (function_exists('mb_strtolower')) {
             $title = mb_strtolower($title, 'UTF-8');
         }
         $title = utf8_uri_encode($title, 200);
