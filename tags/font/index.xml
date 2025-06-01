@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>font on d.oppara.tv</title><link>https://d.oppara.tv/tags/font/</link><description>Recent content in font on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 29 Jan 2024 07:21:41 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/font/index.xml" rel="self" type="application/rss+xml"/><item><title>Intel One Mono を使う</title><link>https://d.oppara.tv/posts/2024/01/font-intel-one-mono/</link><pubDate>Mon, 29 Jan 2024 07:21:41 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/font-intel-one-mono/</guid><description>はじめに 中括弧（{}）が特徴的な、Intel One Mono を使ってみる。 インストール % install homebrew/cask-fonts/font-intel-one-mono 環境 % sw_vers ProductName: macOS ProductVersion: 14.2.1 BuildVersion: 23C71 % brew --version Homebrew 4.2.5</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Font on d.oppara.tv</title><link>https://d.oppara.tv/tags/font/</link><description>Recent content in Font on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Mon, 29 Jan 2024 07:21:41 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/font/index.xml" rel="self" type="application/rss+xml"/><item><title>Intel One Mono を使う</title><link>https://d.oppara.tv/posts/2024/01/font-intel-one-mono/</link><pubDate>Mon, 29 Jan 2024 07:21:41 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/font-intel-one-mono/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>中括弧（{}）が特徴的な、&lt;a href="https://github.com/intel/intel-one-mono">Intel One Mono&lt;/a> を使ってみる。&lt;/p>
+&lt;p>&lt;figure>
+&lt;img loading="lazy" src="font.png"/>
+&lt;/figure>
+&lt;figure>
+&lt;img loading="lazy" src="typeface.png"/>
+&lt;/figure>
+&lt;/p>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% install homebrew/cask-fonts/font-intel-one-mono
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 14.2.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 23C71
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% brew --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Homebrew 4.2.5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

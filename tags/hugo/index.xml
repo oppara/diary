@@ -1,1 +1,109 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>hugo on d.oppara.tv</title><link>https://d.oppara.tv/tags/hugo/</link><description>Recent content in hugo on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sat, 12 Mar 2022 16:08:15 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo で作成した記事を GitHub Pages で公開する</title><link>https://d.oppara.tv/posts/2022/03/hugo-github-pages/</link><pubDate>Sat, 12 Mar 2022 16:08:15 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-github-pages/</guid><description>DNS の設定 d.oppara.tvの CNAME をoppara.github.ioに設定する。 % dig d.oppara.tv @8.8.8.8 ... ;; ANSWER SECTION: d.oppara.tv. 3600 IN CNAME oppara.github.io. oppara.github.io. 3600 IN A 185.199.108.153 oppara.github.io. 3600 IN A 185.199.111.153 oppara.github.io. 3600 IN A 185.199.109.153 oppara.github.io. 3600</description></item><item><title>スムーズに Hugo でブログを書くツール</title><link>https://d.oppara.tv/posts/2022/03/hugo-blog-tool/</link><pubDate>Fri, 11 Mar 2022 14:35:32 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-blog-tool/</guid><description>はじめに hugo vim editorで検索していたら以下の b4b4r07 さんの良さげなブログを発見。 スムーズに Hugo でブログを書くツール | tellme.tokyo 上記ブログで使用されている b4b4r07/blog</description></item><item><title>--editor オプション付きで hugo new するとエラーになる</title><link>https://d.oppara.tv/posts/2022/03/hugo-with-editor/</link><pubDate>Thu, 10 Mar 2022 12:57:57 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-with-editor/</guid><description>問題 --editor オプション付きで hugo new すると以下のエラーになってしまう。 % hugo new posts/2022/03/hoge/index.md --editor vim Content &amp;#34;/path/to/hugo/content/posts/2022/03/hoge/index.md&amp;#34; created Editing &amp;#34;/path/to/hugo/content/posts/2022/03/hoge/index.md&amp;#34; with &amp;#34;vim&amp;#34; ... Error: access denied: &amp;#34;vim&amp;#34; is not whitelisted in policy &amp;#34;security.exec.allow&amp;#34;; the current security configuration is: [security] enableInlineShortcodes = false [security.exec] allow = [&amp;#39;^dart-sass-embedded$&amp;#39;, &amp;#39;^go$&amp;#39;, &amp;#39;^npx$&amp;#39;, &amp;#39;^postcss$&amp;#39;]</description></item><item><title>Hugo の設定</title><link>https://d.oppara.tv/posts/2022/03/hugo-config/</link><pubDate>Wed, 09 Mar 2022 11:14:47 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-config/</guid><description>Configure Hugo | Hugo 日本語周り # デフォルトの言語設定 defaultContentLanguage = &amp;#34;ja&amp;#34; # &amp;lt;language&amp;gt; エレメント用の値 languageCode = &amp;#34;ja&amp;#34; # 日本語の文字数を正しく数えて、短いサマリーを表示できるようにする hasCJKLanguage</description></item><item><title>Hugo 事始め</title><link>https://d.oppara.tv/posts/2022/03/hugo-quick-start/</link><pubDate>Tue, 08 Mar 2022 00:39:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-quick-start/</guid><description>はじめに Quick Start | Hugo とりあえずテーマをインストールしてコンテンツを表示するところまで。 Hugo のインストール % brew install hugo サイトの作成 % hugo new site d.oppara.tv テーマの追加</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Hugo on d.oppara.tv</title><link>https://d.oppara.tv/tags/hugo/</link><description>Recent content in Hugo on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sat, 12 Mar 2022 16:08:15 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo で作成した記事を GitHub Pages で公開する</title><link>https://d.oppara.tv/posts/2022/03/hugo-github-pages/</link><pubDate>Sat, 12 Mar 2022 16:08:15 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-github-pages/</guid><description>&lt;h2 id="dns-の設定">DNS の設定&lt;/h2>
+&lt;p>&lt;code>d.oppara.tv&lt;/code>の CNAME を&lt;code>oppara.github.io&lt;/code>に設定する。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% dig d.oppara.tv @8.8.8.8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>;; ANSWER SECTION:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>d.oppara.tv. 3600 IN CNAME oppara.github.io.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oppara.github.io. 3600 IN A 185.199.108.153
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oppara.github.io. 3600 IN A 185.199.111.153
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oppara.github.io. 3600 IN A 185.199.109.153
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>oppara.github.io. 3600 IN A 185.199.110.153
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="github-actions-を設定する">GitHub Actions を設定する&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/peaceiris/items/d401f2e5724fdcb0759d">GitHub Actions による GitHub Pages への自動デプロイ - Qiita&lt;/a>&lt;/p></description></item><item><title>スムーズに Hugo でブログを書くツール</title><link>https://d.oppara.tv/posts/2022/03/hugo-blog-tool/</link><pubDate>Fri, 11 Mar 2022 14:35:32 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-blog-tool/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>&lt;code>hugo vim editor&lt;/code>で検索していたら以下の b4b4r07 さんの良さげなブログを発見。&lt;/p>
+&lt;p>&lt;a href="https://tellme.tokyo/post/2018/10/16/write-blog-smoothly/">スムーズに Hugo でブログを書くツール | tellme.tokyo&lt;/a>&lt;/p>
+&lt;p>上記ブログで使用されている &lt;a href="https://github.com/b4b4r07/blog">b4b4r07/blog&lt;/a> を使用するには、以下の環境変数の設定が必要な模様。&lt;/p></description></item><item><title>--editor オプション付きで hugo new するとエラーになる</title><link>https://d.oppara.tv/posts/2022/03/hugo-with-editor/</link><pubDate>Thu, 10 Mar 2022 12:57:57 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-with-editor/</guid><description>&lt;h2 id="問題">問題&lt;/h2>
+&lt;p>&lt;code>--editor&lt;/code> オプション付きで &lt;code>hugo new&lt;/code> すると以下のエラーになってしまう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% hugo new posts/2022/03/hoge/index.md --editor vim
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Content &amp;#34;/path/to/hugo/content/posts/2022/03/hoge/index.md&amp;#34; created
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Editing &amp;#34;/path/to/hugo/content/posts/2022/03/hoge/index.md&amp;#34; with &amp;#34;vim&amp;#34; ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Error: access denied: &amp;#34;vim&amp;#34; is not whitelisted in policy &amp;#34;security.exec.allow&amp;#34;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>the current security configuration is:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>[security]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enableInlineShortcodes = false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [security.exec]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> allow = [&amp;#39;^dart-sass-embedded$&amp;#39;, &amp;#39;^go$&amp;#39;, &amp;#39;^npx$&amp;#39;, &amp;#39;^postcss$&amp;#39;]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> osEnv = [&amp;#39;(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$&amp;#39;]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> [security.funcs]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> getenv = [&amp;#39;^HUGO_&amp;#39;]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> [security.http]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> methods = [&amp;#39;(?i)GET|POST&amp;#39;]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> urls = [&amp;#39;.*&amp;#39;]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;p>以下の設定を &lt;code>confg.toml&lt;/code> に追加する。&lt;/p></description></item><item><title>Hugo の設定</title><link>https://d.oppara.tv/posts/2022/03/hugo-config/</link><pubDate>Wed, 09 Mar 2022 11:14:47 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-config/</guid><description>&lt;p>&lt;a href="https://gohugo.io/getting-started/configuration/">Configure Hugo | Hugo&lt;/a>&lt;/p>
+&lt;h2 id="日本語周り">日本語周り&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># デフォルトの言語設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">defaultContentLanguage&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;ja&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># &amp;lt;language&amp;gt; エレメント用の値&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">languageCode&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;ja&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 日本語の文字数を正しく数えて、短いサマリーを表示できるようにする&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">hasCJKLanguage&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># リスト内のタイトルを複数化しない&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">pluralizeListTitles&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># timezone&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">timeZone&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;Asia/Tokyo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="テーマ-papermod-の設定">テーマ &lt;a href="https://github.com/adityatelange/hugo-PaperMod/wiki/Variables">PaperMod&lt;/a> の設定&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">Params&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 著者名&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">author&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;oppara&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 日付のフォーマット&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">dateformat&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;2006-01-02&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># リストページに表示される投稿毎の要約を非表示にする&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">hideSummary&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># リストページに1つめに表示される投稿のデザインを他の投稿のデザインと同じにする&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">disableSpecial1stPost&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 投稿ページで目次を表示する&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ShowToc&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># パン屑メニューを表示する&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ShowBreadCrumbs&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 投稿ページの下部にナビゲーションリンクを表示する&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ShowPostNavLinks&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 12.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 21D49
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% hugo version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo v0.93.3+extended darwin/amd64 BuildDate=unknown
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Hugo 事始め</title><link>https://d.oppara.tv/posts/2022/03/hugo-quick-start/</link><pubDate>Tue, 08 Mar 2022 00:39:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/hugo-quick-start/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>&lt;a href="https://gohugo.io/getting-started/quick-start/">Quick Start | Hugo&lt;/a>&lt;/p>
+&lt;p>とりあえずテーマをインストールしてコンテンツを表示するところまで。&lt;/p>
+&lt;h2 id="hugo-のインストール">Hugo のインストール&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% brew install hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="サイトの作成">サイトの作成&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% hugo new site d.oppara.tv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="テーマの追加">テーマの追加&lt;/h2>
+&lt;p>&lt;a href="https://github.com/adityatelange/hugo-PaperMod">PaperMod&lt;/a> というテーマを使ってみる。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% cd d.oppara.tv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git init
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git add .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git commit -m &lt;span style="color:#e6db74">&amp;#39;feat: initial commit&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% echo theme &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">\&amp;#34;&lt;/span>PaperMod&lt;span style="color:#ae81ff">\&amp;#34;&lt;/span> &amp;gt;&amp;gt; config.toml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git add .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git commit -m &lt;span style="color:#e6db74">&amp;#39;fead: add theme&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="テーマの更新">テーマの更新&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% git submodule update --remote --merge
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="テーマの削除">テーマの削除&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% git submodule deinit -f themes/PaperMod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% git rm -f themes/PaperMod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% rm -rf .git/modules/themes*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="コンテンツの作成">コンテンツの作成&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% hugo new posts/hoge.md
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% echo &lt;span style="color:#e6db74">&amp;#39;hogehoge&amp;#39;&lt;/span> &amp;gt;&amp;gt; content/posts/hoge.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>.hugo_build.lock&lt;/code>をバージョン管理外にする。&lt;/p></description></item></channel></rss>

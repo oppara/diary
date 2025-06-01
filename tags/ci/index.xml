@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>ci on d.oppara.tv</title><link>https://d.oppara.tv/tags/ci/</link><description>Recent content in ci on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sat, 02 Apr 2022 22:50:07 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/ci/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab CI 時でなくてもブランチ名を利用したい</title><link>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</link><pubDate>Sat, 02 Apr 2022 22:50:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</guid><description>目的 CI 時に呼び出すシェルスクリプト内で、CI 時でなくてもブランチ名を利用したい。 対応方法 #!/bin/bash set -Ceu if [ &amp;#34;${CI_COMMIT_REF_NAME:-UNDEF}&amp;#34; = &amp;#34;UNDEF&amp;#34; ]; then CI_COMMIT_REF_NAME=$(git rev-parse --abbrev-ref HEAD) fi ## 以下の書き方は GitLab 16.0 以</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ci on d.oppara.tv</title><link>https://d.oppara.tv/tags/ci/</link><description>Recent content in Ci on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sat, 02 Apr 2022 22:50:07 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/ci/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab CI 時でなくてもブランチ名を利用したい</title><link>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</link><pubDate>Sat, 02 Apr 2022 22:50:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+&lt;p>CI 時に呼び出すシェルスクリプト内で、CI 時でなくてもブランチ名を利用したい。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -Ceu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CI_COMMIT_REF_NAME&lt;span style="color:#66d9ef">:-&lt;/span>UNDEF&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;UNDEF&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> CI_COMMIT_REF_NAME&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>git rev-parse --abbrev-ref HEAD&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 以下の書き方は GitLab 16.0 以降使えなくなる&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># if [ &amp;#34;${CI_BUILD_REF_NAME:-UNDEF}&amp;#34; = &amp;#34;UNDEF&amp;#34; ]; then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># CI_BUILD_REF_NAME=$(git rev-parse --abbrev-ref HEAD)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="bash-のオプション">bash のオプション&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>C&lt;/code>: リダイレクト時に既存のファイルを上書きしない。&lt;/li>
+&lt;li>&lt;code>e&lt;/code>: コマンドがゼロ以外のステータスを返した場合、スクリプトを即座に終了する。&lt;/li>
+&lt;li>&lt;code>u&lt;/code>: 未定義の変数を参照時にエラー。&lt;/li>
+&lt;/ul>
+&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.gitlab.com/ee/update/deprecations.html#ci_build_-predefined-variables">Deprecations by milestone | GitLab&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

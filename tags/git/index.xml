@@ -1,1 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>git on d.oppara.tv</title><link>https://d.oppara.tv/tags/git/</link><description>Recent content in git on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sun, 03 Apr 2022 00:04:44 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Actions 時でなくてもブランチ名を利用したい</title><link>https://d.oppara.tv/posts/2022/04/github-actions-git-branch/</link><pubDate>Sun, 03 Apr 2022 00:04:44 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/github-actions-git-branch/</guid><description>目的 Actions 時に呼び出すシェルスクリプト内で、Actions 時でなくてもブランチ名を利用したい。 対応方法 #!/bin/bash set -Ceu if [ &amp;#34;${GITHUB_REF_NAME:-UNDEF}&amp;#34; = &amp;#34;UNDEF&amp;#34; ]; then GITHUB_REF_NAME=$(git rev-parse --abbrev-ref HEAD) fi 参考サイト 環</description></item><item><title>GitLab CI 時でなくてもブランチ名を利用したい</title><link>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</link><pubDate>Sat, 02 Apr 2022 22:50:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</guid><description>目的 CI 時に呼び出すシェルスクリプト内で、CI 時でなくてもブランチ名を利用したい。 対応方法 #!/bin/bash set -Ceu if [ &amp;#34;${CI_COMMIT_REF_NAME:-UNDEF}&amp;#34; = &amp;#34;UNDEF&amp;#34; ]; then CI_COMMIT_REF_NAME=$(git rev-parse --abbrev-ref HEAD) fi ## 以下の書き方は GitLab 16.0 以</description></item><item><title>git log のエイリアス</title><link>https://d.oppara.tv/posts/2022/03/git-log-alias/</link><pubDate>Tue, 15 Mar 2022 21:59:21 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/git-log-alias/</guid><description>問題 git logの表示が寂しい。 対応 好みのログを表示するエイリアスを設定する。 Git のエイリアス ; ~/.gitconfig [alias] ll = log --graph --color \ --pretty=format:&amp;#39;%C(red)%x09%h %C(yellow)%cn %C(green)%ci %C(reset)%s%C(blue)%d%C(reset)&amp;#39; format 解説 %C(red)%x09%h 9 文字空けて省略さ</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Git on d.oppara.tv</title><link>https://d.oppara.tv/tags/git/</link><description>Recent content in Git on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sun, 03 Apr 2022 00:04:44 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>GitHub Actions 時でなくてもブランチ名を利用したい</title><link>https://d.oppara.tv/posts/2022/04/github-actions-git-branch/</link><pubDate>Sun, 03 Apr 2022 00:04:44 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/github-actions-git-branch/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+&lt;p>Actions 時に呼び出すシェルスクリプト内で、Actions 時でなくてもブランチ名を利用したい。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -Ceu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>GITHUB_REF_NAME&lt;span style="color:#66d9ef">:-&lt;/span>UNDEF&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;UNDEF&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GITHUB_REF_NAME&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>git rev-parse --abbrev-ref HEAD&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.github.com/ja/actions/learn-github-actions/environment-variables">環境変数 - GitHub Docs&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>GitLab CI 時でなくてもブランチ名を利用したい</title><link>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</link><pubDate>Sat, 02 Apr 2022 22:50:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+&lt;p>CI 時に呼び出すシェルスクリプト内で、CI 時でなくてもブランチ名を利用したい。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -Ceu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CI_COMMIT_REF_NAME&lt;span style="color:#66d9ef">:-&lt;/span>UNDEF&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;UNDEF&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> CI_COMMIT_REF_NAME&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>git rev-parse --abbrev-ref HEAD&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 以下の書き方は GitLab 16.0 以降使えなくなる&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># if [ &amp;#34;${CI_BUILD_REF_NAME:-UNDEF}&amp;#34; = &amp;#34;UNDEF&amp;#34; ]; then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># CI_BUILD_REF_NAME=$(git rev-parse --abbrev-ref HEAD)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="bash-のオプション">bash のオプション&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>C&lt;/code>: リダイレクト時に既存のファイルを上書きしない。&lt;/li>
+&lt;li>&lt;code>e&lt;/code>: コマンドがゼロ以外のステータスを返した場合、スクリプトを即座に終了する。&lt;/li>
+&lt;li>&lt;code>u&lt;/code>: 未定義の変数を参照時にエラー。&lt;/li>
+&lt;/ul>
+&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.gitlab.com/ee/update/deprecations.html#ci_build_-predefined-variables">Deprecations by milestone | GitLab&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>git log のエイリアス</title><link>https://d.oppara.tv/posts/2022/03/git-log-alias/</link><pubDate>Tue, 15 Mar 2022 21:59:21 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/git-log-alias/</guid><description>&lt;h2 id="問題">問題&lt;/h2>
+&lt;p>&lt;code>git log&lt;/code>の表示が寂しい。&lt;/p>
+&lt;h2 id="対応">対応&lt;/h2>
+&lt;p>好みのログを表示するエイリアスを設定する。&lt;/p>
+&lt;h3 id="git-のエイリアス">Git のエイリアス&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">; ~/.gitconfig&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">[alias]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ll&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">log --graph --color \
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> --pretty=format:&amp;#39;%C(red)%x09%h %C(yellow)%cn %C(green)%ci %C(reset)%s%C(blue)%d%C(reset)&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>format&lt;/th>
+&lt;th>解説&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>%C(red)%x09%h&lt;/code>&lt;/td>
+&lt;td>9 文字空けて省略されたコミットハッシュを赤で表示&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>%C(yellow)%cn&lt;/code>&lt;/td>
+&lt;td>コミッターの名前を黄色で表示&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>%C(green)%ci&lt;/code>&lt;/td>
+&lt;td>コミットした日時を ISO8601 ぽい形式で緑で表示&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>%C(reset)%s&lt;/code>&lt;/td>
+&lt;td>表示色をリセットし、件名（コミットメッセージの 1 行目）を表示&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>%C(blue)%d%C(reset)&lt;/code>&lt;/td>
+&lt;td>ref name を青で表示し、再度表示色をリセット&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>本家の解説ページ&lt;br>
+&lt;a href="https://git-scm.com/docs/pretty-formats">Git - pretty-formats Documentation&lt;/a>&lt;/p></description></item></channel></rss>

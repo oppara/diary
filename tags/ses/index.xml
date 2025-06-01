@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>ses on d.oppara.tv</title><link>https://d.oppara.tv/tags/ses/</link><description>Recent content in ses on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sat, 27 Jan 2024 14:55:28 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/ses/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CLIからテストメールを送信</title><link>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</link><pubDate>Sat, 27 Jan 2024 14:55:28 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</guid><description>はじめに AWS CLIからテストメールを送信する方法を備忘録。 手順 $ to=&amp;#34;test@example.com&amp;#34; $ aws ses send-email \ --from info@oppara.tv \ --to &amp;#34;${to}&amp;#34; \ --subject &amp;#34;件名&amp;#34; \ --text &amp;#34;本文&amp;#34;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ses on d.oppara.tv</title><link>https://d.oppara.tv/tags/ses/</link><description>Recent content in Ses on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sun, 01 Jun 2025 09:30:25 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/ses/index.xml" rel="self" type="application/rss+xml"/><item><title>シェルスクリプトを使用して、AWS SESでメールを送信する</title><link>https://d.oppara.tv/posts/2025/06/sending-email-by-ses-on-shell-script/</link><pubDate>Sun, 01 Jun 2025 09:30:25 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/06/sending-email-by-ses-on-shell-script/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>シェルスクリプトを使用して、AWS SES でメールを送信する備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -CEeuo pipefail
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SES_FROM&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;admin@oppara.tv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SES_TO&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;admin@oppara.tv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SES_REGION&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ap-northeast-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SES_SUBJECT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;テストメール from SES&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SES_BODY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ほげほげ&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws ses send-email &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --from &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SES_FROM&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --destination &lt;span style="color:#e6db74">&amp;#34;ToAddresses=&lt;/span>$SES_TO&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --message &lt;span style="color:#e6db74">&amp;#34;Subject={Data=&lt;/span>$SES_SUBJECT&lt;span style="color:#e6db74">,Charset=utf-8},Body={Text={Data=&lt;/span>$SES_BODY&lt;span style="color:#e6db74">,Charset=utf-8}}&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --region &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SES_REGION&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% aws --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws-cli/2.27.26 Python/3.13.3 Darwin/24.3.0 source/arm64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>AWS CLIからテストメールを送信</title><link>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</link><pubDate>Sat, 27 Jan 2024 14:55:28 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>AWS CLIからテストメールを送信する方法を備忘録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>$ to&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;test@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ aws ses send-email &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --from info@oppara.tv \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --to &amp;#34;${to}&amp;#34; \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --subject &amp;#34;件名&amp;#34; \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --text &amp;#34;本文&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>$ aws --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws-cli/2.15.13 Python/3.11.6 Linux/6.1.66-91.160.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2023 prompt/off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

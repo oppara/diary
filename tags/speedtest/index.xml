@@ -1,1 +1,66 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>speedtest on d.oppara.tv</title><link>https://d.oppara.tv/tags/speedtest/</link><description>Recent content in speedtest on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 14 Mar 2022 21:16:06 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/speedtest/index.xml" rel="self" type="application/rss+xml"/><item><title>Speedtest の CLI クライアントを試してみる</title><link>https://d.oppara.tv/posts/2022/03/cli-speedtest/</link><pubDate>Mon, 14 Mar 2022 21:16:06 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/cli-speedtest/</guid><description>はじめに speedtest.net の CLI クライアント があったので試してみる。 インストール % brew install teamookla/speedtest/speedtest 初回実行 初回実行時は、ライセンスの確認がある。 % speedtest ==================================================================== You may only use this Speedtest software and information</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Speedtest on d.oppara.tv</title><link>https://d.oppara.tv/tags/speedtest/</link><description>Recent content in Speedtest on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Mon, 14 Mar 2022 21:16:06 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/speedtest/index.xml" rel="self" type="application/rss+xml"/><item><title>Speedtest の CLI クライアントを試してみる</title><link>https://d.oppara.tv/posts/2022/03/cli-speedtest/</link><pubDate>Mon, 14 Mar 2022 21:16:06 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/cli-speedtest/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>&lt;a href="https://www.speedtest.net/">speedtest.net&lt;/a> の &lt;a href="https://www.speedtest.net/apps/cli">CLI クライアント&lt;/a> があったので試してみる。&lt;/p>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% brew install teamookla/speedtest/speedtest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="初回実行">初回実行&lt;/h2>
+&lt;p>初回実行時は、ライセンスの確認がある。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% speedtest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>====================================================================
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>You may only use this Speedtest software and information generated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>from it for personal, non-commercial use, through a command line
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>interface on a personal computer. Your use of this software is subject
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to the End User License Agreement, Terms of Use and Privacy Policy at
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>these URLs:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> https://www.speedtest.net/about/eula
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> https://www.speedtest.net/about/terms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> https://www.speedtest.net/about/privacy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>=====================================================================
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>Do you accept the license? [type YES to accept]:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="サーバ選択の詳細を表示しながら実行">サーバ選択の詳細を表示しながら実行&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% speedtest --selection-details
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> Speedtest by Ookla
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>Selecting server:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 20976: 6.24 ms; GLBB Japan - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 21569: 5.66 ms; i3D.net - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 38241: 5.51 ms; BudgetVM - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 28910: 212.52 ms; fdcservers.net - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 48301: 5.96 ms; Cloudflare - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 24333: 17.89 ms; Rakuten Mobile, Inc - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 44988: 7.02 ms; Misaka Network, Inc. - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 48463: 5.79 ms; IPA CyberLab 400G - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 14623: 6.14 ms; IPA CyberLab - Bunkyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 8407: 10.31 ms; Allied Telesis Capital Corporation - Sagamihara
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Server: BudgetVM - Tokyo (id = 38241)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ISP: Softbank BB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Latency: 5.63 ms (0.76 ms jitter)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Download: 117.23 Mbps (data used: 124.7 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Upload: 230.65 Mbps (data used: 134.4 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Packet Loss: 0.0%
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Result URL: https://www.speedtest.net/result/c/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="サーバ-id-を指定して実行">サーバ ID を指定して実行&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% speedtest -s &lt;span style="color:#ae81ff">21569&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> Speedtest by Ookla
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> Server: i3D.net - Tokyo (id = 21569)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ISP: Softbank BB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Latency: 5.61 ms (0.40 ms jitter)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Download: 110.67 Mbps (data used: 69.7 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Upload: 219.27 Mbps (data used: 145.6 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Packet Loss: 0.0%
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Result URL: https://www.speedtest.net/result/c/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 12.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 21D49
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% speedtest -V
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Speedtest by Ookla 1.1.1.84 (3bdba79799) Darwin 21.3.0 x86_64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

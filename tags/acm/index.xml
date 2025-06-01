@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>acm on d.oppara.tv</title><link>https://d.oppara.tv/tags/acm/</link><description>Recent content in acm on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Tue, 26 Apr 2022 09:22:58 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/acm/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CLI で証明書の再インポート</title><link>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</link><pubDate>Tue, 26 Apr 2022 09:22:58 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</guid><description>はじめに マネコンからの再インポートが面倒くさかったので備忘録。 対応方法 シェルスクリプトから実行する。 #!/bin/bash set -eu # インポートする証明書の ARN ARN=&amp;#34;arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-12345678901 &amp;#34; # 証</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Acm on d.oppara.tv</title><link>https://d.oppara.tv/tags/acm/</link><description>Recent content in Acm on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Tue, 26 Apr 2022 09:22:58 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/acm/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CLI で証明書の再インポート</title><link>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</link><pubDate>Tue, 26 Apr 2022 09:22:58 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>マネコンからの再インポートが面倒くさかったので備忘録。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;p>シェルスクリプトから実行する。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -eu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># インポートする証明書の ARN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ARN&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-12345678901 &amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 証明書ファイルへのパス&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CRT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Certificate.pem&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 中間証明書ファイルへのパス&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CC&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CertificateChain.pem&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># パスワード無しの秘密鍵へのパス&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KEY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;PrivateKey.pem&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># リージョン&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REGION&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws acm import-certificate &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --certificate fileb://&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CRT&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --certificate-chain fileb://&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --private-key fileb://&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>KEY&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --certificate-arn &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>ARN&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --region &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>REGION&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/import-reimport.html">証明書を再インポートする - AWS Certificate Manager&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/acm/import-certificate.html">import-certificate — AWS CLI 2.5.8 Command Reference&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% aws --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws-cli/2.5.8 Python/3.9.12 Darwin/21.4.0 source/x86_64 prompt/off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

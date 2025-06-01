@@ -1,1 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>php on d.oppara.tv</title><link>https://d.oppara.tv/tags/php/</link><description>Recent content in php on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 13 Jan 2025 10:37:19 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/php/index.xml" rel="self" type="application/rss+xml"/><item><title>PHP リトライのテンプレート</title><link>https://d.oppara.tv/posts/2025/01/php-retry/</link><pubDate>Mon, 13 Jan 2025 10:37:19 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/01/php-retry/</guid><description>はじめに よく忘れるので、備呆録。 手順 &amp;lt;?php declare(strict_types=1); function retry($retries, $sleep, callable $callback) { for ($i = 1; $i &amp;lt;= $retries; $i++) { try { return $callback(); } catch (Exception $e) { echo &amp;#34;attempt: $i&amp;#34; . PHP_EOL; echo $e-&amp;gt;getMessage() . PHP_EOL; $delay = $sleep * $i; echo &amp;#34;delay: $delay&amp;#34; . PHP_EOL; sleep($delay); } } throw new Exception(&amp;#39;Failed after</description></item><item><title>ローカルで Web サーバーを立てる</title><link>https://d.oppara.tv/posts/2024/01/localserver/</link><pubDate>Wed, 10 Jan 2024 08:57:54 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/localserver/</guid><description>Node.js npx serve port 指定する場合。 npx serve -p 1192 serve - npm Python python -m http.server 1192 http.server &amp;mdash; HTTP サーバ — Python 3.10.13 ドキュメント PHP php -S localhost:1192 PHP: ビルトインウェブサーバー - Manual まとめ 静的コンテンツは node で</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Php on d.oppara.tv</title><link>https://d.oppara.tv/tags/php/</link><description>Recent content in Php on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Mon, 13 Jan 2025 10:37:19 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/php/index.xml" rel="self" type="application/rss+xml"/><item><title>PHP リトライのテンプレート</title><link>https://d.oppara.tv/posts/2025/01/php-retry/</link><pubDate>Mon, 13 Jan 2025 10:37:19 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/01/php-retry/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>よく忘れるので、備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-php" data-lang="php">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;?&lt;/span>&lt;span style="color:#a6e22e">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">declare&lt;/span>(&lt;span style="color:#a6e22e">strict_types&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">retry&lt;/span>($retries, $sleep, &lt;span style="color:#a6e22e">callable&lt;/span> $callback)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> ($i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>; $i &lt;span style="color:#f92672">&amp;lt;=&lt;/span> $retries; $i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> $callback();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">catch&lt;/span> (&lt;span style="color:#a6e22e">Exception&lt;/span> $e) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">echo&lt;/span> &lt;span style="color:#e6db74">&amp;#34;attempt: &lt;/span>&lt;span style="color:#e6db74">$i&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">.&lt;/span> &lt;span style="color:#a6e22e">PHP_EOL&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">echo&lt;/span> $e&lt;span style="color:#f92672">-&amp;gt;&lt;/span>&lt;span style="color:#a6e22e">getMessage&lt;/span>() &lt;span style="color:#f92672">.&lt;/span> &lt;span style="color:#a6e22e">PHP_EOL&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> $delay &lt;span style="color:#f92672">=&lt;/span> $sleep &lt;span style="color:#f92672">*&lt;/span> $i;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">echo&lt;/span> &lt;span style="color:#e6db74">&amp;#34;delay: &lt;/span>&lt;span style="color:#e6db74">$delay&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">.&lt;/span> &lt;span style="color:#a6e22e">PHP_EOL&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">sleep&lt;/span>($delay);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">Exception&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;Failed after &amp;#39;&lt;/span> &lt;span style="color:#f92672">.&lt;/span> $retries &lt;span style="color:#f92672">.&lt;/span> &lt;span style="color:#e6db74">&amp;#39; retries&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">hoge&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">throw&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">Exception&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;error&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">retry&lt;/span>(&lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;hoge&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24C101
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% php -v
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP 8.2.27 (cli) (built: Dec 17 2024 11:39:23) (NTS)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Copyright (c) The PHP Group
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Zend Engine v4.2.27, Copyright (c) Zend Technologies
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> with Zend OPcache v8.2.27, Copyright (c), by Zend Technologies
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ローカルで Web サーバーを立てる</title><link>https://d.oppara.tv/posts/2024/01/localserver/</link><pubDate>Wed, 10 Jan 2024 08:57:54 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/localserver/</guid><description>&lt;h2 id="nodejs">Node.js&lt;/h2>
+&lt;pre tabindex="0">&lt;code>npx serve
+&lt;/code>&lt;/pre>&lt;p>port 指定する場合。&lt;/p>
+&lt;pre tabindex="0">&lt;code>npx serve -p 1192
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.npmjs.com/package/serve">serve - npm&lt;/a>&lt;/p>
+&lt;h2 id="python">Python&lt;/h2>
+&lt;pre tabindex="0">&lt;code>python -m http.server 1192
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://docs.python.org/ja/3.10/library/http.server.html">http.server &amp;mdash; HTTP サーバ — Python 3.10.13 ドキュメント&lt;/a>&lt;/p>
+&lt;h2 id="php">PHP&lt;/h2>
+&lt;pre tabindex="0">&lt;code>php -S localhost:1192
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.php.net/manual/ja/features.commandline.webserver.php">PHP: ビルトインウェブサーバー - Manual&lt;/a>&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>静的コンテンツは node で。PHP が絡む場合は php で。&lt;/p></description></item></channel></rss>

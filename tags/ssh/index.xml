@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>ssh on d.oppara.tv</title><link>https://d.oppara.tv/tags/ssh/</link><description>Recent content in ssh on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Fri, 07 Oct 2022 09:00:03 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/ssh/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab に登録している公開鍵を取得したい</title><link>https://d.oppara.tv/posts/2022/10/gitlab-pubkey/</link><pubDate>Fri, 07 Oct 2022 09:00:03 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/10/gitlab-pubkey/</guid><description>目的 GitLab に登録している公開鍵を手軽に取得したい。 対応方法 GitLab のユーザーページの URL の後ろに .keys をつける。 例 GitLab のホスト: gitlab.oppara.tv ユーザー名: oppara % curl https://gitlab.oppara.tv/oppara.keys 参考サイ</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Ssh on d.oppara.tv</title><link>https://d.oppara.tv/tags/ssh/</link><description>Recent content in Ssh on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Fri, 07 Oct 2022 09:00:03 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/ssh/index.xml" rel="self" type="application/rss+xml"/><item><title>GitLab に登録している公開鍵を取得したい</title><link>https://d.oppara.tv/posts/2022/10/gitlab-pubkey/</link><pubDate>Fri, 07 Oct 2022 09:00:03 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/10/gitlab-pubkey/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+&lt;p>GitLab に登録している公開鍵を手軽に取得したい。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;p>GitLab のユーザーページの URL の後ろに &lt;code>.keys&lt;/code> をつける。&lt;/p>
+&lt;h3 id="例">例&lt;/h3>
+&lt;ul>
+&lt;li>GitLab のホスト: gitlab.oppara.tv&lt;/li>
+&lt;li>ユーザー名: oppara&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>% curl https://gitlab.oppara.tv/oppara.keys
+&lt;/code>&lt;/pre>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://blog.id774.net/entry/2013/12/16/441/">GitHub に登録した SSH 公開鍵は全世界に公開されている | 774::Blog&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>% curl https://github.com/oppara.keys
+&lt;/code>&lt;/pre></description></item></channel></rss>

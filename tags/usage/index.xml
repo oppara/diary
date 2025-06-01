@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>usage on d.oppara.tv</title><link>https://d.oppara.tv/tags/usage/</link><description>Recent content in usage on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Thu, 05 Oct 2023 22:22:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/usage/index.xml" rel="self" type="application/rss+xml"/><item><title>シェルスクリプトで Usage 表示</title><link>https://d.oppara.tv/posts/2023/10/shellscript-usage/</link><pubDate>Thu, 05 Oct 2023 22:22:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2023/10/shellscript-usage/</guid><description>はじめに 簡易敵な Usage 表示 実装 #!/usr/bin/env bash #/ Usage: #/ awsome-script [-h | -help] &amp;lt;name&amp;gt; [&amp;lt;count&amp;gt;] #/ #/ Example #/ awsome-script foo #/ awsome-script foo 3 #/ set -e usage () { grep &amp;#39;^#/&amp;#39; &amp;lt; &amp;#34;$0&amp;#34; | cut -c4- exit 0 } if [ &amp;#34;$1&amp;#34; = &amp;#34;--help&amp;#34; ] || [ &amp;#34;$1&amp;#34; = &amp;#34;-h&amp;#34; ]; then usage fi NAME=$1 COUNT=${2:-0} echo &amp;#34;$NAME&amp;#34; &amp;#34;$COUNT&amp;#34;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Usage on d.oppara.tv</title><link>https://d.oppara.tv/tags/usage/</link><description>Recent content in Usage on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Thu, 05 Oct 2023 22:22:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/usage/index.xml" rel="self" type="application/rss+xml"/><item><title>シェルスクリプトで Usage 表示</title><link>https://d.oppara.tv/posts/2023/10/shellscript-usage/</link><pubDate>Thu, 05 Oct 2023 22:22:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2023/10/shellscript-usage/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>簡易敵な Usage 表示&lt;/p>
+&lt;h2 id="実装">実装&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e">#/ Usage:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#/ awsome-script [-h | -help] &amp;lt;name&amp;gt; [&amp;lt;count&amp;gt;]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#/ Example&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#/ awsome-script foo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#/ awsome-script foo 3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>usage &lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> grep &lt;span style="color:#e6db74">&amp;#39;^#/&amp;#39;&lt;/span> &amp;lt; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | cut -c4-
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;--help&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-h&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> usage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME&lt;span style="color:#f92672">=&lt;/span>$1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COUNT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>2&lt;span style="color:#66d9ef">:-&lt;/span>0&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$NAME&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$COUNT&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="実行">実行&lt;/h2>
+&lt;pre tabindex="0">&lt;code>% /path/to/awsome-script -h
+Usage:
+awsome-script [-h | -help] &amp;lt;name&amp;gt; [&amp;lt;count&amp;gt;]
+Example
+awsome-script foo
+awsome-script foo 3
+% /path/to/awsome-script foo
+foo 0
+&lt;/code>&lt;/pre></description></item></channel></rss>

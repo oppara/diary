@@ -1,1 +1,151 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>cli on d.oppara.tv</title><link>https://d.oppara.tv/tags/cli/</link><description>Recent content in cli on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sat, 27 Jan 2024 14:55:28 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/cli/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CLIからテストメールを送信</title><link>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</link><pubDate>Sat, 27 Jan 2024 14:55:28 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</guid><description>はじめに AWS CLIからテストメールを送信する方法を備忘録。 手順 $ to=&amp;#34;test@example.com&amp;#34; $ aws ses send-email \ --from info@oppara.tv \ --to &amp;#34;${to}&amp;#34; \ --subject &amp;#34;件名&amp;#34; \ --text &amp;#34;本文&amp;#34;</description></item><item><title>AWS CLI で証明書の再インポート</title><link>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</link><pubDate>Tue, 26 Apr 2022 09:22:58 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</guid><description>はじめに マネコンからの再インポートが面倒くさかったので備忘録。 対応方法 シェルスクリプトから実行する。 #!/bin/bash set -eu # インポートする証明書の ARN ARN=&amp;#34;arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-12345678901 &amp;#34; # 証</description></item><item><title>WP-CLI でテーブル内の文字列を置換する</title><link>https://d.oppara.tv/posts/2022/04/wp-search-replace/</link><pubDate>Mon, 11 Apr 2022 21:52:05 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/wp-search-replace/</guid><description>はじめに WP-CLI でテーブル内の文字列を置換する。 やり方 プレフィックスがwp_のテーブル内のsearchをreplaceに置換してoutに書き出す。</description></item><item><title>AWS Vault を使って MFA と AssumeRole（スイッチロール）</title><link>https://d.oppara.tv/posts/2022/03/aws-vault-assumerole-mfa/</link><pubDate>Thu, 17 Mar 2022 23:01:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/aws-vault-assumerole-mfa/</guid><description>はじめに AWS Vault を使って MFA 経由で AssumeRole する備忘録。 99designs/aws-vault 前提 以下のアカウントを作成済みでスイッチロールの設定済み。 oppara (default): スイッチ元 (MFA 認証) oppara-dev: スイッチ先 対応</description></item><item><title>Speedtest の CLI クライアントを試してみる</title><link>https://d.oppara.tv/posts/2022/03/cli-speedtest/</link><pubDate>Mon, 14 Mar 2022 21:16:06 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/cli-speedtest/</guid><description>はじめに speedtest.net の CLI クライアント があったので試してみる。 インストール % brew install teamookla/speedtest/speedtest 初回実行 初回実行時は、ライセンスの確認がある。 % speedtest ==================================================================== You may only use this Speedtest software and information</description></item><item><title>yaml, toml, json, hclの変換ツール yj</title><link>https://d.oppara.tv/posts/2022/03/cli-yaml-toml-json-hcl-converter/</link><pubDate>Sun, 13 Mar 2022 21:46:57 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/cli-yaml-toml-json-hcl-converter/</guid><description>はじめに yaml から toml への変換ツールを探していて良さげなものを発見したので使ってみる。 sclevine/yj: CLI - Convert between YAML, TOML, JSON, and HCL インストール % brew install yj 使い方 標準入力から読</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Cli on d.oppara.tv</title><link>https://d.oppara.tv/tags/cli/</link><description>Recent content in Cli on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sat, 27 Jan 2024 14:55:28 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/cli/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS CLIからテストメールを送信</title><link>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</link><pubDate>Sat, 27 Jan 2024 14:55:28 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>AWS CLIからテストメールを送信する方法を備忘録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>$ to&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;test@example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ aws ses send-email &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --from info@oppara.tv \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --to &amp;#34;${to}&amp;#34; \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --subject &amp;#34;件名&amp;#34; \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --text &amp;#34;本文&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>$ aws --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws-cli/2.15.13 Python/3.11.6 Linux/6.1.66-91.160.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2023 prompt/off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>AWS CLI で証明書の再インポート</title><link>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</link><pubDate>Tue, 26 Apr 2022 09:22:58 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>マネコンからの再インポートが面倒くさかったので備忘録。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;p>シェルスクリプトから実行する。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -eu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># インポートする証明書の ARN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ARN&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-12345678901 &amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 証明書ファイルへのパス&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CRT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Certificate.pem&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 中間証明書ファイルへのパス&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CC&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CertificateChain.pem&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># パスワード無しの秘密鍵へのパス&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KEY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;PrivateKey.pem&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># リージョン&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REGION&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws acm import-certificate &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --certificate fileb://&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CRT&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --certificate-chain fileb://&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>CC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --private-key fileb://&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>KEY&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --certificate-arn &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>ARN&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --region &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>REGION&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/import-reimport.html">証明書を再インポートする - AWS Certificate Manager&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/acm/import-certificate.html">import-certificate — AWS CLI 2.5.8 Command Reference&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% aws --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws-cli/2.5.8 Python/3.9.12 Darwin/21.4.0 source/x86_64 prompt/off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>WP-CLI でテーブル内の文字列を置換する</title><link>https://d.oppara.tv/posts/2022/04/wp-search-replace/</link><pubDate>Mon, 11 Apr 2022 21:52:05 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/wp-search-replace/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>&lt;a href="https://wp-cli.org/ja/">WP-CLI&lt;/a> でテーブル内の文字列を置換する。&lt;/p>
+&lt;h2 id="やり方">やり方&lt;/h2>
+&lt;p>プレフィックスが&lt;code>wp_&lt;/code>のテーブル内の&lt;code>search&lt;/code>を&lt;code>replace&lt;/code>に置換して&lt;code>out&lt;/code>に書き出す。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -eu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>path&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;wp-config.php があるディレクトリまでのパス&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>search&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://stg.example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>replace&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://www.example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>out&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;export.sql&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/path/to/wp search-replace --path&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>path&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>search&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>replace&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> wp_* &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--export&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>out&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--report-changed-only &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--all-tables-with-prefix
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>--export&lt;/code>をつけない場合はテーブルのデータをじかに置換するので、実行前に&lt;code>--dry-run&lt;/code>を忘れない。&lt;/p></description></item><item><title>AWS Vault を使って MFA と AssumeRole（スイッチロール）</title><link>https://d.oppara.tv/posts/2022/03/aws-vault-assumerole-mfa/</link><pubDate>Thu, 17 Mar 2022 23:01:07 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/aws-vault-assumerole-mfa/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>AWS Vault を使って MFA 経由で AssumeRole する備忘録。&lt;/p>
+&lt;p>&lt;a href="https://github.com/99designs/aws-vault">99designs/aws-vault&lt;/a>&lt;/p>
+&lt;h2 id="前提">前提&lt;/h2>
+&lt;p>以下のアカウントを作成済みでスイッチロールの設定済み。&lt;/p>
+&lt;ul>
+&lt;li>oppara (default): スイッチ元 (MFA 認証)&lt;/li>
+&lt;li>oppara-dev: スイッチ先&lt;/li>
+&lt;/ul>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;h3 id="aws-vault-のインストール">AWS Vault のインストール&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% brew cask install aws-vault
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="accesskeyid-secretaccesskey-をキーチェーンに登録">AccessKeyId, SecretAccessKey をキーチェーンに登録&lt;/h3>
+&lt;p>AWS Vault で生成するキーチェーンにアクセスする為のパスワード入力するダイアログが表示されるので設定する。&lt;/p></description></item><item><title>Speedtest の CLI クライアントを試してみる</title><link>https://d.oppara.tv/posts/2022/03/cli-speedtest/</link><pubDate>Mon, 14 Mar 2022 21:16:06 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/cli-speedtest/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>&lt;a href="https://www.speedtest.net/">speedtest.net&lt;/a> の &lt;a href="https://www.speedtest.net/apps/cli">CLI クライアント&lt;/a> があったので試してみる。&lt;/p>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% brew install teamookla/speedtest/speedtest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="初回実行">初回実行&lt;/h2>
+&lt;p>初回実行時は、ライセンスの確認がある。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% speedtest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>====================================================================
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>You may only use this Speedtest software and information generated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>from it for personal, non-commercial use, through a command line
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>interface on a personal computer. Your use of this software is subject
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to the End User License Agreement, Terms of Use and Privacy Policy at
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>these URLs:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> https://www.speedtest.net/about/eula
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> https://www.speedtest.net/about/terms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> https://www.speedtest.net/about/privacy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>=====================================================================
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>Do you accept the license? [type YES to accept]:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="サーバ選択の詳細を表示しながら実行">サーバ選択の詳細を表示しながら実行&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% speedtest --selection-details
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> Speedtest by Ookla
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>Selecting server:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 20976: 6.24 ms; GLBB Japan - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 21569: 5.66 ms; i3D.net - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 38241: 5.51 ms; BudgetVM - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 28910: 212.52 ms; fdcservers.net - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 48301: 5.96 ms; Cloudflare - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 24333: 17.89 ms; Rakuten Mobile, Inc - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 44988: 7.02 ms; Misaka Network, Inc. - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 48463: 5.79 ms; IPA CyberLab 400G - Tokyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 14623: 6.14 ms; IPA CyberLab - Bunkyo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 8407: 10.31 ms; Allied Telesis Capital Corporation - Sagamihara
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Server: BudgetVM - Tokyo (id = 38241)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ISP: Softbank BB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Latency: 5.63 ms (0.76 ms jitter)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Download: 117.23 Mbps (data used: 124.7 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Upload: 230.65 Mbps (data used: 134.4 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Packet Loss: 0.0%
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Result URL: https://www.speedtest.net/result/c/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="サーバ-id-を指定して実行">サーバ ID を指定して実行&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% speedtest -s &lt;span style="color:#ae81ff">21569&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> Speedtest by Ookla
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span> Server: i3D.net - Tokyo (id = 21569)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ISP: Softbank BB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Latency: 5.61 ms (0.40 ms jitter)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Download: 110.67 Mbps (data used: 69.7 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Upload: 219.27 Mbps (data used: 145.6 MB)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Packet Loss: 0.0%
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Result URL: https://www.speedtest.net/result/c/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 12.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 21D49
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% speedtest -V
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Speedtest by Ookla 1.1.1.84 (3bdba79799) Darwin 21.3.0 x86_64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>yaml, toml, json, hclの変換ツール yj</title><link>https://d.oppara.tv/posts/2022/03/cli-yaml-toml-json-hcl-converter/</link><pubDate>Sun, 13 Mar 2022 21:46:57 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/cli-yaml-toml-json-hcl-converter/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>yaml から toml への変換ツールを探していて良さげなものを発見したので使ってみる。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/sclevine/yj">sclevine/yj: CLI - Convert between YAML, TOML, JSON, and HCL&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% brew install yj
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使い方">使い方&lt;/h2>
+&lt;p>標準入力から読み込ませてリダイレクトする感じ。&lt;/p></description></item></channel></rss>

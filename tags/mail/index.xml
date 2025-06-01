@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>mail on d.oppara.tv</title><link>https://d.oppara.tv/tags/mail/</link><description>Recent content in mail on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Fri, 08 Apr 2022 13:04:15 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/mail/index.xml" rel="self" type="application/rss+xml"/><item><title>メール送信ワンライナー</title><link>https://d.oppara.tv/posts/2022/04/mail-one-liner/</link><pubDate>Fri, 08 Apr 2022 13:04:15 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/mail-one-liner/</guid><description>目的 mail コマンドで対話的にメールを送るのが面倒だったので備忘録。 対応方法 % echo &amp;#34;本文&amp;#34; | mail -s &amp;#34;件名&amp;#34; -r no-replay@example.com foo@oppara.tv bar@oppara.tv 環境</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Mail on d.oppara.tv</title><link>https://d.oppara.tv/tags/mail/</link><description>Recent content in Mail on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Fri, 08 Apr 2022 13:04:15 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/mail/index.xml" rel="self" type="application/rss+xml"/><item><title>メール送信ワンライナー</title><link>https://d.oppara.tv/posts/2022/04/mail-one-liner/</link><pubDate>Fri, 08 Apr 2022 13:04:15 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/04/mail-one-liner/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+&lt;p>mail コマンドで対話的にメールを送るのが面倒だったので備忘録。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% echo &lt;span style="color:#e6db74">&amp;#34;本文&amp;#34;&lt;/span> | mail -s &lt;span style="color:#e6db74">&amp;#34;件名&amp;#34;&lt;/span> -r no-replay@example.com foo@oppara.tv bar@oppara.tv
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>$ mail -V
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>12.5 7/5/10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>$ cat /etc/os-release
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME=&amp;#34;Rocky Linux&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VERSION=&amp;#34;8.5 (Green Obsidian)&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ID=&amp;#34;rocky&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ID_LIKE=&amp;#34;rhel centos fedora&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VERSION_ID=&amp;#34;8.5&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PLATFORM_ID=&amp;#34;platform:el8&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PRETTY_NAME=&amp;#34;Rocky Linux 8.5 (Green Obsidian)&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ANSI_COLOR=&amp;#34;0;32&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CPE_NAME=&amp;#34;cpe:/o:rocky:rocky:8:GA&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HOME_URL=&amp;#34;https://rockylinux.org/&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BUG_REPORT_URL=&amp;#34;https://bugs.rockylinux.org/&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ROCKY_SUPPORT_PRODUCT=&amp;#34;Rocky Linux&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ROCKY_SUPPORT_PRODUCT_VERSION=&amp;#34;8&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

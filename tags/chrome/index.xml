@@ -1,1 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>chrome on d.oppara.tv</title><link>https://d.oppara.tv/tags/chrome/</link><description>Recent content in chrome on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sun, 27 Mar 2022 10:01:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/chrome/index.xml" rel="self" type="application/rss+xml"/><item><title>Chrome を使っているとファンがうるさい</title><link>https://d.oppara.tv/posts/2022/03/chrome-fan-solution/</link><pubDate>Sun, 27 Mar 2022 10:01:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/chrome-fan-solution/</guid><description>問題 Chrome を使うとファンがうなりを上げる。 対応方法 chrome://flags/#enhanced-bookmarks-experimentを開</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Chrome on d.oppara.tv</title><link>https://d.oppara.tv/tags/chrome/</link><description>Recent content in Chrome on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sun, 27 Mar 2022 10:01:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/chrome/index.xml" rel="self" type="application/rss+xml"/><item><title>Chrome を使っているとファンがうるさい</title><link>https://d.oppara.tv/posts/2022/03/chrome-fan-solution/</link><pubDate>Sun, 27 Mar 2022 10:01:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/chrome-fan-solution/</guid><description>&lt;h2 id="問題">問題&lt;/h2>
+&lt;p>Chrome を使うとファンがうなりを上げる。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;ol>
+&lt;li>&lt;code>chrome://flags/#enhanced-bookmarks-experiment&lt;/code>を開く。&lt;/li>
+&lt;li>&lt;code>bookmark&lt;/code>で検索。&lt;/li>
+&lt;li>以下の機能を Disabled に変更する。
+&lt;ul>
+&lt;li>Omnibox short bookmark suggestions&lt;/li>
+&lt;li>Omnibox Bookmark Paths&lt;/li>
+&lt;li>Omnibox Site Search Starter Pack&lt;/li>
+&lt;li>Reading List&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Chrome を再起動する。&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://nldot.info/chrome-slow-fix/">2022年 重たいChromeを軽くする意外な解決方法とは？ | オランダで生きていく&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% /Applications/Google&lt;span style="color:#ae81ff">\ &lt;/span>Chrome.app/Contents/MacOS/Google&lt;span style="color:#ae81ff">\ &lt;/span>Chrome --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Google Chrome 99.0.4844.83
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 12.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 21D49
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

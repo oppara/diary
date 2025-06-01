@@ -1,1 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>dry-run on d.oppara.tv</title><link>https://d.oppara.tv/tags/dry-run/</link><description>Recent content in dry-run on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Sun, 12 Jan 2025 10:08:21 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/dry-run/index.xml" rel="self" type="application/rss+xml"/><item><title>Fluentd で dry-run</title><link>https://d.oppara.tv/posts/2025/01/fluentd-dry-run/</link><pubDate>Sun, 12 Jan 2025 10:08:21 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/01/fluentd-dry-run/</guid><description>はじめに Fluentd で設定ファイルを確認する方法についての備呆録。 CLI % fluentd --dry-run -c /etc/fluentd/fluent.conf Docker プラグイン使っている場合は、あらかじめインストールしておく必要がある。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Dry-Run on d.oppara.tv</title><link>https://d.oppara.tv/tags/dry-run/</link><description>Recent content in Dry-Run on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Sun, 12 Jan 2025 10:08:21 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/dry-run/index.xml" rel="self" type="application/rss+xml"/><item><title>Fluentd で dry-run</title><link>https://d.oppara.tv/posts/2025/01/fluentd-dry-run/</link><pubDate>Sun, 12 Jan 2025 10:08:21 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/01/fluentd-dry-run/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>&lt;a href="https://www.fluentd.org/">Fluentd&lt;/a> で設定ファイルを確認する方法についての備呆録。&lt;/p>
+&lt;h2 id="cli">CLI&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% fluentd --dry-run -c /etc/fluentd/fluent.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="docker">Docker&lt;/h2>
+&lt;p>プラグイン使っている場合は、あらかじめインストールしておく必要がある。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% docker run &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-ti --rm \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--platform linux/x86_64 \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-v ./:/fluentd/etc -v ./:/var/log \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fluent/fluentd:v1.8-debian-1 --dry-run -c /fluentd/etc/hoge.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>fluentd --dry-run -c /fluentd/etc/hoge.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2025-01-12 09:07:29 +0000 [info]: parsing config file is succeeded path=&amp;#34;/fluentd/etc/hoge.conf&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2025-01-12 09:07:29 +0000 [info]: gem &amp;#39;fluentd&amp;#39; version &amp;#39;1.8.1&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2025-01-12 09:07:29 +0000 [info]: starting fluentd-1.8.1 as dry run mode ruby=&amp;#34;2.6.5&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2025-01-12 09:07:29 +0000 [info]: using configuration file: &amp;lt;ROOT&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;source&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @type tail
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path &amp;#34;/var/log/httpd-access.log&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos_file &amp;#34;/var/log/td-agent/httpd-access.log.pos&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tag &amp;#34;s3.apache.access&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;parse&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @type &amp;#34;apache2&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/parse&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/source&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;match log.**&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @type file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path &amp;#34;/var/log/fluent/myapp&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> compress gzip
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;buffer&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timekey 1d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timekey_use_utc true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timekey_wait 10m
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path &amp;#34;/var/log/fluent/myapp&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/buffer&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/match&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/ROOT&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2025-01-12 09:07:29 +0000 [info]: finsihed dry run mode
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24C101
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% docker --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Docker version 27.4.0, build bde2b89
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

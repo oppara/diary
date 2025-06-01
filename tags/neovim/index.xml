@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>neovim on d.oppara.tv</title><link>https://d.oppara.tv/tags/neovim/</link><description>Recent content in neovim on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Thu, 27 Apr 2023 08:29:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/neovim/index.xml" rel="self" type="application/rss+xml"/><item><title>Neovim のインストール</title><link>https://d.oppara.tv/posts/2023/04/neovim-install/</link><pubDate>Thu, 27 Apr 2023 08:29:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2023/04/neovim-install/</guid><description>目的 Neovim を使いたい。 対応方法 Homebrew でインストールする。 brew install neovim 開発バージョンをインストールする。 brew install --HEAD neovim 開発バージョンをアップデートする。 brew upgrade neovim --fetch-HEAD 参</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Neovim on d.oppara.tv</title><link>https://d.oppara.tv/tags/neovim/</link><description>Recent content in Neovim on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Thu, 27 Apr 2023 08:29:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/neovim/index.xml" rel="self" type="application/rss+xml"/><item><title>Neovim のインストール</title><link>https://d.oppara.tv/posts/2023/04/neovim-install/</link><pubDate>Thu, 27 Apr 2023 08:29:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2023/04/neovim-install/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+&lt;p>Neovim を使いたい。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;p>&lt;a href="https://brew.sh/">Homebrew&lt;/a> でインストールする。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>brew install neovim
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>開発バージョンをインストールする。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>brew install --HEAD neovim
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>開発バージョンをアップデートする。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>brew upgrade neovim --fetch-HEAD
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/neovim/neovim/wiki/Installing-Neovim#macos--os-x">Installing Neovim · neovim/neovim Wiki&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% nvim --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NVIM v0.9.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Build type: Release
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LuaJIT 2.1.0-beta3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 13.3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 22E252
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

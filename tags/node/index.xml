@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>node on d.oppara.tv</title><link>https://d.oppara.tv/tags/node/</link><description>Recent content in node on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Wed, 10 Jan 2024 08:57:54 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/node/index.xml" rel="self" type="application/rss+xml"/><item><title>ローカルで Web サーバーを立てる</title><link>https://d.oppara.tv/posts/2024/01/localserver/</link><pubDate>Wed, 10 Jan 2024 08:57:54 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/localserver/</guid><description>Node.js npx serve port 指定する場合。 npx serve -p 1192 serve - npm Python python -m http.server 1192 http.server &amp;mdash; HTTP サーバ — Python 3.10.13 ドキュメント PHP php -S localhost:1192 PHP: ビルトインウェブサーバー - Manual まとめ 静的コンテンツは node で</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Node on d.oppara.tv</title><link>https://d.oppara.tv/tags/node/</link><description>Recent content in Node on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Wed, 10 Jan 2024 08:57:54 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/node/index.xml" rel="self" type="application/rss+xml"/><item><title>ローカルで Web サーバーを立てる</title><link>https://d.oppara.tv/posts/2024/01/localserver/</link><pubDate>Wed, 10 Jan 2024 08:57:54 +0900</pubDate><guid>https://d.oppara.tv/posts/2024/01/localserver/</guid><description>&lt;h2 id="nodejs">Node.js&lt;/h2>
+&lt;pre tabindex="0">&lt;code>npx serve
+&lt;/code>&lt;/pre>&lt;p>port 指定する場合。&lt;/p>
+&lt;pre tabindex="0">&lt;code>npx serve -p 1192
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.npmjs.com/package/serve">serve - npm&lt;/a>&lt;/p>
+&lt;h2 id="python">Python&lt;/h2>
+&lt;pre tabindex="0">&lt;code>python -m http.server 1192
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://docs.python.org/ja/3.10/library/http.server.html">http.server &amp;mdash; HTTP サーバ — Python 3.10.13 ドキュメント&lt;/a>&lt;/p>
+&lt;h2 id="php">PHP&lt;/h2>
+&lt;pre tabindex="0">&lt;code>php -S localhost:1192
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.php.net/manual/ja/features.commandline.webserver.php">PHP: ビルトインウェブサーバー - Manual&lt;/a>&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>静的コンテンツは node で。PHP が絡む場合は php で。&lt;/p></description></item></channel></rss>

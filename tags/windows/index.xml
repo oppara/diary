@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>windows on d.oppara.tv</title><link>https://d.oppara.tv/tags/windows/</link><description>Recent content in windows on d.oppara.tv</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Mon, 28 Mar 2022 23:48:44 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows で rsync を使いたい</title><link>https://d.oppara.tv/posts/2022/03/windows-rsync/</link><pubDate>Mon, 28 Mar 2022 23:48:44 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/windows-rsync/</guid><description>問題 Windows で rsync を使いたい。 でも WSL を使うほどでもない。 対応方法 Git for Windows に rsync をインストールする。 スタートメニューの「Git Bash」を右クリックして、</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Windows on d.oppara.tv</title><link>https://d.oppara.tv/tags/windows/</link><description>Recent content in Windows on d.oppara.tv</description><generator>Hugo -- 0.144.1</generator><language>ja</language><lastBuildDate>Mon, 28 Mar 2022 23:48:44 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows で rsync を使いたい</title><link>https://d.oppara.tv/posts/2022/03/windows-rsync/</link><pubDate>Mon, 28 Mar 2022 23:48:44 +0900</pubDate><guid>https://d.oppara.tv/posts/2022/03/windows-rsync/</guid><description>&lt;h2 id="問題">問題&lt;/h2>
+&lt;p>Windows で rsync を使いたい。
+でも WSL を使うほどでもない。&lt;/p>
+&lt;h2 id="対応方法">対応方法&lt;/h2>
+&lt;p>Git for Windows に rsync をインストールする。&lt;/p>
+&lt;ol>
+&lt;li>スタートメニューの「Git Bash」を右クリックして、「管理者として実行」する。&lt;/li>
+&lt;li>以下のシェルスクリプトを実行する。&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>set -eu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -L http://repo.msys2.org/msys/x86_64/zstd-1.4.5-2-x86_64.pkg.tar.xz |tar CvxJf / -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -L http://repo.msys2.org/msys/x86_64/rsync-3.2.2-2-x86_64.pkg.tar.zst |tar Cxvf / - --zstd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -L http://repo.msys2.org/msys/x86_64/libzstd-1.4.5-2-x86_64.pkg.tar.xz |tar CxvJf / -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -L http://repo.msys2.org/msys/x86_64/libxxhash-0.8.0-1-x86_64.pkg.tar.zst |tar Cvxf / - --zstd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考サイト">参考サイト&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://zenn.dev/miwarin/articles/14a10b3278e7a6">Git for Windows に rsync を追加する&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10 21H2 (OS ビルド 19044, 1586)&lt;/li>
+&lt;li>Git for Windows 2.35.1&lt;/li>
+&lt;li>rsync version 3.2.2 protocol version 31&lt;/li>
+&lt;/ul></description></item></channel></rss>
