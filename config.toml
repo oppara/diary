@@ -15,7 +15,7 @@ pluralizeListTitles = false
     allow = ['^vim$']
 
 [permalinks]
-    posts = "/:section/:year/:month/:filename"
+    posts = "/:section/:year/:month/:contentbasename"
 
 
 [Params]
