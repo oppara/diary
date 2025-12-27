@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Vscode on d.oppara.tv</title><link>https://d.oppara.tv/tags/vscode/</link><description>Recent content in Vscode on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Sat, 27 Dec 2025 21:48:13 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode で PHP Intelephense</title><link>https://d.oppara.tv/posts/2025/12/vscode-php-intelephense/</link><pubDate>Sat, 27 Dec 2025 21:48:13 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-php-intelephense/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode に PHP Intelephense をインストールした際の備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client">PHP Intelephense&lt;/a> をインストール&lt;/li>
+&lt;li>組込みの VSCode PHP 言語機能を無効にする
+&lt;ul>
+&lt;li>機能拡張 (Extensions) を開く&lt;/li>
+&lt;li>@builtin php で検索&lt;/li>
+&lt;li>「PHP 言語機能」(PHP Language Features) を無効化する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>ライセンスキーの設定
+&lt;ul>
+&lt;li>Ctrl + Shift + P (Cmd + Shift + P) でコマンドパレットを開いて、licence key で検索。&lt;/li>
+&lt;li>ライセンスキーを入力する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% code --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.107.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>994fd12f8d3a5aa16f17d42c041e5809167e845a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arm64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24G84
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>VSCode で GitHub Copilot</title><link>https://d.oppara.tv/posts/2025/12/vscode-copilot/</link><pubDate>Sat, 27 Dec 2025 18:45:47 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-copilot/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode に GitHub Copilot と GitHub Copilot Chat をインストールした際の備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;p>以下をインストールする。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot">GitHub Copilot&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat">GitHub Copilot Chat&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>同期設定で GitHub を使っていたためか、インストールしただけで連携できていた&amp;hellip;&lt;/p></description></item><item><title>VSCode の同期設定</title><link>https://d.oppara.tv/posts/2025/12/vscode-sync/</link><pubDate>Sat, 27 Dec 2025 17:44:36 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-sync/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode の同期設定の備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;ol>
+&lt;li>「Code」-&amp;gt; 「基本設定」-&amp;gt; 「バックアップと同期の設定」　を選択する。
+&lt;figure>
+&lt;img loading="lazy" src="vscode_01.png"/>
+&lt;/figure>
+&lt;/li>
+&lt;li>サインインを求められるので、GitHub アカウントでサインインする。
+&lt;figure>
+&lt;img loading="lazy" src="vscode_02.png"/>
+&lt;/figure>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="github-で確認">GitHub で確認&lt;/h2>
+&lt;p>Settings -&amp;gt; Applications -&amp;gt; Authorized OAuth Apps&lt;/p></description></item><item><title>VSCode に Neovim プラグインをインストール</title><link>https://d.oppara.tv/posts/2025/12/vscode-neovim/</link><pubDate>Sat, 27 Dec 2025 15:08:41 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-neovim/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode に Neovim プラグインをインストールした際の備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim">VSCode Neovim&lt;/a> をインストールして VSCode を再起動する。&lt;/li>
+&lt;li>以下のダイアログが表示されるので[Yes]をクリックする。
+&lt;figure>
+&lt;img loading="lazy" src="neovim_01.png"/>
+&lt;/figure>
+&lt;/li>
+&lt;li>再起動しろとダイアログが表示されるので[Restart]をクリックする。
+&lt;figure>
+&lt;img loading="lazy" src="neovim_02.png"/>
+&lt;/figure>
+&lt;/li>
+&lt;li>何も起こらなかったので手動で VSCode を再起動する。&lt;/li>
+&lt;/ol>
+&lt;p>以下の設定がされていた。
+&lt;figure>
+&lt;img loading="lazy" src="vscode_affinity.png"/>
+&lt;/figure>
+&lt;/p></description></item><item><title>VSCode エディタ関連の設定</title><link>https://d.oppara.tv/posts/2025/12/vscode-editor/</link><pubDate>Sat, 27 Dec 2025 10:46:38 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-editor/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode エディタ関連の設定の備呆録。&lt;/p>
+&lt;h2 id="テーマの変更">テーマの変更&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://github.com/metapho-re/kanagawa-vscode-theme">kanagawa-vscode-theme&lt;/a> をインストール&lt;/li>
+&lt;li>Cmd + K から Cmd + T で Kanagawa Wave を選択&lt;/li>
+&lt;/ol>
+&lt;h2 id="フォントの設定">フォントの設定&lt;/h2>
+&lt;ol>
+&lt;li>Cmd + ,&lt;/li>
+&lt;li>検索窓に font と入力&lt;/li>
+&lt;li>Editor: Font Size を 13 に変更&lt;/li>
+&lt;li>Editor: Font Family に &lt;a href="https://github.com/yuru7/HackGen">HackGen Console NF&lt;/a> を設定&lt;/li>
+&lt;li>検索窓に terminal font と入力&lt;/li>
+&lt;li>Terminal › Integrated: Font Size を 14 に変更&lt;/li>
+&lt;/ol>
+&lt;h2 id="文字コードの自動判別">文字コードの自動判別&lt;/h2>
+&lt;ol>
+&lt;li>Cmd + ,&lt;/li>
+&lt;li>検索窓に encoding と入力&lt;/li>
+&lt;li>Files: Auto Guess Encoding にチェック&lt;/li>
+&lt;/ol>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% code --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.107.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>994fd12f8d3a5aa16f17d42c041e5809167e845a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arm64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24G84
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>VSCode の日本語化と言語の切り替え</title><link>https://d.oppara.tv/posts/2025/12/vscode-japanese/</link><pubDate>Sat, 27 Dec 2025 10:17:57 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-japanese/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode の日本語化と言語の切り替えの備呆録。&lt;/p>
+&lt;h2 id="日本語化">日本語化&lt;/h2>
+&lt;p>以下をインストールして再起動。&lt;/p>
+&lt;p>&lt;a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja">Japanese Language Pack for Visual Studio Code&lt;/a>&lt;/p>
+&lt;h2 id="言語の切り替え">言語の切り替え&lt;/h2>
+&lt;ol>
+&lt;li>Ctlr + Shift + P でコマンドパレットを開き、&lt;code>disp&lt;/code> と入力&lt;/li>
+&lt;li>&amp;ldquo;Configure Display Language&amp;rdquo; を表示して Enter をたたく&lt;/li>
+&lt;li>切り替えたい言語を選択して Enter をたたく&lt;/li>
+&lt;/ol>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% code --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.107.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>994fd12f8d3a5aa16f17d42c041e5809167e845a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arm64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24G84
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

@@ -1,4 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Neovim on d.oppara.tv</title><link>https://d.oppara.tv/tags/neovim/</link><description>Recent content in Neovim on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Thu, 27 Apr 2023 08:29:24 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/neovim/index.xml" rel="self" type="application/rss+xml"/><item><title>Neovim のインストール</title><link>https://d.oppara.tv/posts/2023/04/neovim-install/</link><pubDate>Thu, 27 Apr 2023 08:29:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2023/04/neovim-install/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Neovim on d.oppara.tv</title><link>https://d.oppara.tv/tags/neovim/</link><description>Recent content in Neovim on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Sat, 27 Dec 2025 15:08:41 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/neovim/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode に Neovim プラグインをインストール</title><link>https://d.oppara.tv/posts/2025/12/vscode-neovim/</link><pubDate>Sat, 27 Dec 2025 15:08:41 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-neovim/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode に Neovim プラグインをインストールした際の備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim">VSCode Neovim&lt;/a> をインストールして VSCode を再起動する。&lt;/li>
+&lt;li>以下のダイアログが表示されるので[Yes]をクリックする。
+&lt;figure>
+&lt;img loading="lazy" src="neovim_01.png"/>
+&lt;/figure>
+&lt;/li>
+&lt;li>再起動しろとダイアログが表示されるので[Restart]をクリックする。
+&lt;figure>
+&lt;img loading="lazy" src="neovim_02.png"/>
+&lt;/figure>
+&lt;/li>
+&lt;li>何も起こらなかったので手動で VSCode を再起動する。&lt;/li>
+&lt;/ol>
+&lt;p>以下の設定がされていた。
+&lt;figure>
+&lt;img loading="lazy" src="vscode_affinity.png"/>
+&lt;/figure>
+&lt;/p></description></item><item><title>Neovim のインストール</title><link>https://d.oppara.tv/posts/2023/04/neovim-install/</link><pubDate>Thu, 27 Apr 2023 08:29:24 +0900</pubDate><guid>https://d.oppara.tv/posts/2023/04/neovim-install/</guid><description>&lt;h2 id="目的">目的&lt;/h2>
 &lt;p>Neovim を使いたい。&lt;/p>
 &lt;h2 id="対応方法">対応方法&lt;/h2>
 &lt;p>&lt;a href="https://brew.sh/">Homebrew&lt;/a> でインストールする。&lt;/p>

@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Php on d.oppara.tv</title><link>https://d.oppara.tv/tags/php/</link><description>Recent content in Php on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Tue, 12 Aug 2025 14:43:37 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/php/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode を使わない環境での Intelephense のライセンスキーの設定方法</title><link>https://d.oppara.tv/posts/2025/08/php-intelephense-licence/</link><pubDate>Tue, 12 Aug 2025 14:43:37 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/08/php-intelephense-licence/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Php on d.oppara.tv</title><link>https://d.oppara.tv/tags/php/</link><description>Recent content in Php on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Sat, 27 Dec 2025 21:48:13 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/php/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode で PHP Intelephense</title><link>https://d.oppara.tv/posts/2025/12/vscode-php-intelephense/</link><pubDate>Sat, 27 Dec 2025 21:48:13 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/12/vscode-php-intelephense/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode に PHP Intelephense をインストールした際の備呆録。&lt;/p>
+&lt;h2 id="手順">手順&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client">PHP Intelephense&lt;/a> をインストール&lt;/li>
+&lt;li>組込みの VSCode PHP 言語機能を無効にする
+&lt;ul>
+&lt;li>機能拡張 (Extensions) を開く&lt;/li>
+&lt;li>@builtin php で検索&lt;/li>
+&lt;li>「PHP 言語機能」(PHP Language Features) を無効化する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>ライセンスキーの設定
+&lt;ul>
+&lt;li>Ctrl + Shift + P (Cmd + Shift + P) でコマンドパレットを開いて、licence key で検索。&lt;/li>
+&lt;li>ライセンスキーを入力する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% code --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.107.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>994fd12f8d3a5aa16f17d42c041e5809167e845a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arm64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24G84
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>VSCode を使わない環境での Intelephense のライセンスキーの設定方法</title><link>https://d.oppara.tv/posts/2025/08/php-intelephense-licence/</link><pubDate>Tue, 12 Aug 2025 14:43:37 +0900</pubDate><guid>https://d.oppara.tv/posts/2025/08/php-intelephense-licence/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
 &lt;p>VSCode を使わない環境での Intelephense のライセンスキーの設定方法の備呆録&lt;/p>
 &lt;h2 id="対応方法">対応方法&lt;/h2>
 &lt;p>以下のテキストファイルにライセンスキーを記載する。&lt;/p>
