@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Mermaid on d.oppara.tv</title><link>https://d.oppara.tv/tags/mermaid/</link><description>Recent content in Mermaid on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Sun, 04 Jan 2026 17:07:13 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/mermaid/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode で Mermeid を扱う</title><link>https://d.oppara.tv/posts/2026/01/vscode-mermaid/</link><pubDate>Sun, 04 Jan 2026 17:07:13 +0900</pubDate><guid>https://d.oppara.tv/posts/2026/01/vscode-mermaid/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>VSCode で Mermeid を扱うための備呆録。&lt;/p>
+&lt;h2 id="インストールしたプラグイン">インストールしたプラグイン&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting">Mermaid Markdown Syntax Highlighting&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="そのほか">そのほか&lt;/h2>
+&lt;p>&lt;a href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced">Markdown Preview Enhanced&lt;/a> でプレビュー可能だったので &lt;a href="https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid">Markdown Preview Mermaid Support&lt;/a> のインストールは不要だった。&lt;/p>
+&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>% code --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.107.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>994fd12f8d3a5aa16f17d42c041e5809167e845a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arm64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>% sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 15.6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 24G84
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
