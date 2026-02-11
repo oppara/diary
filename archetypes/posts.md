@@ -21,7 +21,7 @@ tags: []
 
 ```console
 % sw_vers
-ProductName:            macOS
-ProductVersion:         15.6
-BuildVersion:           24G84
+ProductName:		macOS
+ProductVersion:		26.2
+BuildVersion:		25C56
 ```
