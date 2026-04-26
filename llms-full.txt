@@ -1,0 +1,3672 @@
+# d.oppara.tv
+
+> 備呆録
+
+
+
+
+--------------------------------------------------------------------------------
+title: "openssl で SAN を確認"
+date: "2026-03-10"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+手元の証明書ファイルから Subject Alternative Name (SAN) を確認するための備呆録。
+
+##  やり方
+
+```shell
+openssl x509 -noout -text -in /path/to/cert.pem | grep -A1 "Subject Alternative Name"
+
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:		macOS
+ProductVersion:		26.3
+BuildVersion:		25D125
+
+% openssl version  
+OpenSSL 3.6.1 27 Jan 2026 (Library: OpenSSL 3.6.1 27 Jan 2026)
+```
+
+--------------------------------------------------------------------------------
+title: "AWS CLI でセキュリティグループのインバウンドルールを追加する"
+date: "2026-02-18"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+AWS CLI で SG のインバウンドルールを追加することがあったので備呆録。  
+量が多かったのでシェルスクリプト化。
+
+## 手順
+
+以下実行。
+
+```bash
+#!/usr/bin/env bash
+set -CEeuo pipefail
+
+SG_ID="sg-xxxxxxxxxxxxxxxxx"
+PORT=443
+DESC="hogehoge"
+
+declare -A CIDRS
+CIDRS["127.0.0.1/32"]="${DESC}"
+# CIDRS["127.0.0.1/32"]="${DESC}"
+
+for CIDR in "${!CIDRS[@]}"; do
+  aws ec2 authorize-security-group-ingress \
+    --group-id "$SG_ID" \
+    --ip-permissions "[
+      {
+        \"IpProtocol\": \"tcp\",
+        \"FromPort\": $PORT,
+        \"ToPort\": $PORT,
+        \"IpRanges\": [
+          {
+            \"CidrIp\": \"$CIDR\",
+            \"Description\": \"${CIDRS[$CIDR]}\"
+          }
+        ]
+      }
+    ]"
+done
+```
+
+## 参考サイト
+
+- [authorize-security-group-ingress](https://docs.aws.amazon.com/cli/latest/reference/ec2/authorize-security-group-ingress.html)
+
+## 環境
+
+```console
+$ aws --version
+aws-cli/2.33.23 Python/3.13.11 Linux/6.1.159-182.297.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2023
+```
+
+--------------------------------------------------------------------------------
+title: "コンテナの一覧を表示するコマンドを見やすくする"
+date: "2026-02-08"
+--------------------------------------------------------------------------------
+
+## 問題
+
+`docker ps -a` の実行結果が見づらい。
+
+## 解決
+
+以下、利用して、自分用のサブコマンドを作成する。  
+[Dockerでカスタムsubcommandをあれする - 茅の下](https://ryooooooga.hateblo.jp/entry/2021/05/13/210743)
+
+```shell
+docker() {
+    if [ "$#" -eq 0 ] || ! command -v "docker-$1" > /dev/null; then
+        command docker "$@"
+    elif (( ${+aliases[docker-$1]} )); then
+        eval "${aliases[docker-$1]} ${(q)@:2}"
+    else
+        "docker-$1" "${@:2}"
+    fi
+}
+```
+
+## 手順
+
+以下、エイリアスを設定する。
+
+```shell
+alias docker-psa="docker ps -a --format \"table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}\""
+```
+
+## 比較
+
+```console
+% docker ps -a
+CONTAINER ID   IMAGE                      COMMAND                  CREATED       STATUS                        PORTS                                                                                                                                             NAMES
+0f8b515ac1f3   jwilder/nginx-proxy        "/app/docker-entrypo…"   13 days ago   Up 36 minutes                 0.0.0.0:80->80/tcp, [::]:80->80/tcp                                                                                                               nginx-proxy
+fe52095f8dfd   axllent/mailpit:v1.21.5    "/mailpit"               13 days ago   Up 36 minutes (healthy)       0.0.0.0:1025->1025/tcp, [::]:1025->1025/tcp, 0.0.0.0:8025->8025/tcp, [::]:8025->8025/tcp, 1110/tcp, 0.0.0.0:1080->8025/tcp, [::]:1080->8025/tcp   mailpit
+c886759a486c   plantuml/plantuml-server   "/entrypoint.sh"         5 weeks ago   Exited (137) 40 minutes ago 
+```
+
+```console
+% docker psa
+CONTAINER ID   IMAGE                      NAMES                   STATUS                        PORTS
+0f8b515ac1f3   jwilder/nginx-proxy        nginx-proxy             Up 36 minutes                 0.0.0.0:80->80/tcp, [::]:80->80/tcp
+fe52095f8dfd   axllent/mailpit:v1.21.5    mailpit                 Up 36 minutes (healthy)       0.0.0.0:1025->1025/tcp, [::]:1025->1025/tcp, 0.0.0.0:8025->8025/tcp, [::]:8025->8025/tcp, 1110/tcp, 0.0.0.0:1080->8025/tcp, [::]:1080->8025/tcp
+c886759a486c   plantuml/plantuml-server   plantuml-local-server   Exited (137) 40 minutes ago
+```
+
+## 環境
+
+```console
+% docker --version
+Docker version 28.4.0, build d8eb465
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "colima を使ってみる"
+date: "2026-02-07"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[Colima](https://github.com/abiosoft/colima) を使ってみたので備呆録。
+
+## インストール
+
+```console
+brew install colima
+```
+
+## Docker のコンテキストを確認
+
+```console
+docker context ls
+```
+
+colima が選択されていない場合以下のコマンドで切り替える。
+
+```console
+docker context use colima
+```
+
+実行結果
+
+```console
+% docker context ls
+NAME       DESCRIPTION                               DOCKER ENDPOINT                                    ERROR
+colima *   colima                                    unix:///Users/oppara/.colima/default/docker.sock
+default    Current DOCKER_HOST based configuration   unix:///var/run/docker.sock
+```
+
+## 使い方
+
+起動
+
+```console
+colima start
+```
+
+状態確認
+
+```console
+colima status
+```
+
+停止
+
+```console
+colima stop
+```
+
+動作確認
+
+```console
+docker run --rm hello-world
+`````
+
+## 自動起動
+
+システム起動時に自動起動させる。
+
+```console
+brew services start colima
+```
+
+status が started になるには少し時間がかかる。
+
+```console
+% brew services list 
+Name             Status  User   File
+colima           started oppara ~/Library/LaunchAgents/homebrew.mxcl.colima.plist
+```
+
+
+## 環境
+
+```console
+% colima --version
+colima version 0.9.1
+
+% docker --version
+Docker version 28.4.0, build d8eb465
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode で Mermeid を扱う"
+date: "2026-01-04"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode で Mermeid を扱うための備呆録。
+
+## インストールしたプラグイン
+
+* [Mermaid Markdown Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting)
+
+## そのほか
+
+[Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) でプレビュー可能だったので [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) のインストールは不要だった。
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode で PlantUML を扱う"
+date: "2025-12-30"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode で PlantUML を扱うための備呆録。
+
+## インストールしたプラグイン
+
+- [PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
+
+## ローカルのサーバで動かす
+
+java 等諸々のインストールが面倒なので Docker で plantuml-server を動かす。
+
+```yaml
+services:
+  plantuml-server:
+    image: plantuml/plantuml-server
+    container_name: plantuml-local-server
+    ports:
+      - "9876:8080"
+```
+
+コンテナを立ち上げる。
+
+```shell
+docker compose up -d
+```
+
+## 設定
+
+```json:settings.json
+{
+  "plantuml.render": "Local",
+  "plantuml.server": "http://localhost:9876",
+  "markdown-preview-enhanced.plantumlServer": "http://localhost:9876/svg/"
+}
+```
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode で Markdown を扱う"
+date: "2025-12-29"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode で Markdown を扱うための備呆録。
+
+## インストールしたプラグイン
+
+* [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+* [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
+* [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+
+## 見出し (Table of Contents) の作成
+
+見出しを作成したい行で、Cmd + Shift + p から `Markdown All in One: Create Table of Contents` を選択する。
+
+目次にする範囲を制限する設定。
+
+```json:settings.json
+{
+  "markdown.extension.toc.levels": "2..4"
+}
+```
+
+## セクション番号の追加/削除
+
+Cmd + Shift + p から `Markdown All in One: Add/Update section numbers` を選択する。
+
+## プレビュー
+
+* Cmd + Shift + p から ``Markdown Preview Enhanced: Open preview to the Side を選択する。
+* もしくは Cmd + K V でプレビューをサイドに表示できる。
+* 改行コードで改行させる設定。
+
+```json:settings.json
+{
+  "markdown-preview-enhanced.breakOnSingleNewLine": true,
+}
+```
+
+## PDF へのエクスポート
+
+Markdown Preview Enhanced の画面を右クリックして、`Export -> Chrome(Puppeteer) -> PDF` を選択する。
+
+## markdownlint の設定
+
+```json:settings.json
+{
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+}
+```
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode で PHP Intelephense"
+date: "2025-12-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode に PHP Intelephense をインストールした際の備呆録。
+
+## 手順
+
+1. [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) をインストール
+2. 組込みの VSCode PHP 言語機能を無効にする
+    - 機能拡張 (Extensions) を開く
+    - @builtin php で検索
+    - 「PHP 言語機能」(PHP Language Features) を無効化する
+3. ライセンスキーの設定
+    - Ctrl + Shift + P (Cmd + Shift + P) でコマンドパレットを開いて、licence key で検索。
+    - ライセンスキーを入力する
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode で GitHub Copilot"
+date: "2025-12-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode に GitHub Copilot と GitHub Copilot Chat をインストールした際の備呆録。
+
+## 手順
+
+以下をインストールする。
+
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
+
+同期設定で GitHub を使っていたためか、インストールしただけで連携できていた...
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode の同期設定"
+date: "2025-12-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode の同期設定の備呆録。
+
+## 手順
+
+1. 「Code」-> 「基本設定」-> 「バックアップと同期の設定」　を選択する。
+{{< figure src="vscode_01.png" alt="" >}}
+2. サインインを求められるので、GitHub アカウントでサインインする。
+{{< figure src="vscode_02.png" alt="" >}}
+
+## GitHub で確認
+
+Settings -> Applications -> Authorized OAuth Apps
+
+{{< figure src="vscode_03.png" alt="" >}}
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode に Neovim プラグインをインストール"
+date: "2025-12-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode に Neovim プラグインをインストールした際の備呆録。
+
+## 手順
+
+1. [VSCode Neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) をインストールして VSCode を再起動する。
+2. 以下のダイアログが表示されるので[Yes]をクリックする。
+{{< figure src="neovim_01.png" alt="" >}}
+3. 再起動しろとダイアログが表示されるので[Restart]をクリックする。
+{{< figure src="neovim_02.png" alt="" >}}
+4. 何も起こらなかったので手動で VSCode を再起動する。
+
+以下の設定がされていた。
+{{< figure src="vscode_affinity.png" alt="" >}}
+
+## キーリピートできない問題の対応
+
+以下を実行し Mac を再起動する。
+
+```shell
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
+設定されているか確認するには、以下を実行し、0 か false が表示されれば OK。
+
+```shell
+defaults read -g ApplePressAndHoldEnabled
+```
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% nvim --version
+NVIM v0.11.5
+Build type: Release
+LuaJIT 2.1.1765228720
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode エディタ関連の設定"
+date: "2025-12-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode エディタ関連の設定の備呆録。
+
+## テーマの変更
+
+1. [kanagawa-vscode-theme](https://github.com/metapho-re/kanagawa-vscode-theme) をインストール
+2. Cmd + K から Cmd + T で Kanagawa Wave を選択
+
+## フォントの設定
+
+1. Cmd + ,
+2. 検索窓に font と入力
+3. Editor: Font Size を 13 に変更
+4. Editor: Font Family に [HackGen Console NF](https://github.com/yuru7/HackGen) を設定
+5. 検索窓に terminal font と入力
+6. Terminal › Integrated: Font Size を 14 に変更
+
+## 文字コードの自動判別
+
+1. Cmd + ,
+2. 検索窓に encoding と入力
+3. Files: Auto Guess Encoding にチェック
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode の日本語化と言語の切り替え"
+date: "2025-12-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode の日本語化と言語の切り替えの備呆録。
+
+## 日本語化
+
+以下をインストールして再起動。
+
+[Japanese Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
+
+## 言語の切り替え
+
+1. Ctlr + Shift + P でコマンドパレットを開き、`disp` と入力
+2. "Configure Display Language" を表示して Enter をたたく
+3. 切り替えたい言語を選択して Enter をたたく
+
+## 環境
+
+```console
+% code --version
+1.107.1
+994fd12f8d3a5aa16f17d42c041e5809167e845a
+arm64
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "Google Drive で draw.io を扱う"
+date: "2025-12-11"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+Google Drive で draw.io を扱う備呆録。
+
+## 手順
+
+1. 以下 Google Workspace Marketplace で draw.io のページを表示する。  
+[draw.io - Google Workspace Marketplace](https://workspace.google.com/marketplace/app/drawio/671128082532?flow_type=2)
+
+2. 「インストール」 ボタンをクリック。
+
+3. 諸々認証を行う。
+
+4. 初めて draw.io でファイルを作成した際も認証を求めら得るので諸々認証を行う。
+
+## 環境
+
+特になし。
+
+--------------------------------------------------------------------------------
+title: "CLI で AWS IAM ユーザーを作成"
+date: "2025-09-12"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+CLI で AWS IAM ユーザーを作成方法の備呆録
+
+## 手順
+
+ユーザー名を環境変数に設定する。
+
+```console
+USER_NAME="hoge”
+```
+
+ユーザーを作成する。
+
+```console
+aws iam create-user --user-name "${USER_NAME}"
+```
+
+ユーザーを admin グループに追加する。
+
+```console
+aws iam add-user-to-group --user-name "${USER_NAME}" \
+  --group-name admin
+```
+
+パスワード更新必須で初期パスワード (p4ssw0rd) を設定する。
+
+```console
+aws iam create-login-profile --user-name "${USER_NAME}" \
+  --password p4ssw0rd \
+  --password-reset-required
+```
+
+アクセスキーを作成する。
+
+```console
+aws iam create-access-key --user-name "${USER_NAME}"
+```
+
+## 参考サイト
+
+- [create-user — AWS CLI 2.29.1 Command Reference](https://docs.aws.amazon.com/cli/latest/reference/iam/create-user.html)
+
+## 環境
+
+```console
+$ aws --version
+aws-cli/2.28.26 Python/3.13.7 Linux/6.1.147-172.266.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2023
+```
+
+--------------------------------------------------------------------------------
+title: "VSCode を使わない環境での Intelephense のライセンスキーの設定方法"
+date: "2025-08-12"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+VSCode を使わない環境での Intelephense のライセンスキーの設定方法の備呆録
+
+## 対応方法
+
+以下のテキストファイルにライセンスキーを記載する。
+
+```text
+~/intelephense/licence.txt
+```
+
+## 参考サイト
+
+- [Intelephense -- Frequently Asked Questions (FAQ)](https://intelephense.com/faq.html)
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```
+
+--------------------------------------------------------------------------------
+title: "シェルスクリプトを使用して、AWS SESでメールを送信する"
+date: "2025-06-01"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+シェルスクリプトを使用して、AWS SES でメールを送信する備呆録。
+
+## 手順
+
+```bash
+#!/usr/bin/env bash
+set -CEeuo pipefail
+
+SES_FROM="admin@oppara.tv"
+SES_TO="admin@oppara.tv"
+SES_REGION="ap-northeast-1"
+
+SES_SUBJECT="テストメール from SES"
+SES_BODY="ほげほげ"
+
+aws ses send-email \
+    --from "$SES_FROM" \
+    --destination "ToAddresses=$SES_TO" \
+    --message "Subject={Data=$SES_SUBJECT,Charset=utf-8},Body={Text={Data=$SES_BODY,Charset=utf-8}}" \
+    --region "$SES_REGION"
+```
+
+## 環境
+
+```console
+
+% aws --version
+aws-cli/2.27.26 Python/3.13.3 Darwin/24.3.0 source/arm64
+```
+
+--------------------------------------------------------------------------------
+title: "SELinux で httpd からのファイルへのアクセスを許可する"
+date: "2025-02-20"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+SELinux で httpd からのファイルへのアクセスを許可する方法の備忘録。
+
+## 前提
+
+`/var/app/tmp` に httpd からアクセスする場合を想定する。
+
+## 対応方法
+
+```
+# chcon -R -t httpd_sys_rw_content_t /var/app/tmp
+```
+
+永続化
+```
+# semanage fcontext -a -t httpd_sys_rw_content_t /var/app/tmp
+```
+
+確認
+```
+# ls -alFZ /var/app/tmp
+```
+
+## 参考サイト
+
+- [SELinuxでApacheからのファイルへのアクセスを許可する - tech-notes](https://scrapbox.io/tech-notes/SELinux%E3%81%A7Apache%E3%81%8B%E3%82%89%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%B8%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B)
+
+
+## 環境
+
+```console
+$ cat /etc/system-release
+Amazon Linux release 2023.6.20250123 (Amazon Linux)
+```
+
+--------------------------------------------------------------------------------
+title: "PHP リトライのテンプレート"
+date: "2025-01-13"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+よく忘れるので、備呆録。
+
+
+## 手順
+
+```php
+<?php
+declare(strict_types=1);
+
+
+function retry($retries, $sleep, callable $callback)
+{
+    for ($i = 1; $i <= $retries; $i++) {
+        try {
+            return $callback();
+        } catch (Exception $e) {
+            echo  "attempt: $i" . PHP_EOL;
+            echo $e->getMessage() . PHP_EOL;
+            $delay = $sleep * $i;
+            echo  "delay: $delay" . PHP_EOL;
+            sleep($delay);
+        }
+    }
+    throw new Exception('Failed after ' . $retries . ' retries');
+}
+
+function hoge()
+{
+    throw new Exception('error');
+}
+
+retry(3, 1, 'hoge');
+
+```
+
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.2
+BuildVersion:           24C101
+
+% php -v
+PHP 8.2.27 (cli) (built: Dec 17 2024 11:39:23) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.2.27, Copyright (c) Zend Technologies
+    with Zend OPcache v8.2.27, Copyright (c), by Zend Technologies
+```
+
+--------------------------------------------------------------------------------
+title: "Fluentd で dry-run"
+date: "2025-01-12"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[Fluentd](https://www.fluentd.org/) で設定ファイルを確認する方法についての備呆録。
+
+## CLI
+
+```console
+% fluentd --dry-run -c /etc/fluentd/fluent.conf
+```
+
+## Docker
+
+プラグイン使っている場合は、あらかじめインストールしておく必要がある。
+
+```console
+% docker run \
+-ti --rm \
+--platform linux/x86_64 \
+-v ./:/fluentd/etc -v ./:/var/log \
+fluent/fluentd:v1.8-debian-1 --dry-run -c /fluentd/etc/hoge.conf
+
+fluentd --dry-run -c /fluentd/etc/hoge.conf
+2025-01-12 09:07:29 +0000 [info]: parsing config file is succeeded path="/fluentd/etc/hoge.conf"
+2025-01-12 09:07:29 +0000 [info]: gem 'fluentd' version '1.8.1'
+2025-01-12 09:07:29 +0000 [info]: starting fluentd-1.8.1 as dry run mode ruby="2.6.5"
+2025-01-12 09:07:29 +0000 [info]: using configuration file: <ROOT>
+  <source>
+    @type tail
+    path "/var/log/httpd-access.log"
+    pos_file "/var/log/td-agent/httpd-access.log.pos"
+    tag "s3.apache.access"
+    <parse>
+      @type "apache2"
+    </parse>
+  </source>
+  <match log.**>
+    @type file
+    path "/var/log/fluent/myapp"
+    compress gzip
+    <buffer>
+      timekey 1d
+      timekey_use_utc true
+      timekey_wait 10m
+      path "/var/log/fluent/myapp"
+    </buffer>
+  </match>
+</ROOT>
+2025-01-12 09:07:29 +0000 [info]: finsihed dry run mode
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.2
+BuildVersion:           24C101
+
+% docker --version
+Docker version 27.4.0, build bde2b89
+```
+
+--------------------------------------------------------------------------------
+title: "MySQL ですべてのテーブルを削除する"
+date: "2024-10-31"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+MySQL でデータベース内のすべてのテーブルを削除する方法の備忘録。
+
+## 手順
+
+DROP 文を作成して実行する。
+
+```console
+$ echo "SET FOREIGN_KEY_CHECKS = 0;" > /patht/to/tmp.sql
+$ mysqldump -h $DB_HOST --single-transaction --add-drop-table --no-data -u $DB_USER -p $DB_NAME | grep 'DROP TABLE' >> /path/to/tmp.sql
+$ echo "SET FOREIGN_KEY_CHECKS = 1;" >> /path/to/tmp.sql
+
+$ mysql -h $DB_HOST -u $DB_USER -p $DB_NAME < /path/to/tmp.sql
+```
+
+--------------------------------------------------------------------------------
+title: "運用中で指定した名前の EC2 のプライベートアドレスを取得する"
+date: "2024-09-02"
+--------------------------------------------------------------------------------
+
+```bash
+TARGET_TAG="hoge"
+aws ec2 describe-instances \
+    --filter "Name=instance-state-name,Values=running" "Name=tag:Name,Values=${TARGET_TAG}" \
+    | jq -r '.Reservations[].Instances[] | .PrivateIpAddress '
+```
+
+`ec2:DescribeInstances`ポリシーが必要。
+
+## 環境
+
+```console
+$ aws --version
+aws-cli/2.17.41 Python/3.11.9 Linux/6.1.102-111.182.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2023
+```
+
+--------------------------------------------------------------------------------
+title: "1 秒に 1 回サーバにアクセスするコマンド"
+date: "2024-06-06"
+--------------------------------------------------------------------------------
+
+## 使いどころ
+
+例えば、サーバのアップグレード時に、実際に通信が途切れてないか 1 秒に 1 回サーバにアクセスして接続を確認したい時とか。
+
+## 手順
+
+
+```console
+url=https://oppara.tv/
+while true; do TZ=JST-9 date; curl -I "$url"; sleep 1s; done
+```
+
+Mac の場合
+```console
+url=https://oppara.tv/
+while true; do TZ=JST-9 date; curl -I $url; sleep 1; done
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         14.4.1
+BuildVersion:           23E224
+```
+
+--------------------------------------------------------------------------------
+title: "WordPress の管理画面でチェックされたカテゴリーが上に表示されるのを抑止する"
+date: "2024-05-29"
+--------------------------------------------------------------------------------
+
+## 問題
+
+WordPress の管理画面でカテゴリーをチェックすると、そのカテゴリーが上に表示されるのを止めたい。
+
+## 対応方法
+
+
+```php
+add_filter('wp_terms_checklist_args', function($args) {
+    $args['checked_ontop'] = false;
+    return $args;
+});
+```
+
+## 参考サイト
+
+- [WordPressの設置の際に気を配りたい。カテゴリーの階層構造について | 株式会社LIG(リグ)｜DX支援・システム開発・Web制作](https://liginc.co.jp/programmer/archives/2931)
+
+## 環境
+
+```console
+% wp core version
+6.5.3
+```
+
+--------------------------------------------------------------------------------
+title: "Zabbix `Disk space is low` トリガーの条件"
+date: "2024-05-02"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+Zabbix のトリガー `/: Disk space is low` の条件の備呆録
+
+## `/: Disk space is low` トリガーの条件
+
+
+```
+last(/oppara.tv/vfs.fs.size[/,pused])>{$VFS.FS.PUSED.MAX.WARN:"/"} and ((last(/oppara.tv/vfs.fs.size[/,total])-last(/oppara.tv/vfs.fs.size[/,used]))<{$VFS.FS.FREE.MIN.WARN:"/"} or timeleft(/oppara.tv/vfs.fs.size[/,pused],1h,100)<1d)
+```
+
+見やすく整形してみる。
+```
+last(/oppara.tv/vfs.fs.size[/, pused]) > {$VFS.FS.PUSED.MAX.WARN:"/"} 
+and 
+(
+  (last(/oppara.tv/vfs.fs.size[/, total]) - last(/oppara.tv/vfs.fs.size[/, used])) < {$VFS.FS.FREE.MIN.WARN:"/"} 
+  or 
+  timeleft(/oppara.tv/vfs.fs.size[/, pused], 1h, 100) < 1d
+)
+```
+
+日本語にしてみる。
+
+```
+ディスク使用率が $VFS.FS.PUSED.MAX.WARN より大きい
+かつ 
+(
+  ディスク残量が $VFS.FS.FREE.MIN.WARN より小さい
+  もしくは 
+  1日以内にディスク使用率が100%となる
+)
+```
+
+
+## 環境
+
+```console
+$ zabbix_server --version
+zabbix_server (Zabbix) 6.0.23
+```
+
+--------------------------------------------------------------------------------
+title: "openssl を使って証明書を確認"
+date: "2024-02-17"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+openssl を使って証明書の諸々を確認する方法の備忘録。
+
+## 証明書のコモンネームと有効開始日・有効期限日を確認する
+
+```console
+% openssl x509 -noout -subject -dates -in oppara.tv.crt
+subject=CN=oppara.tv
+notBefore=Jan 31 19:06:53 2024 GMT
+notAfter=Apr 30 19:06:52 2024 GMT
+```
+
+## 証明書と秘密鍵の「整合性」を確認する
+
+ハッシュが同じであれば整合性が取れている。
+
+```console
+% openssl x509 -noout -modulus -in oppara.tv.cert | md5sum
+48f8be8df2822b4f302fc16276566f9e  -
+
+% openssl rsa -noout -modulus -in oppara.tv.key | md5sum
+48f8be8df2822b4f302fc16276566f9e  -
+```
+
+## 証明書と中間証明書の「整合性」を確認する
+
+ハッシュが同じであれば整合性が取れている。
+
+```console
+% openssl x509 -issuer_hash -noout -in oppara.tv.cert
+8d33f237
+
+% openssl x509 -subject_hash -noout -in  chain.cert
+8d33f237
+```
+## リモートの証明書のコモンネームと有効開始日・有効期限日を確認する
+
+```console
+% echo | openssl s_client -connect oppara.tv:443 2> /dev/null | openssl x509 -noout -subject -dates 2> /dev/null
+
+
+subject=CN=oppara.tv
+notBefore=Jan 14 00:17:24 2024 GMT
+notAfter=Apr 13 00:17:23 2024 GMT
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         14.2.1
+BuildVersion:           23C71
+
+% openssl -version
+OpenSSL 3.2.1 30 Jan 2024 (Library: OpenSSL 3.2.1 30 Jan 2024)
+```
+
+--------------------------------------------------------------------------------
+title: "Intel One Mono を使う"
+date: "2024-01-29"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+中括弧（{}）が特徴的な、[Intel One Mono](https://github.com/intel/intel-one-mono) を使ってみる。
+
+{{< figure src="font.png" alt="" >}}
+{{< figure src="typeface.png" alt="" >}}
+
+## インストール
+
+```console
+% install homebrew/cask-fonts/font-intel-one-mono 
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         14.2.1
+BuildVersion:           23C71
+
+% brew --version   
+Homebrew 4.2.5
+```
+
+--------------------------------------------------------------------------------
+title: "AWS CLIからテストメールを送信"
+date: "2024-01-27"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+AWS CLIからテストメールを送信する方法を備忘録。
+
+## 手順
+
+```console
+$ to="test@example.com"
+$ aws ses send-email \
+  --from info@oppara.tv \
+  --to "${to}" \
+  --subject "件名" \
+  --text "本文"
+```
+
+
+## 環境
+
+```console
+$ aws --version
+aws-cli/2.15.13 Python/3.11.6 Linux/6.1.66-91.160.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2023 prompt/off
+```
+
+--------------------------------------------------------------------------------
+title: "ローカルで Web サーバーを立てる"
+date: "2024-01-10"
+--------------------------------------------------------------------------------
+
+## Node.js
+
+```
+npx serve
+```
+
+port 指定する場合。
+```
+npx serve -p 1192
+```
+
+[serve - npm](https://www.npmjs.com/package/serve)
+
+## Python
+
+```
+python -m http.server 1192
+```
+
+[http.server --- HTTP サーバ — Python 3.10.13 ドキュメント](https://docs.python.org/ja/3.10/library/http.server.html)
+
+## PHP
+
+```
+php -S localhost:1192
+```
+
+[PHP: ビルトインウェブサーバー - Manual](https://www.php.net/manual/ja/features.commandline.webserver.php)
+
+
+## まとめ
+
+静的コンテンツは node で。PHP が絡む場合は php で。
+
+## 環境
+
+```console
+% node -v
+v21.5.0
+% npx -v
+10.2.4
+
+% python --version
+Python 3.10.6
+
+% php -v 
+PHP 8.3.1 (cli) (built: Dec 20 2023 12:44:38) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.1, Copyright (c) Zend Technologies
+    with Zend OPcache v8.3.1, Copyright (c), by Zend Technologies
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         14.2.1
+BuildVersion:           23C71
+```
+
+--------------------------------------------------------------------------------
+title: "CLI で Aurora Serverless V1 を作成する"
+date: "2023-11-25"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+マネジメントコンソールで Aurora Serverless V1 を作成できないので、AWS CLI の覚書。
+
+## 手順
+
+
+```shell
+DATABASE_NAME="try_db"
+DB_CLUSTER_IDENTIFIER="try-cluster"
+VPC_SECURITY_GROUP_IDS="sg-016afba3d02181db5"
+MASTER_USERNAME="admin"
+MASTER_USER_PASSWORD="p4ssw0rd"
+DB_SUBNET_GROUP_NAME="try-db-subnet-group"
+
+aws rds create-db-cluster  \
+  --database-name "${DATABASE_NAME}" \
+  --db-cluster-identifier "${DB_CLUSTER_IDENTIFIER}" \
+  --vpc-security-group-ids "${VPC_SECURITY_GROUP_IDS}" \
+  --master-username "${MASTER_USERNAME}" \
+  --master-user-password "${MASTER_USER_PASSWORD}" \
+  --db-subnet-group-name "${DB_SUBNET_GROUP_NAME}" \
+  --availability-zones  ap-northeast-1a ap-northeast-1c ap-northeast-1d \
+  --engine aurora-mysql \
+  --engine-version 5.7.mysql_aurora.2.08.3 \
+  --engine-mode serverless \
+  --scaling-configuration '{"MinCapacity":1,"MaxCapacity":2,"AutoPause":true,"SecondsUntilAutoPause":300,"TimeoutAction":"ForceApplyCapacityChange","SecondsBeforeTimeout":60}'
+```
+
+## 参考
+
+- [Aurora Serverless v1 DB クラスターの作成 - Amazon Aurora](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.create.html)
+- [create-db-cluster — AWS CLI 2.13.38 Command Reference](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-cluster.html)
+
+## 環境
+
+```console
+$ aws --version
+aws-cli/2.13.35 Python/3.11.6 Linux/6.1.59-84.139.amzn2023.x86_64 exec-env/CloudShell exe/x86_64.amzn.2 prompt/off
+```
+
+--------------------------------------------------------------------------------
+title: "Next.js で Basic 認証をかける"
+date: "2023-11-20"
+--------------------------------------------------------------------------------
+
+## 対応方法
+
+middleware を使用する。
+
+```typescript:middleware.ts
+// middleware.ts
+
+import { NextResponse, NextRequest } from 'next/server';
+
+export const config = {
+  // /hoge/ 以下のパスに対して Basic 認証をかける
+  matcher: ['/hoge/:path*'],
+}
+
+export function middleware(req: NextRequest) {
+
+  const basicAuth = req.headers.get('authorization');
+  if (basicAuth) {
+    const authValue = basicAuth.split(' ')[1];
+    const [user, password] = atob(authValue).split(':');
+    if (user === process.env.BASIC_AUTH_USER 
+      && password === process.env.BASIC_AUTH_PASSWORD) {
+      return NextResponse.next();
+    }
+  }
+
+  return new NextResponse('Unauthorized', {
+    status: 401,
+    headers: {
+      'WWW-Authenticate': 'Basic realm="Secure Area"',
+    },
+  });
+};
+```
+
+```bash
+# .env.local
+
+BASIC_AUTH_USER=foo
+BASIC_AUTH_PASSWORD=bar
+```
+
+## 環境
+
+```console
+% npx next -v
+Next.js v14.0.3
+```
+
+--------------------------------------------------------------------------------
+title: "Next.js で IP アドレスを使用したアクセス制限を行う"
+date: "2023-11-20"
+--------------------------------------------------------------------------------
+
+## 対応方法
+
+middleware を使用する。
+
+```typescript:middleware.ts
+// middleware.ts
+
+import { NextResponse, NextRequest } from 'next/server';
+
+const validAddresses = new Set();
+if (process.env.VALID_IP_ADDRESSES) {
+  process.env.VALID_IP_ADDRESSES!.split(',').forEach((address) => {
+    validAddresses.add(address.trim());
+  })
+}
+
+export function middleware(req: NextRequest) {
+  let ip: string = req.ip ?? req.headers.get('x-real-ip') ?? '';
+  // with CDN or LB or next dev
+  if (!ip && req.headers.get('x-forwarded-for')) {
+    ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '';
+  }
+
+  if (!validAddresses.has(ip)) {
+    const tmp = {
+      status: 403,
+      url: req.url,
+      host: req.nextUrl.host,
+    };
+    console.log(JSON.stringify(tmp));
+
+    return new NextResponse(null, { status: 401 });
+  }
+
+  return NextResponse.next();
+};
+```
+
+```bash
+# .env.local
+
+VALID_IP_ADDRESSES=127.0.0.1,::1
+```
+
+## 環境
+
+```console
+% npx next -v
+Next.js v14.0.3
+```
+
+--------------------------------------------------------------------------------
+title: "ログローテートの覚書"
+date: "2023-11-06"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+ログローテートの dry-run、実行方法についての覚書。
+
+## Usage
+
+dry-run 実行
+```shell
+logrotate -d /etc/logrotate.conf
+```
+
+実行
+```shell
+logrotate -f /etc/logrotate.conf
+```
+
+設定ファイルを指定して実行
+```shell
+logrotate -f /etc/logrotate.d/httpd
+```
+
+--------------------------------------------------------------------------------
+title: "textlint で dry run"
+date: "2023-10-19"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[textlint](https://textlint.github.io/) の dry-run をよく忘れるので覚書。
+そもそもデフォルトが dry-run だった。
+
+## Usage
+
+```console
+npx textlint /path/to/target
+```
+
+
+キャッシュなし、設定ファイル指定の場合。
+
+```console
+npx textlint --no-cache -c /path/to/textlintrc /path/to/target
+```
+
+
+自動修正時の場合。
+
+```console
+npx textlint --dry-run --fix /path/to/target
+```
+
+
+
+## 環境
+
+```console
+% npx textlint --version
+v13.3.3
+
+% sw_vers
+ProductName:		macOS
+ProductVersion:		14.0
+BuildVersion:		23A344
+```
+
+--------------------------------------------------------------------------------
+title: "stree を使ってみる"
+date: "2023-10-09"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+便利そうなので使ってみる。
+- [orangekame3/stree: 📁Directory trees of AWS S3 Bucket](https://github.com/orangekame3/stree)
+- [stree：S3バケットをtreeするCLIコマンド | フューチャー技術ブログ](https://future-architect.github.io/articles/20230926a/)
+
+## インストール
+
+Homebrew でインストールする。
+```console
+% brew install orangekame3/tap/stree
+```
+
+## ちょい、はまる。
+
+```console
+% stree my-bucket
+ignoring argument my-bucket (path check I)
+No Git or Mercurial URLs found in arguments or current working path, see stree --help
+```
+
+は？
+
+```console
+% which stree
+/opt/homebrew/bin/stree
+
+% ll /opt/homebrew/bin | grep stree
+lrwxr-xr-x  1 oppara  admin    53B Oct 28  2022 stree -> /Applications/Sourcetree.app/Contents/Resources/stree
+```
+
+Sourcetree の CLI がインストールされていたので削除する。
+
+```console
+% rm /opt/homebrew/bin/stree
+```
+
+
+## 設定
+
+config と credentials をよしなに設定する。
+
+~/.aws/config
+```toml
+[oppara]
+region = ap-northeast-1
+output = json
+```
+
+~/.aws/credentials
+```toml
+[oppara]
+aws_access_key_id = XXXXXXXXXXXXXXXXXXXXX
+aws_secret_access_key = XXXXXXXXXXXXXXXXX
+```
+
+
+## 実行
+
+```console
+% stree opp-my-bucket --profile oppara --no-color
+opp-my-bucket
+├── foo
+│   └── bar
+│       └── baz.toml
+└── hoge.md
+
+2 directories, 2 files
+```
+
+
+## 環境
+
+```console
+% sw_vers
+ProductName:		macOS
+ProductVersion:		14.0
+BuildVersion:		23A344
+```
+
+--------------------------------------------------------------------------------
+title: "シェルスクリプトで Usage 表示"
+date: "2023-10-05"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+簡易敵な Usage 表示
+
+## 実装
+
+
+```bash
+#!/usr/bin/env bash
+#/ Usage:
+#/     awsome-script [-h | -help] <name> [<count>]
+#/
+#/ Example
+#/     awsome-script foo
+#/     awsome-script foo 3
+#/
+
+set -e
+
+usage () {
+  grep '^#/' < "$0" | cut -c4-
+  exit 0
+}
+
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  usage
+fi
+
+NAME=$1
+COUNT=${2:-0}
+
+echo "$NAME" "$COUNT"
+```
+
+## 実行
+
+```
+% /path/to/awsome-script -h 
+Usage:
+    awsome-script [-h | -help] <name> [<count>]
+
+Example
+    awsome-script foo
+    awsome-script foo 3
+
+% /path/to/awsome-script foo
+foo 0
+```
+
+--------------------------------------------------------------------------------
+title: "Postfix 覚書"
+date: "2023-10-03"
+--------------------------------------------------------------------------------
+
+
+## 主要な項目の説明
+
+- myhostname：DNS で正引きできる（A レコードが存在する）ホスト名。  
+ DNS 正引きの IP アドレスと、Postfix を設定するサーバの IP アドレスが一致する必要はない！
+- mydomain：ドメイン名を FQDN で指定
+- myorigin：アプリケーションからのメール送信時に From アドレスのドメインとして使用する名前
+
+最終的に、myorigin に設定するドメインに、逆引き、SPF レコードの設定が必要。
+
+## 設定例
+
+```postfix
+myhostname = mail01.example.com
+mydomain = example.com
+myorigin = $mydomain
+mydestination =
+```
+## コマンド
+
+### main.cf の確認
+```
+# postfix check
+```
+
+### 再起動
+```
+# service postfix restart
+```
+
+--------------------------------------------------------------------------------
+title: "www ありなしの RewiteRule"
+date: "2023-09-22"
+--------------------------------------------------------------------------------
+
+
+## www ありの https のURLに統一
+
+```apache
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+```
+## www なしの https のURLに統一
+
+```apache
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+```
+
+--------------------------------------------------------------------------------
+title: "WordPress の管理画面でプラグインの URL を取得する"
+date: "2023-07-18"
+--------------------------------------------------------------------------------
+
+
+## 目的
+
+WordPress の管理画面で独自プラグインの URL を取得したい。
+
+## 対応方法
+
+```php
+
+funtcion getPluginUrl()
+{
+    return admin_url('admin.php?page=' . プラグインのスラッグ);
+}
+```
+
+
+
+--------------------------------------------------------------------------------
+title: "WordPress でスラッグにスラッシュを含ませたい"
+date: "2023-05-20"
+--------------------------------------------------------------------------------
+
+
+## 問題
+
+WordPress でスラッグにスラッシュを含ませられない。  
+スラッシュがハイフンに変換されてしまう。。。
+
+## 対応方法
+
+[sanitize_title_with_dashes](https://github.com/WordPress/WordPress/blob/6.2.2/wp-includes/formatting.php#L2258) という関数でフィルタしてるので削除する。
+
+ただし、フィルタを削除すると、[URI エンコード](https://github.com/WordPress/WordPress/blob/6.2.2/wp-includes/formatting.php#L2267-L2272) されなくなるので自前でエンコードする。
+
+```php
+remove_filter('sanitize_title', 'sanitize_title_with_dashes');
+
+// URI エンコードを行う
+add_filter('sanitize_title', function ($title) {
+    if (seems_utf8($title)) {
+        if (function_exists('mb_strtolower')) {
+            $title = mb_strtolower($title, 'UTF-8');
+        }
+        $title = utf8_uri_encode($title, 200);
+    }
+
+    return $title;
+});
+```
+
+--------------------------------------------------------------------------------
+title: "WordPress で外観メニュー内に「メニュー」表示されない件"
+date: "2023-05-19"
+--------------------------------------------------------------------------------
+
+## 問題
+
+自分で作成したテーマを使用した場合、サイドメニュー -> 外観メニュー内に「メニュー」が表示されない。
+
+## 対応方法
+
+```php
+add_action('after_setup_theme', function(): void {
+    register_nav_menu('primary', __('Primary Menu', 'theme-slug'));
+});
+```
+
+
+--------------------------------------------------------------------------------
+title: "シェルスクリプトでディレクトリ名やファイル名を取得したい"
+date: "2023-05-02"
+--------------------------------------------------------------------------------
+
+## 目的
+
+よく忘れるので備忘録。
+
+よく使うのは `##*/`, `%/*`
+
+## パターン
+
+| パターン | 説明                               |
+|------|----------------------------------|
+| ${var#pattern}    | var の先頭から pattern の最短一致を削除する。 |
+| ${var##pattern}    | var の先頭から pattern の最長一致を削除する。 |
+| ${var%pattern}    | var の末尾から pattern の最短一致を削除する。 |
+| ${var%%pattern}    | var の末尾から pattern の最長一致を削除する。 |
+
+```shell
+#!/bin/sh
+
+path="/etc/httpd/httpd.conf"
+
+# ファイル名
+echo ${path##*/}
+
+# ディレクトリ名
+echo ${path%/*}
+
+# 拡張子を除いたファイル名
+echo ${path%.*}
+
+# 拡張子
+echo ${path##*.}
+```
+
+
+--------------------------------------------------------------------------------
+title: "Neovim のインストール"
+date: "2023-04-27"
+--------------------------------------------------------------------------------
+
+## 目的
+
+Neovim を使いたい。
+
+## 対応方法
+
+[Homebrew](https://brew.sh/) でインストールする。
+
+
+```console
+brew install neovim
+
+```
+
+開発バージョンをインストールする。
+
+```console
+brew install --HEAD neovim
+
+```
+開発バージョンをアップデートする。
+
+```console
+brew upgrade neovim --fetch-HEAD
+```
+
+## 参考サイト
+
+- [Installing Neovim · neovim/neovim Wiki](https://github.com/neovim/neovim/wiki/Installing-Neovim#macos--os-x)
+
+## 環境
+
+```console
+% nvim --version
+NVIM v0.9.0
+Build type: Release
+LuaJIT 2.1.0-beta3
+
+% sw_vers
+ProductName:            macOS
+ProductVersion:         13.3
+BuildVersion:           22E252
+```
+
+--------------------------------------------------------------------------------
+title: "XDG Base Directory のデフォルト値まとめ"
+date: "2023-04-26"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+XDG_ほにゃららの環境変数のデフォルト値を忘れてしまうのでまとめ。
+
+## まとめ
+
+### XDG_CONFIG_HOME
+
+ユーザー個別の設定が書き込まれるディレクトリ。
+
+```
+echo "${XDG_CONFIG_HOME:-$HOME/.config}"
+```
+
+### XDG_DATA_HOME
+
+ユーザー個別のデータファイルが書き込まれるディレクトリ。
+
+```
+echo "${XDG_DATA_HOME:-$HOME/.share}"
+```
+### XDG_STATE_HOME
+
+ユーザー個別の状態ファイルをが書き込まれるディレクトリ。
+
+```
+echo "${XDG_STATE_HOME:-$HOME/.state}"
+```
+### XDG_CACHE_HOME
+
+ユーザー個別の重要でない (キャッシュ) データが書き込まれるディレクトリ。
+
+```
+echo "${XDG_CACHE_HOME:-$HOME/.cache}"
+```
+
+## 参考サイト
+
+- [XDG Base Directory - ArchWiki](https://wiki.archlinux.jp/index.php/XDG_Base_Directory)
+
+
+--------------------------------------------------------------------------------
+title: "GitLab に登録している公開鍵を取得したい"
+date: "2022-10-07"
+--------------------------------------------------------------------------------
+
+## 目的
+
+GitLab に登録している公開鍵を手軽に取得したい。
+
+## 対応方法
+
+GitLab のユーザーページの URL の後ろに `.keys` をつける。
+
+### 例
+
+- GitLab のホスト: gitlab.oppara.tv
+- ユーザー名: oppara
+
+```
+% curl https://gitlab.oppara.tv/oppara.keys
+```
+
+## 参考サイト
+
+- [GitHub に登録した SSH 公開鍵は全世界に公開されている | 774::Blog](https://blog.id774.net/entry/2013/12/16/441/)
+
+```
+% curl https://github.com/oppara.keys
+```
+
+--------------------------------------------------------------------------------
+title: "APG4b を Mac  上で確認したい"
+date: "2022-09-24"
+--------------------------------------------------------------------------------
+
+## 目的
+
+[C++入門 AtCoder Programming Guide for beginners (APG4b)](https://atcoder.jp/contests/apg4b) の解答を Mac 上で確認したい。
+
+## 対応方法
+
+以下のファイルを作成して  
+~/apg4b/include/bits/stdc++.h
+
+```cpp
+#include <iostream> // cout, endl, cin
+#include <string> // string, to_string, stoi
+#include <vector> // vector
+#include <algorithm> // min, max, swap, sort, reverse, lower_bound, upper_bound
+#include <utility> // pair, make_pair
+#include <tuple> // tuple, make_tuple
+#include <cstdint> // int64_t, int*_t
+#include <cstdio> // printf
+#include <map> // map
+#include <queue> // queue, priority_queue
+#include <set> // set
+#include <stack> // stack
+#include <deque> // deque
+#include <unordered_map> // unordered_map
+#include <unordered_set> // unordered_set
+#include <bitset> // bitset
+#include <cctype> // isupper, islower, isdigit, toupper, tolower
+
+```
+
+パスに追加しておく。
+```
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:${HOME}/apg4b/include/
+```
+
+## 実行
+
+[quickrun](https://github.com/thinca/vim-quickrun) で実行！
+
+{{< figure src="ss.png" alt="" >}}
+
+
+## 参考サイト
+
+- [手元のコンピュータでプログラムを書きたい場合](https://atcoder.jp/contests/apg4b/tasks/APG4b_ak#:~:text=%E6%89%8B%E5%85%83%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%A7%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%82%92%E6%9B%B8%E3%81%8D%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88)
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.4
+BuildVersion:   21F79
+
+% clang --version
+Apple clang version 13.1.6 (clang-1316.0.21.2.5)
+Target: arm64-apple-darwin21.5.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+```
+
+--------------------------------------------------------------------------------
+title: "VPN 接続しても IP アドレスが変わらない件"
+date: "2022-09-04"
+--------------------------------------------------------------------------------
+
+
+## 問題
+
+Mac で会社の VPN 設定をしても、IP アドレスが会社のものに切り替わらない。
+
+## 対応方法
+
+1. 「システム環境設定」 -> 「ネットワーク」で設定した VPN 設定の [詳細...] ボタンをクリック
+1. 「オプション」タブ内の「すべてのトラフィックを VPN 接続経由で送信」をチェック
+
+![](./vpn.png)
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.4
+BuildVersion:   21F79
+```
+
+--------------------------------------------------------------------------------
+title: "Trivy で AWS のセキュリティスキャンを行う"
+date: "2022-08-21"
+--------------------------------------------------------------------------------
+
+## やり方
+
+aws-vault を利用し、EC2 のセキュリティスキャンを行う場合。
+
+```console
+% aws-vault exec opp-dev -- trivy aws --service ec2
+```
+
+## ヘルプ
+
+```console
+% trivy aws --help
+```
+
+## 参考サイト
+
+- [TrivyでAWSアカウントのセキュリティスキャンができるようになりました | DevelopersIO](https://dev.classmethod.jp/articles/aws-security-scan-by-trivy/)
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.4
+BuildVersion:   21F79
+
+% trivy --version
+Version: 0.31.2
+```
+
+--------------------------------------------------------------------------------
+title: "DynamoDB をローカル環境で使いたい"
+date: "2022-06-28"
+--------------------------------------------------------------------------------
+
+## 目的
+
+DynamoDB をローカル環境で使いたい。
+
+## 対応方法
+
+[DynamoDB ローカルを Docker で動かす](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html#docker)
+
+```yaml:docker-compose.yaml
+version: '3.8'
+services:
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8888:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+```
+
+### 起動
+
+```console
+% docker-compose up -d
+```
+
+### テーブルを作成してみる
+
+```console
+% export AWS_DEFAULT_REGION=us-west-2
+% export ENDPOINT="http://localhost:8888"
+
+% aws dynamodb create-table \
+    --table-name sessions \
+    --endpoint-url "${ENDPOINT}" \
+    --attribute-definitions \
+        AttributeName=id,AttributeType=S \
+    --key-schema \
+        AttributeName=id,KeyType=HASH \
+    --billing-mode PAY_PER_REQUEST \
+    --table-class STANDARD
+
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.4
+BuildVersion:   21F79
+```
+
+--------------------------------------------------------------------------------
+title: "Wrangler で Cloudflare Workers"
+date: "2022-05-17"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[Wrangler（Workers CLI）](https://developers.cloudflare.com/workers/wrangler/)を使って [Cloudflare Workers](https://developers.cloudflare.com/workers/) を試してみる。
+
+## Wrangler のインストール
+
+```console
+% npm install -g wrangler
+```
+
+## Cloudflare の認証
+
+2 段階認証にもたもたしてたらタイムアウトしてしまった。
+
+```console
+% wrangler login
+ ⛅️ wrangler 2.0.5
+-------------------
+Attempting to login via OAuth...
+✘ [ERROR] Timed out waiting for authorization code, please try again.
+```
+
+もう一度。
+
+```console
+% wrangler login
+ ⛅️ wrangler 2.0.5
+-------------------
+Attempting to login via OAuth...
+```
+
+ブラウザが起動し、ログイン、2 段階認証を通過すると以下の画面になるので、問題なければ[Allow]をクリック。
+{{< figure src="authorize.png" alt="" >}}
+
+承認。
+{{< figure src="granted.png" alt="" >}}
+
+## プロジェクトの作成
+
+```console
+% wrangler init my-worker -y
+```
+
+中身確認。
+```console
+% ls -1F my-worker
+node_modules/
+package-lock.json
+package.json
+src/
+tsconfig.json
+wrangler.toml
+
+% cat my-worker/src/index.ts
+/**
+ * Welcome to Cloudflare Workers! This is your first worker.
+ *
+ * - Run `wrangler dev src/index.ts` in your terminal to start a development server
+ * - Open a browser tab at http://localhost:8787/ to see your worker in action
+ * - Run `wrangler publish src/index.ts --name my-worker` to publish your worker
+ *
+ * Learn more at https://developers.cloudflare.com/workers/
+ */
+
+export default {
+  async fetch(request: Request): Promise<Response> {
+    return new Response("Hello World!");
+  },
+};
+```
+## ローカルで実行
+
+```console
+% cd my-worker
+% wrangler dev # または npm start
+
+> my-worker@0.0.0 start
+> wrangler dev
+
+ ⛅️ wrangler 2.0.5
+-------------------
+⬣ Listening at http://localhost:59598
+
+╭────────────────────────────────────────────╮
+│ [b] open a browser, [d] open Devtools, [l] turn off local mode, [c] clear console, [x] to exit   │
+╰────────────────────────────────────────────╯
+```
+
+
+## デプロイ
+
+```console
+% wrangler publish # または npm run publish
+ ⛅️ wrangler 2.0.5
+-------------------
+Uploaded my-worker (0.61 sec)
+Published my-worker (3.61 sec)
+  my-worker.oppara.workers.dev
+```
+
+## 動作確認
+
+```console
+% curl https://my-worker.oppara.workers.dev
+Hello World!
+```
+
+ログが見れる。
+
+```console
+% wrangler tail
+ ⛅️ wrangler 2.0.5
+-------------------
+Successfully created tail, expires at 2022-05-17T20:19:21Z
+Connected to my-worker, waiting for logs...
+GET https://my-worker.oppara.workers.dev/ - Ok @ 5/17/2022, 11:19:47 PM
+```
+
+## 参考サイト
+
+- [Wrangler (command line) · Cloudflare Workers docs](https://developers.cloudflare.com/workers/wrangler/)
+- [Get started guide · Cloudflare Workers docs](https://developers.cloudflare.com/workers/get-started/guide/)
+
+## 環境
+
+```console
+% wrangler --version
+2.0.5
+
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.3.1
+BuildVersion:   21E258
+```
+
+--------------------------------------------------------------------------------
+title: "npx 実行時に Ok to proceed? (y) と表示させない"
+date: "2022-05-10"
+--------------------------------------------------------------------------------
+
+## 問題
+
+npx 実行時に`y`とたたくのが面倒、もしくはたたくこと自体を忘れてしまう。
+
+```console
+% npx cowsay foo
+Need to install the following packages:
+  cowsay
+Ok to proceed? (y)
+```
+
+
+## 対応方法
+
+`--yes`をつける。(キャッシュを有効にする?)
+
+```console
+% npx --yes cowsay foo
+ _____
+< foo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+以後、`--yes`をつけなくても`Ok to proceed? (y)`は表示されない。
+
+```console
+% npx  cowsay foo
+ _____
+< foo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+キャッシュをクリアすると、`Ok to proceed? (y)`が復活する。
+
+```console
+% npx --yes clear-npx-cache
+
+% npx  cowsay foo
+Need to install the following packages:
+  cowsay
+Ok to proceed? (y)
+ _____
+< foo >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+## まとめ
+
+`--yes` 5 文字か、`y` 1 文字か...
+
+
+## 参考サイト
+
+- [npx | npm Docs](https://docs.npmjs.com/cli/v7/commands/npx)
+
+
+## 環境
+
+```console
+% npm --version
+8.6.0
+```
+
+--------------------------------------------------------------------------------
+title: "Brewfile を上書きしたい"
+date: "2022-04-27"
+--------------------------------------------------------------------------------
+
+
+## 目的
+
+Brewfile コメント付きで上書きしたい。
+
+## やり方
+
+```console
+% brew bundle dump --force --describe
+```
+
+## ヘルプ表示
+
+```console
+% brew bundle --help
+```
+
+## 環境
+
+```console
+% brew --version
+Homebrew 3.4.8-11-g96e8796
+Homebrew/homebrew-core (git revision 44fc63c8cca; last commit 2022-04-25)
+Homebrew/homebrew-cask (git revision 659584ba8c; last commit 2022-04-26)
+
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.3.1
+BuildVersion:   21E258
+```
+
+--------------------------------------------------------------------------------
+title: "AWS CLI で証明書の再インポート"
+date: "2022-04-26"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+マネコンからの再インポートが面倒くさかったので備忘録。
+
+## 対応方法
+
+シェルスクリプトから実行する。
+
+```bash
+#!/bin/bash
+set -eu
+
+# インポートする証明書の ARN
+ARN="arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-12345678901	"
+
+# 証明書ファイルへのパス
+CRT="Certificate.pem"
+
+# 中間証明書ファイルへのパス
+CC="CertificateChain.pem"
+
+# パスワード無しの秘密鍵へのパス
+KEY="PrivateKey.pem"
+
+# リージョン
+REGION="us-east-1"
+
+aws acm import-certificate \
+  --certificate fileb://"${CRT}" \
+  --certificate-chain fileb://"${CC}" \
+  --private-key fileb://"${KEY}" \
+  --certificate-arn "${ARN}" \
+  --region "${REGION}"
+```
+
+
+## 参考サイト
+
+- [証明書を再インポートする - AWS Certificate Manager](https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/import-reimport.html)
+- [import-certificate — AWS CLI 2.5.8 Command Reference](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/acm/import-certificate.html)
+
+## 環境
+
+```console
+% aws --version
+aws-cli/2.5.8 Python/3.9.12 Darwin/21.4.0 source/x86_64 prompt/off
+```
+
+--------------------------------------------------------------------------------
+title: "WP-CLI でテーブル内の文字列を置換する"
+date: "2022-04-11"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[WP-CLI](https://wp-cli.org/ja/) でテーブル内の文字列を置換する。
+
+## やり方
+
+プレフィックスが`wp_`のテーブル内の`search`を`replace`に置換して`out`に書き出す。
+
+```bash
+#!/bin/bash
+set -eu
+
+path="wp-config.php があるディレクトリまでのパス"
+search="https://stg.example.com"
+replace="https://www.example.com"
+out="export.sql"
+
+/path/to/wp search-replace --path="${path}" "${search}" "${replace}" wp_* \
+--export="${out}" \
+--report-changed-only \
+--all-tables-with-prefix
+```
+
+`--export`をつけない場合はテーブルのデータをじかに置換するので、実行前に`--dry-run`を忘れない。
+
+## 参考サイト
+
+- [wp search-replace | WP-CLI Command | WordPress Developer Resources](https://developer.wordpress.org/cli/commands/search-replace/)
+
+## 環境
+
+```console
+% php wp --version
+WP-CLI 2.6.0
+```
+
+--------------------------------------------------------------------------------
+title: "メール送信ワンライナー"
+date: "2022-04-08"
+--------------------------------------------------------------------------------
+
+## 目的
+
+mail コマンドで対話的にメールを送るのが面倒だったので備忘録。
+
+## 対応方法
+
+```console
+% echo "本文" | mail -s "件名" -r no-replay@example.com foo@oppara.tv bar@oppara.tv
+```
+
+## 環境
+
+```console
+$ mail -V
+12.5 7/5/10
+
+$ cat /etc/os-release
+NAME="Rocky Linux"
+VERSION="8.5 (Green Obsidian)"
+ID="rocky"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="8.5"
+PLATFORM_ID="platform:el8"
+PRETTY_NAME="Rocky Linux 8.5 (Green Obsidian)"
+ANSI_COLOR="0;32"
+CPE_NAME="cpe:/o:rocky:rocky:8:GA"
+HOME_URL="https://rockylinux.org/"
+BUG_REPORT_URL="https://bugs.rockylinux.org/"
+ROCKY_SUPPORT_PRODUCT="Rocky Linux"
+ROCKY_SUPPORT_PRODUCT_VERSION="8"
+```
+
+--------------------------------------------------------------------------------
+title: "GitHub Actions 時でなくてもブランチ名を利用したい"
+date: "2022-04-03"
+--------------------------------------------------------------------------------
+
+## 目的
+
+Actions 時に呼び出すシェルスクリプト内で、Actions 時でなくてもブランチ名を利用したい。
+
+## 対応方法
+
+```bash
+#!/bin/bash
+set -Ceu
+
+if [ "${GITHUB_REF_NAME:-UNDEF}" = "UNDEF" ]; then
+  GITHUB_REF_NAME=$(git rev-parse --abbrev-ref HEAD)
+fi
+```
+
+## 参考サイト
+
+- [環境変数 - GitHub Docs](https://docs.github.com/ja/actions/learn-github-actions/environment-variables)
+
+--------------------------------------------------------------------------------
+title: "GitLab CI 時でなくてもブランチ名を利用したい"
+date: "2022-04-02"
+--------------------------------------------------------------------------------
+
+## 目的
+
+CI 時に呼び出すシェルスクリプト内で、CI 時でなくてもブランチ名を利用したい。
+
+## 対応方法
+
+
+```bash
+#!/bin/bash
+set -Ceu
+
+if [ "${CI_COMMIT_REF_NAME:-UNDEF}" = "UNDEF" ]; then
+  CI_COMMIT_REF_NAME=$(git rev-parse --abbrev-ref HEAD)
+fi
+
+## 以下の書き方は GitLab 16.0 以降使えなくなる
+# if [ "${CI_BUILD_REF_NAME:-UNDEF}" = "UNDEF" ]; then
+#   CI_BUILD_REF_NAME=$(git rev-parse --abbrev-ref HEAD)
+# fi
+```
+
+## bash のオプション
+
+* `C`: リダイレクト時に既存のファイルを上書きしない。
+* `e`: コマンドがゼロ以外のステータスを返した場合、スクリプトを即座に終了する。
+* `u`: 未定義の変数を参照時にエラー。
+
+## 参考サイト
+
+- [Deprecations by milestone | GitLab](https://docs.gitlab.com/ee/update/deprecations.html#ci_build_-predefined-variables)
+
+
+--------------------------------------------------------------------------------
+title: "Windows で rsync を使いたい"
+date: "2022-03-28"
+--------------------------------------------------------------------------------
+
+## 問題
+
+Windows で rsync を使いたい。
+でも WSL を使うほどでもない。
+
+## 対応方法
+
+Git for Windows に rsync をインストールする。
+
+
+1. スタートメニューの「Git Bash」を右クリックして、「管理者として実行」する。
+1. 以下のシェルスクリプトを実行する。
+
+```bash
+#!/usr/bin/bash
+set -eu
+
+curl -L http://repo.msys2.org/msys/x86_64/zstd-1.4.5-2-x86_64.pkg.tar.xz |tar CvxJf / -
+curl -L http://repo.msys2.org/msys/x86_64/rsync-3.2.2-2-x86_64.pkg.tar.zst |tar Cxvf / - --zstd
+curl -L http://repo.msys2.org/msys/x86_64/libzstd-1.4.5-2-x86_64.pkg.tar.xz |tar CxvJf / -
+curl -L http://repo.msys2.org/msys/x86_64/libxxhash-0.8.0-1-x86_64.pkg.tar.zst  |tar Cvxf / - --zstd
+```
+
+## 参考サイト
+
+- [Git for Windows に rsync を追加する](https://zenn.dev/miwarin/articles/14a10b3278e7a6)
+
+
+## 環境
+
+* Windows 10 21H2 (OS ビルド 19044, 1586)
+* Git for Windows 2.35.1
+* rsync version 3.2.2 protocol version 31
+
+--------------------------------------------------------------------------------
+title: "Chrome を使っているとファンがうるさい"
+date: "2022-03-27"
+--------------------------------------------------------------------------------
+
+## 問題
+
+Chrome を使うとファンがうなりを上げる。
+
+## 対応方法
+
+1. `chrome://flags/#enhanced-bookmarks-experiment`を開く。
+1. `bookmark`で検索。
+1. 以下の機能を Disabled に変更する。
+    - Omnibox short bookmark suggestions
+    - Omnibox Bookmark Paths
+    - Omnibox Site Search Starter Pack
+    - Reading List
+1. Chrome を再起動する。
+
+## 参考サイト
+
+- [2022年 重たいChromeを軽くする意外な解決方法とは？ | オランダで生きていく](https://nldot.info/chrome-slow-fix/)
+
+## 環境
+
+```console
+
+% /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version
+Google Chrome 99.0.4844.83
+
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+```
+
+--------------------------------------------------------------------------------
+title: "Bash 変数文字列置換"
+date: "2022-03-24"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+よく使う変数内文字列置換を忘れるのでのメモ。
+
+## 例
+
+`~/tmp/hoge.sh`
+```bash
+#!/bin/bash
+
+echo "$0"
+
+# basename
+echo "${0##*/}"
+
+# 拡張子取得
+echo "${0##*\.}"
+
+# dirname
+echo "${0%/*}"
+
+# 拡張子以外
+echo "${0%.*}"
+```
+
+output
+```console
+/Users/oppara/tmp/hoge.sh
+hoge.sh
+sh
+/Users/oppara/tmp
+/Users/oppara/tmp/hoge
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% bash --version
+GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin21)
+Copyright (C) 2007 Free Software Foundation, Inc.
+```
+
+--------------------------------------------------------------------------------
+title: "Pandoc マークダウンを PDF に変換しようとしてエラー"
+date: "2022-03-22"
+--------------------------------------------------------------------------------
+
+## 問題
+
+マークダウンを PDF に変換しようとすると以下のエラー。
+
+```console
+% pandoc hoge.md -o hoge.pdf
+pandoc: pdflatex: createProcess: posix_spawnp: illegal operation (Inappropriate ioctl for device)
+```
+
+## 対応方法
+
+[wkhtmltopdf](https://wkhtmltopdf.org/) を使ってみる。
+
+
+wkhtmltopdf のインストール。
+```console
+% brew install --cask wkhtmltopdf
+```
+
+マークダウンを PDF に変換する。
+```console
+% pandoc hoge.md -o hoge.pdf --pdf-engine wkhtmltopdf
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% pandoc --version
+pandoc 2.17.1.1
+```
+
+--------------------------------------------------------------------------------
+title: "AWS CLI で AWS Backup を利用した EC2 のバックアップ設定をする"
+date: "2022-03-21"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+AWS CLI で AWS Backup を利用した EC2 のバックアップ設定の備忘録。
+
+
+
+## デフォルトのロールの作成
+
+1 つもバックアッププランがない状態で、cli 経由でバックリソースを作成した場合、デフォルトのロール ( AWSBackupDefaultServiceRole ) は自動で作成されないので注意。  
+（マネコンからバックアップリソース作成時、IAM ロールで「デフォルトのロール」を選択した場合はデフォルトのロールが作成される）
+
+
+### ロール作成用のシェルスクリプト
+
+- 名前: AWSBackupDefaultServiceRole
+- 信頼されたエンティティAWS のサービス: backup.amazonaws.com
+- ポリシー:
+  - AWSBackupServiceRolePolicyForRestores
+  - AWSBackupServiceRolePolicyForBackup
+
+{{< collapse summary="表示" >}}
+
+
+```bash
+#!/bin/bash
+set -eu
+
+ROLE_NAME="AWSBackupDefaultServiceRole" 
+
+# IAM ロールを作成
+aws iam create-role \
+--role-name "${ROLE_NAME}" \
+--assume-role-policy-document file://backup-role-policy.json
+
+# AWSBackupServiceRolePolicyForBackup ポリシーをアタッチ
+aws iam attach-role-policy \
+--role-name "${ROLE_NAME}" \
+--policy-arn arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup
+
+# AWSBackupServiceRolePolicyForRestores ポリシーをアタッチ
+aws iam attach-role-policy \
+--role-name "${ROLE_NAME}" \
+--policy-arn arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores
+
+# EC2 のバックアップをする場合、以下のインラインポリシーを追加する必要あり
+aws iam put-role-policy \
+--role-name "${ROLE_NAME}" \
+--policy-name ec2-backup-policy \
+--policy-document  file://ec2-backup-policy.json
+```
+
+backup-role-policy.json
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "backup.amazonaws.com" 
+      },
+      "Action": "sts:AssumeRole" 
+    }
+  ]
+}
+```
+ec2-backup-policy.json
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ec2:DescribeFastSnapshotRestores",
+      "Resource": "*" 
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::<アカウントID>:role/service-role/AWSBackupDefaultServiceRole" 
+    }
+  ]
+}
+```
+{{< /collapse >}}
+
+## EC2 バックアップの CLI 実行例
+
+前提: デフォルトのロール ( AWSBackupDefaultServiceRole ) は作成済み。
+
+### 1. バックアップボールトを作成
+
+```console
+% aws backup create-backup-vault \
+    --backup-vault-name <バックアップボールト名> \
+    --encryption-key-arn <サーバー側で暗号化する際の KMS の暗号化キーの ARN>
+{
+    "BackupVaultName": "バックアップボールト名",
+    "BackupVaultArn": "作成されたバックアップボールトの ARN>",
+    "CreationDate": "YYYY-MM-DDThh:mm:ss+09:00" 
+}
+```
+
+### 2. バックアッププランを作成
+
+```console
+$ aws backup create-backup-plan --backup-plan file://backup-plan.json
+{
+    "BackupPlanId": "作成されたバックアッププランの ID",
+    "BackupPlanArn": "作成されたバックアッププランの ARN",
+    "CreationDate": "YYYY-MM-DDThh:mm:ss+09:00",
+    "VersionId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+}
+```
+
+backup-plan.json
+```json (JST 03:03 にバックアップ実行し 5 日間保存)
+{
+  "BackupPlanName": "<バックアッププラン名>",
+  "Rules": [
+    {
+      "RuleName": "<バックアップルール名>",
+      "TargetBackupVaultName": "<作成したバックアップボールト名>",
+      "ScheduleExpression": "cron(3 18 ? * * *)",
+      "StartWindowMinutes": 120,
+      "CompletionWindowMinutes": 300,
+      "Lifecycle": {
+        "DeleteAfterDays": 5
+      }
+    }
+  ]
+}
+```
+
+### 3. バックアップリソースの割り当て
+
+```console
+$ aws backup create-backup-selection \
+    --backup-plan-id <作成されたバックアッププランの ID> \
+    --backup-selection file://backup-selection.json
+{
+    "SelectionId": "作成されたセレクションの ID",
+    "BackupPlanId": "作成されたバックアッププランの ID",
+    "CreationDate": "YYYY-MM-DDThh:mm:ss+09:00" 
+}
+```
+
+backup-selection.json (EC2 インスタンスをバックアップする)
+```json
+{
+  "SelectionName": "ec2-prod",
+  "IamRoleArn": "AWSBackupDefaultServiceRole の ARN",
+  "Resources": [
+    "バックアップを設定する EC2 インスタンスの ID>" 
+  ],
+  "ListOfTags": []
+}
+```
+
+## 参考サイト
+
+- [backup — AWS CLI 2.4.27 Command Reference](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/backup/index.html)
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% aws --version
+aws-cli/2.4.26 Python/3.9.10 Darwin/21.3.0 source/x86_64 prompt/off
+```
+
+--------------------------------------------------------------------------------
+title: "EC2インスタンスのタグとプライベートIPアドレスを表示する"
+date: "2022-03-19"
+--------------------------------------------------------------------------------
+
+```bash
+#!/usr/bin/env bash
+set -e
+
+desc() {
+  while read -r line
+  do
+    set ${line}
+    name=${1}
+    ip=${2}
+
+    echo "${name}: ${ip}"
+  done
+}
+
+aws ec2 describe-instances --filter "Name=instance-state-name,Values=running" \
+  | jq -r '.Reservations[].Instances[] | [(.Tags[] | select(.Key=="Name").Value), .PrivateIpAddress] | @tsv' \
+  | desc
+```
+
+`ec2:DescribeInstances`ポリシーが必要。
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% aws --version
+aws-cli/2.4.26 Python/3.9.10 Darwin/21.3.0 source/x86_64 prompt/off
+```
+
+--------------------------------------------------------------------------------
+title: "Bash 変数のデフォルト値を設定する"
+date: "2022-03-18"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+変数のデフォルト値の設定をを忘れるのでのメモ。
+
+## 例
+
+```bash
+#!/bin/bash
+
+# var には代入されない
+echo "hello ${var:-world}"
+echo "$var"
+
+# デフォルト値を変数化するときは再代入した方が楽
+var=${var:-foo}
+echo "${var}"
+```
+
+output
+```consle
+hello world
+
+foo
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% bash --version
+GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin21)
+Copyright (C) 2007 Free Software Foundation, Inc.
+```
+
+--------------------------------------------------------------------------------
+title: "AWS Vault を使って MFA と AssumeRole（スイッチロール） "
+date: "2022-03-17"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+AWS Vault を使って MFA 経由で AssumeRole する備忘録。
+
+[99designs/aws-vault](https://github.com/99designs/aws-vault)
+
+## 前提
+
+以下のアカウントを作成済みでスイッチロールの設定済み。
+
+* oppara (default): スイッチ元 (MFA 認証)
+* oppara-dev: スイッチ先
+
+## 対応方法
+
+### AWS Vault のインストール
+
+```console
+% brew cask install aws-vault
+```
+
+### AccessKeyId, SecretAccessKey をキーチェーンに登録
+
+AWS Vault で生成するキーチェーンにアクセスする為のパスワード入力するダイアログが表示されるので設定する。
+
+```console
+% aws-vault add default
+Enter Access Key Id: xxxxxxxxxxxxxxxxxxxx
+Enter Secret Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+Credential が登録されている。
+
+```console
+% aws-vault list
+Profile                  Credentials              Sessions
+=======                  ===========              ========
+default                  default                  -
+```
+
+### ~/.aws/config の設定
+
+```toml
+[default]
+output=json
+region=ap-northeast-1
+
+[profile oppara-dev]
+source_profile=default
+mfa_serial=arn:aws:iam::xxxxxxxxxxxx:mfa/oppara
+role_arn=arn:aws:iam::zzzzzzzzzzzz:role/<ロール名>
+```
+* `mfa_serial`:  スイッチ元アカウントの「MFA デバイスの割り当て」
+* `role_arn`:  スイッチ時に使用するスイッチ先アカウントの IAM ロールの ARN
+
+## 実行
+
+oppara-dev アカウントの S3 バケット一覧を表示する。  
+- aws-vaultキーチェーンへアクセスする為のパスワードを入力する
+- MFA コードを入力するよう求められるので入力する  
+素の AWS CLI と違い入力したコードが表示されるので入力が楽 😆
+
+```console
+% aws-vault exec oppara-dev -- aws s3 ls
+Enter MFA code for arn:aws:iam::xxxxxxxxxxxx:mfa/oppara:
+2021-07-01 23:13:48 cdk-hnb659fds-assets-552376481266-ap-northeast-1
+2020-06-10 00:58:26 cf-templates-8pyd86xx4vzz-ap-northeast-1
+2021-05-31 01:18:49 rain-artifacts-552376481266-ap-northeast-1
+```
+
+セッションができている。
+
+```console
+% aws-vault list
+Profile                  Credentials              Sessions
+=======                  ===========              ========
+default                  default                  -
+oppara-dev               -                        sts.AssumeRole:37m15s
+```
+
+セッションが切れるまでは、コマンドを実行しても MFA コードの入力は求められない。  
+便利 😆
+
+```console
+% aws-vault exec oppara-dev -- aws s3 ls
+2021-07-01 23:13:48 cdk-hnb659fds-assets-552376481266-ap-northeast-1
+2020-06-10 00:58:26 cf-templates-8pyd86xx4vzz-ap-northeast-1
+2021-05-31 01:18:49 rain-artifacts-552376481266-ap-northeast-1
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% aws-vault --version
+v6.6.0
+```
+
+--------------------------------------------------------------------------------
+title: "Session Manager で Amazon Linux にログイン後ユーザーを切り替える"
+date: "2022-03-16"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+Session Manager で EC2 上の Amazon Linux にログイン後、他のユーザーになるための備忘録。
+
+ログイン時は`ssm-user`
+
+```console
+sh-4.2$ whoami
+ssm-user
+```
+
+## 対応方法
+
+### ec2-user になる
+
+```console
+sh-4.2$ sudo su --login ec2-user
+```
+
+### root になる
+
+```console
+sh-4.2$ sudo su --login
+```
+
+## 環境
+
+```console
+sh-4.2$ cat /etc/system-release
+Amazon Linux release 2 (Karoo)
+
+sh-4.2$ amazon-ssm-agent -version
+SSM Agent version: 3.0.1124.0
+```
+
+--------------------------------------------------------------------------------
+title: "git log のエイリアス"
+date: "2022-03-15"
+--------------------------------------------------------------------------------
+
+## 問題
+
+`git log`の表示が寂しい。
+
+## 対応
+
+好みのログを表示するエイリアスを設定する。
+
+### Git のエイリアス
+
+```ini
+; ~/.gitconfig
+[alias]
+    ll = log --graph --color \
+        --pretty=format:'%C(red)%x09%h %C(yellow)%cn %C(green)%ci %C(reset)%s%C(blue)%d%C(reset)'
+```
+
+| format                | 解説
+|-----------------------|----------------------------------|
+| `%C(red)%x09%h`       | 9 文字空けて省略されたコミットハッシュを赤で表示        |
+| `%C(yellow)%cn`       | コミッターの名前を黄色で表示                   |
+| `%C(green)%ci`        | コミットした日時を ISO8601 ぽい形式で緑で表示      |
+| `%C(reset)%s`         | 表示色をリセットし、件名（コミットメッセージの 1 行目）を表示 |
+| `%C(blue)%d%C(reset)` | ref name を青で表示し、再度表示色をリセット       |
+
+本家の解説ページ  
+[Git - pretty-formats Documentation](https://git-scm.com/docs/pretty-formats)
+
+
+### シェルのエイリアス
+
+とりあえず、10 行だけ欲しい。
+
+```bash
+alias gl="git ll | head -10 && echo"
+```
+
+## 実行結果
+
+{{< figure src="git-log.png" alt="" >}}
+
+
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% git --version
+git version 2.35.1
+```
+
+--------------------------------------------------------------------------------
+title: "Speedtest の CLI クライアントを試してみる"
+date: "2022-03-14"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[speedtest.net](https://www.speedtest.net/) の [CLI クライアント](https://www.speedtest.net/apps/cli) があったので試してみる。
+
+## インストール
+
+```console
+% brew install teamookla/speedtest/speedtest
+```
+
+## 初回実行
+
+初回実行時は、ライセンスの確認がある。
+
+```console
+% speedtest
+====================================================================
+
+You may only use this Speedtest software and information generated
+from it for personal, non-commercial use, through a command line
+interface on a personal computer. Your use of this software is subject
+to the End User License Agreement, Terms of Use and Privacy Policy at
+these URLs:
+
+        https://www.speedtest.net/about/eula
+        https://www.speedtest.net/about/terms
+        https://www.speedtest.net/about/privacy
+
+=====================================================================
+
+Do you accept the license? [type YES to accept]:
+```
+
+## サーバ選択の詳細を表示しながら実行
+
+```console
+% speedtest --selection-details
+
+   Speedtest by Ookla
+
+Selecting server:
+      20976:   6.24 ms; GLBB Japan - Tokyo
+      21569:   5.66 ms; i3D.net - Tokyo
+      38241:   5.51 ms; BudgetVM - Tokyo
+      28910: 212.52 ms; fdcservers.net - Tokyo
+      48301:   5.96 ms; Cloudflare - Tokyo
+      24333:  17.89 ms; Rakuten Mobile, Inc - Tokyo
+      44988:   7.02 ms; Misaka Network, Inc. - Tokyo
+      48463:   5.79 ms; IPA CyberLab 400G - Tokyo
+      14623:   6.14 ms; IPA CyberLab - Bunkyo
+       8407:  10.31 ms; Allied Telesis Capital Corporation - Sagamihara
+     Server: BudgetVM - Tokyo (id = 38241)
+        ISP: Softbank BB
+    Latency:     5.63 ms   (0.76 ms jitter)
+   Download:   117.23 Mbps (data used: 124.7 MB)
+     Upload:   230.65 Mbps (data used: 134.4 MB)
+Packet Loss:     0.0%
+ Result URL: https://www.speedtest.net/result/c/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+ ```
+
+## サーバ ID を指定して実行
+
+```console
+% speedtest -s 21569
+
+   Speedtest by Ookla
+
+     Server: i3D.net - Tokyo (id = 21569)
+        ISP: Softbank BB
+    Latency:     5.61 ms   (0.40 ms jitter)
+   Download:   110.67 Mbps (data used: 69.7 MB)
+     Upload:   219.27 Mbps (data used: 145.6 MB)
+Packet Loss:     0.0%
+ Result URL: https://www.speedtest.net/result/c/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+ 
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% speedtest -V
+Speedtest by Ookla 1.1.1.84 (3bdba79799) Darwin 21.3.0 x86_64
+```
+
+--------------------------------------------------------------------------------
+title: "yaml, toml, json, hclの変換ツール yj"
+date: "2022-03-13"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+
+yaml から toml への変換ツールを探していて良さげなものを発見したので使ってみる。
+
+- [sclevine/yj: CLI - Convert between YAML, TOML, JSON, and HCL](https://github.com/sclevine/yj)
+
+## インストール
+
+```console
+% brew install yj
+```
+
+## 使い方
+
+標準入力から読み込ませてリダイレクトする感じ。
+
+```console
+% yj -yt -i < example.yaml > example.toml
+```
+or 
+
+```console
+% cat example.yaml | yj -yt -i > example.toml
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% yj -v
+v5.0.0
+```
+
+--------------------------------------------------------------------------------
+title: "Hugo で作成した記事を GitHub Pages で公開する"
+date: "2022-03-12"
+--------------------------------------------------------------------------------
+
+## DNS の設定
+
+`d.oppara.tv`の CNAME を`oppara.github.io`に設定する。
+
+```console
+% dig d.oppara.tv @8.8.8.8
+...
+;; ANSWER SECTION:
+d.oppara.tv.            3600    IN      CNAME   oppara.github.io.
+oppara.github.io.       3600    IN      A       185.199.108.153
+oppara.github.io.       3600    IN      A       185.199.111.153
+oppara.github.io.       3600    IN      A       185.199.109.153
+oppara.github.io.       3600    IN      A       185.199.110.153
+...
+```
+
+## GitHub Actions を設定する
+
+[GitHub Actions による GitHub Pages への自動デプロイ - Qiita](https://qiita.com/peaceiris/items/d401f2e5724fdcb0759d)
+
+変更箇所
+
+- `pull_request:`を削除
+- hugo のバージョンを 0.94.0 に変更
+- `publish_dir: ./public`を削除
+  - gh-pages ブランチの直下にデプロイする。
+- [cname option](https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-add-cname-file-cname) を設定
+  - **重要** 設定しないとデプロイ時に Custom domain の設定が初期化され、URL にアクセスしても 404 になってしまう。
+
+## GitHub の設定
+
+Settings -> Pages
+
+{{< figure src="githu-pages.png" alt="GitHub Pages の設定" >}}
+
+
+--------------------------------------------------------------------------------
+title: "スムーズに Hugo でブログを書くツール"
+date: "2022-03-11"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+`hugo vim editor`で検索していたら以下の b4b4r07 さんの良さげなブログを発見。
+
+[スムーズに Hugo でブログを書くツール | tellme.tokyo](https://tellme.tokyo/post/2018/10/16/write-blog-smoothly/)
+
+
+上記ブログで使用されている [b4b4r07/blog](https://github.com/b4b4r07/blog) を使用するには、以下の環境変数の設定が必要な模様。
+
+- BLOG_ROOT: `hugo new site`でできたディレクトリのパスを指定。
+- BLOG_POST_DIR: 記事を作成するディレクトリ。BLOG_ROOT からの相対パスを指定。
+
+## 設定例
+
+```sh
+export BLOG_ROOT="${HOME}/src/github.com/oppara/d.oppara.tv"
+export BLOG_POST_DIR=`date +"content/posts/%Y/%m"`
+```
+
+## `blog new` で作成される日付を JST にしたい
+
+The 力技。
+
+```diff:
+diff --git a/cmd/new.go b/cmd/new.go
+index 4996bfb..85d597e 100644
+--- a/cmd/new.go
++++ b/cmd/new.go
+@@ -69,7 +69,7 @@ func (c *newCmd) run(args []string) error {
+                Command: "hugo",
+                Args:    []string{"new", strings.TrimPrefix(next, "content/")},
+                Dir:     c.RootPath,
+-               Env:     map[string]string{},
++               Env:     map[string]string{"TZ":"Asia/Tokyo"},
+                Stdin:   os.Stdin,
+                Stdout:  ioutil.Discard,
+                Stderr:  ioutil.Discard,
+```
+https://github.com/oppara/b4b4r07-blog/commit/1b653d83f0352d0bc06e9b1e737ec292c85989e1
+
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% hugo version
+hugo v0.94.0+extended darwin/amd64 BuildDate=unknown
+```
+
+--------------------------------------------------------------------------------
+title: "--editor オプション付きで hugo new するとエラーになる"
+date: "2022-03-10"
+--------------------------------------------------------------------------------
+
+## 問題
+
+`--editor` オプション付きで `hugo new` すると以下のエラーになってしまう。
+
+```console
+% hugo new posts/2022/03/hoge/index.md --editor vim
+Content "/path/to/hugo/content/posts/2022/03/hoge/index.md" created
+Editing "/path/to/hugo/content/posts/2022/03/hoge/index.md" with "vim" ...
+Error: access denied: "vim" is not whitelisted in policy "security.exec.allow"; 
+the current security configuration is:
+
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+    osEnv = ['(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$']
+
+  [security.funcs]
+    getenv = ['^HUGO_']
+
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']
+
+```
+
+## 対応方法
+
+以下の設定を `confg.toml` に追加する。
+
+
+```toml:confg.toml
+[security]
+  [security.exec]
+    allow = ['^vim$']
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% hugo version
+hugo v0.93.3+extended darwin/amd64 BuildDate=unknown
+```
+
+--------------------------------------------------------------------------------
+title: "Hugo の設定"
+date: "2022-03-09"
+--------------------------------------------------------------------------------
+
+[Configure Hugo | Hugo](https://gohugo.io/getting-started/configuration/)
+
+## 日本語周り
+
+```toml
+# デフォルトの言語設定
+defaultContentLanguage = "ja"
+
+# <language> エレメント用の値
+languageCode = "ja"
+
+# 日本語の文字数を正しく数えて、短いサマリーを表示できるようにする
+hasCJKLanguage = true
+
+# リスト内のタイトルを複数化しない
+pluralizeListTitles = false
+
+# timezone
+timeZone = "Asia/Tokyo"
+```
+
+## テーマ [PaperMod](https://github.com/adityatelange/hugo-PaperMod/wiki/Variables) の設定
+
+```toml
+[Params]
+  # 著者名
+  author = "oppara"
+
+  # 日付のフォーマット
+  dateformat = "2006-01-02"
+
+  # リストページに表示される投稿毎の要約を非表示にする
+  hideSummary = true
+
+  # リストページに1つめに表示される投稿のデザインを他の投稿のデザインと同じにする
+  disableSpecial1stPost = true
+
+  # 投稿ページで目次を表示する
+  ShowToc = true
+
+  # パン屑メニューを表示する
+  ShowBreadCrumbs = true
+
+  # 投稿ページの下部にナビゲーションリンクを表示する
+  ShowPostNavLinks = true
+```
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% hugo version
+hugo v0.93.3+extended darwin/amd64 BuildDate=unknown
+```
+
+--------------------------------------------------------------------------------
+title: "Hugo 事始め"
+date: "2022-03-08"
+--------------------------------------------------------------------------------
+
+## はじめに
+
+[Quick Start | Hugo](https://gohugo.io/getting-started/quick-start/)
+
+とりあえずテーマをインストールしてコンテンツを表示するところまで。
+
+
+## Hugo のインストール
+
+```console
+% brew install hugo
+```
+
+## サイトの作成
+
+```console
+% hugo new site d.oppara.tv
+```
+
+## テーマの追加
+
+[PaperMod](https://github.com/adityatelange/hugo-PaperMod) というテーマを使ってみる。
+
+```console
+% cd d.oppara.tv
+% git init
+% git add .
+% git commit  -m 'feat: initial commit'
+% git submodule add  https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+% echo theme = \"PaperMod\" >> config.toml
+% git add .
+% git commit  -m 'fead: add theme'
+```
+
+### テーマの更新
+
+```console
+% git submodule update --remote --merge
+```
+
+### テーマの削除
+
+```console
+% git submodule deinit -f themes/PaperMod
+% git rm -f themes/PaperMod
+% rm -rf .git/modules/themes*
+```
+
+## コンテンツの作成
+
+```console
+% hugo new posts/hoge.md
+% echo 'hogehoge' >> content/posts/hoge.md
+```
+
+`.hugo_build.lock`をバージョン管理外にする。
+
+```console
+% echo '.hugo_build.lock' > .gitignore
+% git add .gitignore
+% git commit -m 'Add .gitignore'
+
+```
+
+## サーバの起動
+
+```console
+% hugo server -D
+```
+
+## ブラウザで動作確認
+
+```console
+% open http://localhost:1313/
+```
+
+## 環境
+
+```console
+% sw_vers
+ProductName:    macOS
+ProductVersion: 12.2
+BuildVersion:   21D49
+
+% hugo version
+hugo v0.93.3+extended darwin/amd64 BuildDate=unknown
+```
+

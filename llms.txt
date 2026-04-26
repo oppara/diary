@@ -1,0 +1,113 @@
+# d.oppara.tv
+
+> 備呆録
+
+
+## Articles
+
+* 2026/03
+    * [openssl で SAN を確認](https://d.oppara.tv/posts/2026/03/openssl-check-san/)
+* 2026/02
+    * [AWS CLI でセキュリティグループのインバウンドルールを追加する](https://d.oppara.tv/posts/2026/02/aws-cli-sg-inbound/)
+    * [コンテナの一覧を表示するコマンドを見やすくする](https://d.oppara.tv/posts/2026/02/docker-subcommand/)
+    * [colima を使ってみる](https://d.oppara.tv/posts/2026/02/colima/)
+* 2026/01
+    * [VSCode で Mermeid を扱う](https://d.oppara.tv/posts/2026/01/vscode-mermaid/)
+* 2025/12
+    * [VSCode で PlantUML を扱う](https://d.oppara.tv/posts/2025/12/vscode-plantuml/)
+    * [VSCode で Markdown を扱う](https://d.oppara.tv/posts/2025/12/vscode-markdown/)
+    * [VSCode で PHP Intelephense](https://d.oppara.tv/posts/2025/12/vscode-php-intelephense/)
+    * [VSCode で GitHub Copilot](https://d.oppara.tv/posts/2025/12/vscode-copilot/)
+    * [VSCode の同期設定](https://d.oppara.tv/posts/2025/12/vscode-sync/)
+    * [VSCode に Neovim プラグインをインストール](https://d.oppara.tv/posts/2025/12/vscode-neovim/)
+    * [VSCode エディタ関連の設定](https://d.oppara.tv/posts/2025/12/vscode-editor/)
+    * [VSCode の日本語化と言語の切り替え](https://d.oppara.tv/posts/2025/12/vscode-japanese/)
+    * [Google Drive で draw.io を扱う](https://d.oppara.tv/posts/2025/12/google-drive-drawio/)
+* 2025/09
+    * [CLI で AWS IAM ユーザーを作成](https://d.oppara.tv/posts/2025/09/aws-iam-create-user/)
+* 2025/08
+    * [VSCode を使わない環境での Intelephense のライセンスキーの設定方法](https://d.oppara.tv/posts/2025/08/php-intelephense-licence/)
+* 2025/06
+    * [シェルスクリプトを使用して、AWS SESでメールを送信する](https://d.oppara.tv/posts/2025/06/sending-email-by-ses-on-shell-script/)
+* 2025/02
+    * [SELinux で httpd からのファイルへのアクセスを許可する](https://d.oppara.tv/posts/2025/02/selinux-httpd/)
+* 2025/01
+    * [PHP リトライのテンプレート](https://d.oppara.tv/posts/2025/01/php-retry/)
+    * [Fluentd で dry-run](https://d.oppara.tv/posts/2025/01/fluentd-dry-run/)
+* 2024/10
+    * [MySQL ですべてのテーブルを削除する](https://d.oppara.tv/posts/2024/10/mysql-drop-all-table/)
+* 2024/09
+    * [運用中で指定した名前の EC2 のプライベートアドレスを取得する](https://d.oppara.tv/posts/2024/09/aws-ec2-describe-private-ip/)
+* 2024/06
+    * [1 秒に 1 回サーバにアクセスするコマンド](https://d.oppara.tv/posts/2024/06/curl-per-second/)
+* 2024/05
+    * [WordPress の管理画面でチェックされたカテゴリーが上に表示されるのを抑止する](https://d.oppara.tv/posts/2024/05/wp-terms-checked-ontop/)
+    * [Zabbix `Disk space is low` トリガーの条件](https://d.oppara.tv/posts/2024/05/zabbix-disk-space-is-low/)
+* 2024/02
+    * [openssl を使って証明書を確認](https://d.oppara.tv/posts/2024/02/check-certificate-using-openssl/)
+* 2024/01
+    * [Intel One Mono を使う](https://d.oppara.tv/posts/2024/01/font-intel-one-mono/)
+    * [AWS CLIからテストメールを送信](https://d.oppara.tv/posts/2024/01/aws-ses-cli-send-email/)
+    * [ローカルで Web サーバーを立てる](https://d.oppara.tv/posts/2024/01/localserver/)
+* 2023/11
+    * [CLI で Aurora Serverless V1 を作成する](https://d.oppara.tv/posts/2023/11/aws-aurora-serverless-v1/)
+    * [Next.js で Basic 認証をかける](https://d.oppara.tv/posts/2023/11/nextjs-basic-auth/)
+    * [Next.js で IP アドレスを使用したアクセス制限を行う](https://d.oppara.tv/posts/2023/11/nextjs-restrict-access-by-ip-address/)
+    * [ログローテートの覚書](https://d.oppara.tv/posts/2023/11/logrotate/)
+* 2023/10
+    * [textlint で dry run](https://d.oppara.tv/posts/2023/10/textlint-dryrun/)
+    * [stree を使ってみる](https://d.oppara.tv/posts/2023/10/aws-s3-stree/)
+    * [シェルスクリプトで Usage 表示](https://d.oppara.tv/posts/2023/10/shellscript-usage/)
+    * [Postfix 覚書](https://d.oppara.tv/posts/2023/10/postfix-setting/)
+* 2023/09
+    * [www ありなしの RewiteRule](https://d.oppara.tv/posts/2023/09/rewrite-rule-www/)
+* 2023/07
+    * [WordPress の管理画面でプラグインの URL を取得する](https://d.oppara.tv/posts/2023/07/wp-admin-plugin-url/)
+* 2023/05
+    * [WordPress でスラッグにスラッシュを含ませたい](https://d.oppara.tv/posts/2023/05/wp-slug-with-slash/)
+    * [WordPress で外観メニュー内に「メニュー」表示されない件](https://d.oppara.tv/posts/2023/05/wp-themes-menu/)
+    * [シェルスクリプトでディレクトリ名やファイル名を取得したい](https://d.oppara.tv/posts/2023/05/shellscript-dirname-filename/)
+* 2023/04
+    * [Neovim のインストール](https://d.oppara.tv/posts/2023/04/neovim-install/)
+    * [XDG Base Directory のデフォルト値まとめ](https://d.oppara.tv/posts/2023/04/xdg-base-directory/)
+* 2022/10
+    * [GitLab に登録している公開鍵を取得したい](https://d.oppara.tv/posts/2022/10/gitlab-pubkey/)
+* 2022/09
+    * [APG4b を Mac  上で確認したい](https://d.oppara.tv/posts/2022/09/apgb-mac/)
+    * [VPN 接続しても IP アドレスが変わらない件](https://d.oppara.tv/posts/2022/09/mac-vpn/)
+* 2022/08
+    * [Trivy で AWS のセキュリティスキャンを行う](https://d.oppara.tv/posts/2022/08/aws-trivy/)
+* 2022/06
+    * [DynamoDB をローカル環境で使いたい](https://d.oppara.tv/posts/2022/06/aws-dynamodb-local/)
+* 2022/05
+    * [Wrangler で Cloudflare Workers](https://d.oppara.tv/posts/2022/05/wrangler-cloudflare-workers/)
+    * [npx 実行時に Ok to proceed? (y) と表示させない](https://d.oppara.tv/posts/2022/05/npx-not-show-ok-to-proceed/)
+* 2022/04
+    * [Brewfile を上書きしたい](https://d.oppara.tv/posts/2022/04/brew-bundle-dump/)
+    * [AWS CLI で証明書の再インポート](https://d.oppara.tv/posts/2022/04/aws-acm-import-certificate/)
+    * [WP-CLI でテーブル内の文字列を置換する](https://d.oppara.tv/posts/2022/04/wp-search-replace/)
+    * [メール送信ワンライナー](https://d.oppara.tv/posts/2022/04/mail-one-liner/)
+    * [GitHub Actions 時でなくてもブランチ名を利用したい](https://d.oppara.tv/posts/2022/04/github-actions-git-branch/)
+    * [GitLab CI 時でなくてもブランチ名を利用したい](https://d.oppara.tv/posts/2022/04/gitlab-ci-git-branch/)
+* 2022/03
+    * [Windows で rsync を使いたい](https://d.oppara.tv/posts/2022/03/windows-rsync/)
+    * [Chrome を使っているとファンがうるさい](https://d.oppara.tv/posts/2022/03/chrome-fan-solution/)
+    * [Bash 変数文字列置換](https://d.oppara.tv/posts/2022/03/bash-string-replacement/)
+    * [Pandoc マークダウンを PDF に変換しようとしてエラー](https://d.oppara.tv/posts/2022/03/pandoc-markdown-pdf-error/)
+    * [AWS CLI で AWS Backup を利用した EC2 のバックアップ設定をする](https://d.oppara.tv/posts/2022/03/aws-backup-ec2-cli/)
+    * [EC2インスタンスのタグとプライベートIPアドレスを表示する](https://d.oppara.tv/posts/2022/03/aws-ec2-describe-ipaddress/)
+    * [Bash 変数のデフォルト値を設定する](https://d.oppara.tv/posts/2022/03/bash-default-value/)
+    * [AWS Vault を使って MFA と AssumeRole（スイッチロール） ](https://d.oppara.tv/posts/2022/03/aws-vault-assumerole-mfa/)
+    * [Session Manager で Amazon Linux にログイン後ユーザーを切り替える](https://d.oppara.tv/posts/2022/03/aws-ssm-switch-user/)
+    * [git log のエイリアス](https://d.oppara.tv/posts/2022/03/git-log-alias/)
+    * [Speedtest の CLI クライアントを試してみる](https://d.oppara.tv/posts/2022/03/cli-speedtest/)
+    * [yaml, toml, json, hclの変換ツール yj](https://d.oppara.tv/posts/2022/03/cli-yaml-toml-json-hcl-converter/)
+    * [Hugo で作成した記事を GitHub Pages で公開する](https://d.oppara.tv/posts/2022/03/hugo-github-pages/)
+    * [スムーズに Hugo でブログを書くツール](https://d.oppara.tv/posts/2022/03/hugo-blog-tool/)
+    * [--editor オプション付きで hugo new するとエラーになる](https://d.oppara.tv/posts/2022/03/hugo-with-editor/)
+    * [Hugo の設定](https://d.oppara.tv/posts/2022/03/hugo-config/)
+    * [Hugo 事始め](https://d.oppara.tv/posts/2022/03/hugo-quick-start/)
+
+
+
+
