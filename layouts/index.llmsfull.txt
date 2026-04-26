@@ -13,4 +13,4 @@ date: "{{ .Date.Format "2006-01-02" }}"
 {{ end -}}
 
 
-{{/* vim: set ft=gohtmltmpl : */}}
+{{/* vim: set ft=gotmpl : */}}

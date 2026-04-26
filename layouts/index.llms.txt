@@ -23,4 +23,4 @@
 * [Privacy Policy]({{ $baseURL }}/privacy/): 当サイトの広告、アフィリエイト、プライバシーポリシー
 */}}
 
-{{/* vim: set ft=gohtmltmpl : */}}
+{{/* vim: set ft=gotmpl : */}}
