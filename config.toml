@@ -28,7 +28,21 @@ pluralizeListTitles = false
   ShowPostNavLinks = true
 
 [outputs]
-home = ["html", "rss", "json"]
+home = ["html", "rss", "json", "llms", "llmsfull"]
+
+[outputFormats.llms]
+  baseName = "llms"
+  isPlainText = true
+  mediaType = "text/plain"
+  rel = "alternate"
+  root = true
+
+[outputFormats.llmsfull]
+  baseName = "llms-full"
+  isPlainText = true
+  mediaType = "text/plain"
+  rel = "alternate"
+  root = true
 
 [menu]
 
