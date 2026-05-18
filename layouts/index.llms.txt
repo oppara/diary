@@ -1,0 +1,26 @@
+# {{ .Site.Title }}
+
+> 備呆録
+
+
+## Articles
+{{ $yearMonthGroups := slice -}}
+{{ range where (where (sort (.Site.GetPage "/posts/").Pages "Date" "desc") "Draft" "ne" true) "Sitemap.Disable" "ne" true -}}
+{{ $yearMonth := .Date.Format "2006/01" -}}
+{{ if not (in $yearMonthGroups $yearMonth) }}
+* {{ $yearMonth -}}
+{{ $yearMonthGroups = $yearMonthGroups | append $yearMonth -}}
+{{ end }}
+    * [{{ .Title }}]({{ .Permalink }})
+{{- end }}
+
+{{/*
+## Others
+
+{{- $baseURL := .Site.BaseURL | strings.TrimSuffix "/" }}
+
+* [About]({{ $baseURL }}/about/): 自己紹介
+* [Privacy Policy]({{ $baseURL }}/privacy/): 当サイトの広告、アフィリエイト、プライバシーポリシー
+*/}}
+
+{{/* vim: set ft=gotmpl : */}}

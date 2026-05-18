@@ -1,0 +1,27 @@
+---
+title: "VSCode PHP Intelephense"
+date: 2025-12-27T21:48:13+09:00
+draft: true
+tags: ["vscode", "php", "intelephense"]
+---
+
+## はじめに
+
+VSCode に PHP Intelephense をインストールした際の備呆録。
+
+## 手順
+
+[PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) をインストールする。
+
+## 対応方法
+
+## 参考サイト
+
+## 環境
+
+```console
+% sw_vers
+ProductName:            macOS
+ProductVersion:         15.6
+BuildVersion:           24G84
+```

@@ -1,0 +1,31 @@
+// 使い方
+// markdownlint-cli2 --config /path/to/.markdownlint-cli2.jsonc "**/*.md"
+{
+  "config": {
+    // 個別ルール設定
+    "MD009": {
+      "br_spaces": 2, // 改行のための末尾スペース数
+      "list_item_empty_lines": true,
+      "strict": false
+    },
+    "MD012": {
+      "maximum": 2 // 連続空行は2つまで
+    },
+    // 無効化ルール
+    "MD010": false, // タブ文字を許可（TSV等）
+    "MD013": false, // 行長制限なし
+    "MD025": false, // 複数H1を許可
+    "MD026": false, // 見出しの句読点を許可
+    "MD033": false, // HTMLを許可
+    "MD034": false, // 素のURLを許可
+    "MD037": false, // 強調記法内のスペースを許可
+    "MD051": false // リンクのフラグメント検証を無効
+  },
+  // .gitignore を尊重
+  "gitignore": true,
+  // 除外パス
+  "ignores": [
+    "node_modules/**",
+    "dist/**"
+  ]
+}

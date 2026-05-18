@@ -22,8 +22,8 @@ all: new ## create new post
 new: ## create new post
 	@blog new
 
-.PHONY: edit
-edit: ## edit post
+.PHONY: edit e
+edit e: ## edit post
 	@blog edit
 
 .PHONY: up
