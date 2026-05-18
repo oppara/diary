@@ -22,6 +22,16 @@ url=https://oppara.tv/
 while true; do TZ=JST-9 date; curl -I $url; sleep 1; done
 ```
 
+HTTPステータスだけの場合
+```console
+while true; do
+  TZ=JST-9 date
+  curl -s -o /dev/null -w "%{http_code}\n" -I "$url"
+  sleep 1
+done
+```
+
+
 ## 環境
 
 ```console
