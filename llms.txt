@@ -5,6 +5,8 @@
 
 ## Articles
 
+* 2026/05
+    * [シークレットを即時削除する](https://d.oppara.tv/posts/2026/05/aws-secretsmanager-delete-secret/)
 * 2026/03
     * [openssl で SAN を確認](https://d.oppara.tv/posts/2026/03/openssl-check-san/)
 * 2026/02
