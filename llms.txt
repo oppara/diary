@@ -5,6 +5,8 @@
 
 ## Articles
 
+* 2026/08
+    * [Claude Code の「無駄」を確認](https://d.oppara.tv/posts/2026/08/claude-code-cost-cclens/)
 * 2026/05
     * [シークレットを即時削除する](https://d.oppara.tv/posts/2026/05/aws-secretsmanager-delete-secret/)
 * 2026/03

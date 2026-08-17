@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Claude on d.oppara.tv</title><link>https://d.oppara.tv/tags/claude/</link><description>Recent content in Claude on d.oppara.tv</description><generator>Hugo -- 0.148.2</generator><language>ja</language><lastBuildDate>Tue, 18 Aug 2026 01:24:56 +0900</lastBuildDate><atom:link href="https://d.oppara.tv/tags/claude/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Code の「無駄」を確認</title><link>https://d.oppara.tv/posts/2026/08/claude-code-cost-cclens/</link><pubDate>Tue, 18 Aug 2026 01:24:56 +0900</pubDate><guid>https://d.oppara.tv/posts/2026/08/claude-code-cost-cclens/</guid><description>&lt;h2 id="はじめに">はじめに&lt;/h2>
+&lt;p>Claude Code の「無駄」を可視化するツール &lt;a href="https://zenn.dev/lambdalisue/articles/introduce-cclens">cclens&lt;/a> をインストールしたので備忘録。&lt;/p>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>brew install lambdalisue/cclens/cclens
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使い方">使い方&lt;/h2>
+&lt;p>全体の健康状態を確認する。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>cclens doctor --scope global
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>直す（最適化する）。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>cclens optimize --scope global
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="環境">環境&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-console" data-lang="console">&lt;span style="display:flex;">&lt;span>❯ sw_vers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductName: macOS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProductVersion: 26.5.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BuildVersion: 25F84
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>❯ claude -v
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.1.224 (Claude Code)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
