@@ -20,7 +20,7 @@ tags: []
 ## 環境
 
 ```console
-% sw_vers
+❯ sw_vers
 ProductName:        macOS
 ProductVersion:     26.5.2
 BuildVersion:       25F84
