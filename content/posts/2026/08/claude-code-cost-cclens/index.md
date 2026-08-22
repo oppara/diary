@@ -6,7 +6,7 @@ tags: ["claude code", "cost", "claude"]
 
 ## はじめに
 
-Claude Code の「無駄」を可視化するツール [cclens](https://zenn.dev/lambdalisue/articles/introduce-cclens) をインストールしたので備忘録。
+Claude Code の「無駄」を可視化するツール [cclens](https://zenn.dev/lambdalisue/articles/introduce-cclens) をインストールしたので備呆録。
 
 ## インストール
 
