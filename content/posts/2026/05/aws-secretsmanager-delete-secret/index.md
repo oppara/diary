@@ -1,5 +1,5 @@
 ---
-title: "シークレットを即時削除する"
+title: "AWS Secrets Manager のシークレットを即時削除する"
 date: 2026-05-30T08:47:25+09:00
 tags: ["aws", "secret"]
 ---
