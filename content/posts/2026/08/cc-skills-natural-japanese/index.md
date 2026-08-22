@@ -13,8 +13,8 @@ AI が書いた日本語を自然な日本語に直すスキル [natural-japanes
 ## インストール
 
 ```console
-npx openskills install coji/natural-japanese
-npx openskills sync
+/plugin marketplace add coji/natural-japanese
+/plugin install natural-japanese@natural-japanese
 ```
 
 ## ヘルプ
