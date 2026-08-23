@@ -1,21 +1,18 @@
 ---
-title: "Claude Code でキーボードでスクロール"
+title: "Claude Code をキーボードでスクロール"
 date: 2026-08-23T04:11:54+09:00
-draft: true
 tags: ["claudecode"]
 ---
 
 ## はじめに
 
-Claude Code でキーボードでスクロールしたい。
+Claude Code をキーボード操作でスクロールできたので備呆録。
 
 ## 手順
 
 ### フルスクリーンモードにする
 
-```console
-/tui fullscreen
-```
+`~/.claude/settings.json` に以下を追記する。
 
 ```json:~/.claude/settings.json
 {
@@ -25,18 +22,25 @@ Claude Code でキーボードでスクロールしたい。
 
 ### キーバインド設定を行う
 
-```console
-/keybindings
-```
+`~/.claude/keybindings.json` に以下を追記する。
+
+- Chat コンテキストで `ctrl+j` の設定（改行を挿入する）を無効にする。
+- Scroll コンテキストで `ctrl+j`/`ctrl+k` を上下スクロールに割り当てる。
 
 ```json:~/.claude/keybindings.json
 {
   "bindings": [
     {
+      "context": "Chat",
+      "bindings": {
+        "ctrl+j": null
+      }
+    },
+    {
       "context": "Scroll",
       "bindings": {
-        "alt+j": "scroll:lineDown",
-        "alt+k": "scroll:lineUp"
+        "ctrl+j": "scroll:lineDown",
+        "ctrl+k": "scroll:lineUp"
       }
     }
   ]
