@@ -34,10 +34,8 @@ Claude Code でキーボードでスクロールしたい。
     {
       "context": "Scroll",
       "bindings": {
-        "j": "scroll:lineDown",
-        "k": "scroll:lineUp",
-        "ctrl+f": "scroll:fullPageDown",
-        "ctrl+b": "scroll:fullPageUp"
+        "alt+j": "scroll:lineDown",
+        "alt+k": "scroll:lineUp"
       }
     }
   ]
