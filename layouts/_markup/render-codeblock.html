@@ -1,0 +1,21 @@
+{{- $lang := .Type -}}
+{{- $filename := "" -}}
+{{- $parts := split $lang ":" -}}
+{{- if eq (len $parts) 2 -}}
+  {{- $lang = index $parts 0 -}}
+  {{- $filename = index $parts 1 -}}
+{{- end -}}
+{{- $optsList := slice -}}
+{{- range $k, $v := .Attributes -}}
+  {{- $optsList = $optsList | append (printf "%s=%v" $k $v) -}}
+{{- end -}}
+{{- $opts := delimit $optsList "," -}}
+{{- $highlighted := highlight .Inner $lang $opts -}}
+{{- if $filename -}}
+<div class="highlight-filename">
+  <div class="highlight-filename-title">{{ $filename }}</div>
+  {{ $highlighted }}
+</div>
+{{- else -}}
+{{ $highlighted }}
+{{- end -}}

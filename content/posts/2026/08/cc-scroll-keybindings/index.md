@@ -21,9 +21,8 @@ Profiles -> Keys -> General -> Left option (⌥) key: を `Esc+` に変更する
 
 - Scroll コンテキストで `alt+j`/`alt+k` を上下スクロールに割り当てる。
 
-`~/.claude/keybindings.json`
 
-```json
+```json:~/.claude/keybindings.json
 {
   "bindings": [
     {
