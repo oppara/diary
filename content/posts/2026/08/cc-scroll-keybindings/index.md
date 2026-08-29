@@ -10,37 +10,27 @@ Claude Code をキーボード操作でスクロールできたので備呆録�
 
 ## 手順
 
-### フルスクリーンモードにする
+### iTrem2 の設定
 
-`~/.claude/settings.json` に以下を追記する。
+Profiles -> Keys -> General -> Left option (⌥) key: を `Esc+` に変更する。
 
-```json:~/.claude/settings.json
-{
-  "tui": "fullscreen"
-}
-```
+![](./ss.png)
 
 ### キーバインド設定を行う
 
-`~/.claude/keybindings.json` に以下を追記する。
 
-- Chat コンテキストで `ctrl+j` の設定（改行を挿入する）を無効にする。
-- Scroll コンテキストで `ctrl+j`/`ctrl+k` を上下スクロールに割り当てる。
+- Scroll コンテキストで `alt+j`/`alt+k` を上下スクロールに割り当てる。
 
-```json:~/.claude/keybindings.json
+`~/.claude/keybindings.json`
+
+```json
 {
   "bindings": [
     {
-      "context": "Chat",
-      "bindings": {
-        "ctrl+j": null
-      }
-    },
-    {
       "context": "Scroll",
       "bindings": {
-        "ctrl+j": "scroll:lineDown",
-        "ctrl+k": "scroll:lineUp"
+        "alt+j": "scroll:lineDown",
+        "alt+k": "scroll:lineUp"
       }
     }
   ]
@@ -48,6 +38,8 @@ Claude Code をキーボード操作でスクロールできたので備呆録�
 ```
 
 ## 環境
+
+- iTerm: Build 3.6.11
 
 ```console
 ❯ sw_vers
@@ -58,3 +50,4 @@ BuildVersion:       25F84
 ❯ claude -v
 2.1.231 (Claude Code)
 ```
+
