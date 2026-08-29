@@ -17,6 +17,9 @@ pluralizeListTitles = false
 [permalinks]
     posts = "/:section/:year/:month/:contentbasename"
 
+[markup]
+  [markup.highlight]
+    style = "kanagawa-dragon"
 
 [Params]
   author = "oppara"
