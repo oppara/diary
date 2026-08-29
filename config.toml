@@ -26,6 +26,7 @@ pluralizeListTitles = false
   ShowToc = true
   ShowBreadCrumbs = true
   ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
 
 [outputs]
 home = ["html", "rss", "json", "llms", "llmsfull"]
