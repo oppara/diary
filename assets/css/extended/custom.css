@@ -21,3 +21,25 @@
     background: var(--code-block-bg);
     border-bottom: 1px solid var(--border);
 }
+
+.post-tags-list {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.post-tag {
+    padding: 4px 10px;
+    font-size: 0.8em;
+    background-color: var(--code-bg);
+    color: var(--secondary);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.post-tag:hover {
+    background-color: var(--tertiary);
+    color: var(--primary);
+}

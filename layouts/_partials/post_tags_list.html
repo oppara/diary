@@ -1,0 +1,7 @@
+{{- if .Params.tags }}
+<div class="post-tags-list">
+  {{- range .Params.tags }}
+  <a href="{{ printf "%s" (printf "/tags/%s/" (. | urlize)) | relURL }}" class="post-tag">{{ . }}</a>
+  {{- end }}
+</div>
+{{- end }}
