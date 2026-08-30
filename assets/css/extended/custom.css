@@ -48,3 +48,25 @@
 .entry-footer {
     font-size: 1em;
 }
+
+.post-title {
+    font-size: 2em;
+}
+
+.post-content h1 {
+    font-size: 2em;
+}
+
+.post-content h2 {
+    font-size: 1.6em;
+}
+
+.post-content h3 {
+    font-size: 1.3em;
+}
+
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    font-size: 1.1em;
+}
