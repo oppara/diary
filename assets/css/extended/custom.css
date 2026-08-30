@@ -17,7 +17,7 @@
     padding: 6px 14px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.8em;
-    color: var(--secondary);
+    color: #dadadb;
     background: var(--code-block-bg);
     border-bottom: 1px solid var(--border);
 }
