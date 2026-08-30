@@ -24,4 +24,7 @@ tags: []
 ProductName:        macOS
 ProductVersion:     26.5.2
 BuildVersion:       25F84
+
+❯ claude -v
+2.1.231 (Claude Code)
 ```
