@@ -25,6 +25,7 @@ pluralizeListTitles = false
   author = "oppara"
   dateformat = "2006-01-02"
   hideSummary = true
+  hideAuthor = true
   disableSpecial1stPost = true
   ShowToc = true
   ShowBreadCrumbs = true
