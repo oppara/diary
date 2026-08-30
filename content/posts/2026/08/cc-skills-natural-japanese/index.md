@@ -1,7 +1,7 @@
 ---
 title: "自然な日本語に直すAgent Skill"
 date: 2026-08-22T13:37:08+09:00
-tags: ["claudecode", "skills"]
+tags: ["claude code", "skills"]
 ---
 
 ## はじめに

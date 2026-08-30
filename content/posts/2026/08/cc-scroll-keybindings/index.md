@@ -1,7 +1,7 @@
 ---
 title: "Claude Code をキーボードでスクロール"
 date: 2026-08-23T04:11:54+09:00
-tags: ["claudecode"]
+tags: ["claude code"]
 ---
 
 ## はじめに
